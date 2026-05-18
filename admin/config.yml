@@ -1,1 +1,155 @@
+# ============================================================
+# ⚙️ إعدادات لوحة تحكم مدونة شات الخليج (Sveltia CMS)
+# ============================================================
 
+backend:
+  name: github
+  repo: NexArab/alkhaleej-blog
+  branch: main
+  # ⚠️ ستضع هنا رابط Cloudflare Worker بعد إنشائه
+  base_url: https://alkhaleej-blog-auth-king-divel2007.workers.dev
+
+# دعم اللغة العربية والـ RTL
+locale: 'ar'
+
+# اللغة الافتراضية للمحرر
+display_url: https://blog.chat-alkhaleej.com
+
+# الموقع المباشر للمعاينة
+site_url: https://blog.chat-alkhaleej.com
+
+# مجلد رفع الصور
+media_folder: 'images/uploads'
+public_folder: '/images/uploads'
+
+# ============================================================
+# 📚 المجموعات (Collections) - أنواع المحتوى
+# ============================================================
+
+collections:
+  # ============================================
+  # 📝 مجموعة المقالات
+  # ============================================
+  - name: 'posts'
+    label: '📝 المقالات'
+    label_singular: 'مقال'
+    folder: 'posts'
+    create: true
+    delete: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    extension: 'html'
+    format: 'frontmatter'
+    frontmatter_delimiter: ['<!---', '--->']
+
+    # شكل عرض كل مقال في القائمة
+    summary: '{{title}} — {{date | date("YYYY-MM-DD")}}'
+
+    # الحقول الظاهرة عند إنشاء/تعديل المقال
+    fields:
+
+      # ─────── الحقول الأساسية ───────
+
+      - label: '📌 عنوان المقال'
+        name: 'title'
+        widget: 'string'
+        required: true
+        hint: 'العنوان الذي سيظهر في قوقل وفي بطاقة المقال (يفضّل 50-60 حرف)'
+
+      - label: '📝 وصف المقال (Meta Description)'
+        name: 'description'
+        widget: 'text'
+        required: true
+        hint: 'الوصف الذي يظهر في نتائج بحث قوقل (150-160 حرف)'
+        pattern: ['^.{50,200}$', 'يجب أن يكون بين 50 و 200 حرف']
+
+      - label: '🖼️ الصورة الرئيسية'
+        name: 'image'
+        widget: 'image'
+        required: true
+        hint: 'صورة بعرض 1200×630px (مهمة للسوشيال ميديا والـ SEO)'
+        media_library:
+          config:
+            max_file_size: 5120000  # 5MB
+
+      - label: '🏷️ التصنيف'
+        name: 'category'
+        widget: 'select'
+        required: true
+        options:
+          - { label: '💬 دردشة وتعارف', value: 'دردشة وتعارف' }
+          - { label: '🎮 ألعاب وترفيه', value: 'ألعاب وترفيه' }
+          - { label: '💕 عبارات وكلمات', value: 'عبارات وكلمات' }
+          - { label: '🌙 تفسير أحلام', value: 'تفسير أحلام' }
+          - { label: '🔮 أبراج وحظ', value: 'أبراج وحظ' }
+          - { label: '📜 أمثال شعبية', value: 'أمثال شعبية' }
+          - { label: '😂 نكت وفكاهة', value: 'نكت وفكاهة' }
+          - { label: '💻 تقنية وترندات', value: 'تقنية وترندات' }
+          - { label: '📱 سوشال ميديا', value: 'سوشال ميديا' }
+          - { label: '📰 معلومات عامة', value: 'معلومات عامة' }
+        default: 'معلومات عامة'
+
+      - label: '🔖 الكلمات الدلالية (Tags)'
+        name: 'tags'
+        widget: 'list'
+        required: false
+        default: []
+        hint: 'كلمات مفتاحية مرتبطة بالمقال (مثلاً: شات، تعارف، خليج)'
+
+      # ─────── إعدادات متقدمة ───────
+
+      - label: '✍️ اسم الكاتب'
+        name: 'author'
+        widget: 'string'
+        default: 'فريق شات الخليج'
+        required: false
+
+      - label: '📅 تاريخ النشر'
+        name: 'date'
+        widget: 'datetime'
+        required: true
+        default: ''
+        format: "YYYY-MM-DDTHH:mm:ssZ"
+        date_format: "YYYY-MM-DD"
+        time_format: "HH:mm"
+        picker_utc: false
+
+      - label: '⏱️ وقت القراءة (دقائق)'
+        name: 'read_time'
+        widget: 'number'
+        required: false
+        default: 5
+        min: 1
+        max: 60
+        hint: 'الوقت التقريبي لقراءة المقال'
+
+      - label: '🔗 الرابط (Slug)'
+        name: 'slug'
+        widget: 'string'
+        required: false
+        hint: 'يُولّد تلقائياً من العنوان. اتركه فارغاً إذا تبي توليد تلقائي'
+
+      # ─────── محتوى المقال ───────
+
+      - label: '💻 محتوى المقال (HTML)'
+        name: 'body'
+        widget: 'code'
+        default_language: 'html'
+        allow_language_selection: false
+        output_code_only: true
+        required: true
+        hint: '⚠️ انسخ والصق كود HTML للمقال هنا. سيُعرض كما هو على المدونة.'
+
+      # ─────── خيارات إضافية ───────
+
+      - label: '⭐ مقال مميز (يظهر في الأعلى)'
+        name: 'featured'
+        widget: 'boolean'
+        default: false
+        required: false
+
+      - label: '🔕 إخفاء CTA الشات'
+        name: 'hide_cta'
+        widget: 'boolean'
+        default: false
+        required: false
+        hint: 'فعّل هذا الخيار فقط إذا ما تبي يظهر زر "ادخل الشات" في هذا المقال'
