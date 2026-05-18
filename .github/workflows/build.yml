@@ -1,0 +1,82 @@
+# 🤖 بناء المدونة تلقائياً
+#
+# هذا الـ workflow يشتغل تلقائياً كل ما تعمل push للريبو
+# يقرأ المقالات في /posts/ ويحدّث:
+# - index.html (الصفحة الرئيسية مع أحدث المقالات)
+# - archive.html (صفحة كل المقالات)
+# - sitemap.xml
+# - rss.xml
+# - robots.txt
+
+name: 🚀 بناء المدونة
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'posts/**'           # عند تغيير أي مقال
+      - 'scripts/build.js'   # عند تعديل السكربت
+      - '.github/workflows/build.yml'  # عند تعديل الـ workflow
+  workflow_dispatch:  # السماح بالتشغيل اليدوي
+
+# الصلاحيات المطلوبة
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 تحميل الكود
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🟢 إعداد Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 🏗️ بناء المدونة
+        run: node scripts/build.js
+
+      - name: 💾 حفظ التحديثات
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # إضافة الملفات المحدّثة
+          git add index.html archive.html sitemap.xml rss.xml robots.txt
+
+          # تحقق إذا فيه تغييرات قبل الـ commit
+          if git diff --staged --quiet; then
+            echo "✅ لا توجد تغييرات للحفظ"
+          else
+            git commit -m "🤖 تحديث تلقائي للمدونة [skip ci]"
+            git push
+            echo "✅ تم حفظ التحديثات"
+          fi
+
+      - name: 📡 إخبار IndexNow بالمقالات الجديدة (Bing)
+        continue-on-error: true
+        run: |
+          # IndexNow key (نفس اسم الملف اللي ننشئه)
+          INDEXNOW_KEY="alkhaleej-blog-key-2026"
+
+          # إرسال sitemap.xml كاملاً لـ IndexNow
+          echo "📨 إرسال sitemap لـ IndexNow..."
+
+          curl -X POST "https://api.indexnow.org/IndexNow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "{
+              \"host\": \"blog.chat-alkhaleej.com\",
+              \"key\": \"$INDEXNOW_KEY\",
+              \"keyLocation\": \"https://blog.chat-alkhaleej.com/$INDEXNOW_KEY.txt\",
+              \"urlList\": [
+                \"https://blog.chat-alkhaleej.com/\",
+                \"https://blog.chat-alkhaleej.com/archive.html\",
+                \"https://blog.chat-alkhaleej.com/sitemap.xml\"
+              ]
+            }" || echo "⚠️ فشل إخبار IndexNow (لا يهم)"
