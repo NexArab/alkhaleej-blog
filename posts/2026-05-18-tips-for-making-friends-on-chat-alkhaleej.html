@@ -22,7 +22,7 @@
     <meta property="og:url" content="https://blog.chat-alkhaleej.com/posts/2026-05-18-tips-for-making-friends-on-chat-alkhaleej.html" />
     <meta property="og:title" content="أفضل 10 طرق للتعارف وتكوين صداقات جديدة عبر شات الخليج" />
     <meta property="og:description" content="دليلك الشامل لطرق التعارف وتكوين صداقات حقيقية ودائمة عبر شات الخليج، مع نصائح ذهبية لجلسة دردشة ممتعة وآمنة مع أبناء الخليج العربي." />
-    <meta property="og:image" content="https://tools.chat-alkhaleej.com/logo.webp" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop" />
     <meta property="og:locale" content="ar_SA" />
     <meta property="og:site_name" content="مدونة شات الخليج" />
     <meta property="article:published_time" content="2026-05-18T10:00:00+03:00" />
@@ -33,7 +33,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="أفضل 10 طرق للتعارف وتكوين صداقات جديدة عبر شات الخليج" />
     <meta name="twitter:description" content="دليلك الشامل لطرق التعارف وتكوين صداقات حقيقية ودائمة عبر شات الخليج، مع نصائح ذهبية لجلسة دردشة ممتعة وآمنة مع أبناء الخليج العربي." />
-    <meta name="twitter:image" content="https://tools.chat-alkhaleej.com/logo.webp" />
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop" />
 
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,7 +49,7 @@
       "@type": "Article",
       "headline": "أفضل 10 طرق للتعارف وتكوين صداقات جديدة عبر شات الخليج",
       "description": "دليلك الشامل لطرق التعارف وتكوين صداقات حقيقية ودائمة عبر شات الخليج، مع نصائح ذهبية لجلسة دردشة ممتعة وآمنة مع أبناء الخليج العربي.",
-      "image": "https://tools.chat-alkhaleej.com/logo.webp",
+      "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop",
       "datePublished": "2026-05-18T10:00:00+03:00",
       "dateModified": "2026-05-18T10:00:00+03:00",
       "author": {
@@ -322,11 +322,108 @@
 
         .article-body img {
             max-width: 100%;
+            width: 100%;
+            max-height: 400px;
             height: auto;
+            object-fit: cover;
             border-radius: 12px;
             margin: 20px auto;
             display: block;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            cursor: zoom-in;
+            transition: all 0.3s ease;
+        }
+
+        .article-body img:hover {
+            transform: scale(1.01);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        /* ===== LIGHTBOX (نافذة تكبير الصورة) ===== */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            cursor: zoom-out;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            max-width: 95%;
+            max-height: 95%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            cursor: default;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            left: -10px;
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .lightbox-close:hover {
+            background: #fff;
+            transform: rotate(90deg);
+        }
+
+        .lightbox-caption {
+            color: #fff;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            max-width: 80%;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 600px) {
+            .article-body img { max-height: 280px; }
+            .lightbox-close { top: -45px; width: 38px; height: 38px; font-size: 18px; }
+            .lightbox-img { max-height: 75vh; }
         }
 
         .article-body a {
@@ -860,7 +957,7 @@
     </nav>
 
     <!-- Featured Image -->
-    <img src="https://tools.chat-alkhaleej.com/logo.webp" alt="أفضل 10 طرق للتعارف وتكوين صداقات جديدة عبر شات الخليج" class="featured-image" />
+    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop" alt="أفضل 10 طرق للتعارف وتكوين صداقات جديدة عبر شات الخليج" class="featured-image" />
 
     <!-- ===== SHARE BUTTONS (MOBILE) ===== -->
     <div class="share-mobile">
@@ -907,6 +1004,8 @@
     اسمك في الشات هو أول انطباع يحصل عليه الآخرون عنك. اختر اسماً بسيطاً، سهل الحفظ، يعكس شخصيتك أو اهتماماتك. تجنب الأرقام العشوائية أو الرموز الكثيرة التي تجعل اسمك صعب الكتابة.
 </p>
 
+<img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1200&auto=format&fit=crop" alt="اختيار اسم مستخدم مناسب للشات" />
+
 <h2>2. ابدأ بتحية ودودة</h2>
 <p>
     عند الدخول لأي غرفة دردشة، ألقِ التحية على الجميع بطريقة لطيفة. تحية بسيطة مثل "مساء الخير على الجميع" أو "السلام عليكم ورحمة الله" تكسر الجليد وتفتح باب المحادثة.
@@ -922,6 +1021,8 @@
     <li><strong>غرف صوتية:</strong> للأصوات الجميلة والمحادثات الحية</li>
     <li><strong>غرف كتابية:</strong> للهواة الذين يفضلون التواصل عبر الكتابة</li>
 </ul>
+
+<img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1200&auto=format&fit=crop" alt="غرف دردشة متنوعة" />
 
 <h2>4. كن مستمعاً جيداً</h2>
 <p>
@@ -1011,6 +1112,17 @@
 
 </div>
 
+<!-- ===== LIGHTBOX (يفتح الصور بحجم كبير) ===== -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+        <button class="lightbox-close" onclick="closeLightbox()" aria-label="إغلاق">
+            <i class="fas fa-times"></i>
+        </button>
+        <img src="" alt="" class="lightbox-img" id="lightboxImg">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+</div>
+
 <!-- ===== FOOTER ===== -->
 <footer>
     <div class="footer-nav">
@@ -1041,6 +1153,37 @@
             nav.classList.remove("active");
         }
     });
+
+    /* ===== LIGHTBOX (تكبير الصور بالضغط) ===== */
+    document.addEventListener('DOMContentLoaded', function() {
+        const articleImages = document.querySelectorAll('.article-body img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+
+        articleImages.forEach(img => {
+            img.addEventListener('click', function() {
+                lightboxImg.src = this.src;
+                lightboxImg.alt = this.alt || '';
+                lightboxCaption.textContent = this.alt || '';
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        /* إغلاق بمفتاح Escape */
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+    });
+
+    function closeLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 
     /* ===== SHARE FUNCTIONS ===== */
     function shareOn(platform) {
