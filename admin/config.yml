@@ -39,7 +39,6 @@ collections:
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     extension: 'html'
     format: 'frontmatter'
-    frontmatter_delimiter: ['<!---', '--->']
 
     # شكل عرض كل مقال في القائمة
     summary: '{{title}} — {{date | date("YYYY-MM-DD")}}'
