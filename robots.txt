@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# لا تفهرس القوالب
+Disallow: /posts/_template.html
+
+# Sitemap
+Sitemap: https://blog.chat-alkhaleej.com/sitemap.xml
