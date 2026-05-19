@@ -4,94 +4,58 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/webp" href="https://tools.chat-alkhaleej.com/logo.webp">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>أرشيف المقالات | مدونة شات الخليج</title>
-    <meta name="description" content="تصفّح جميع مقالات مدونة شات الخليج: مقالات عربية متنوعة عن الترندات والألعاب والتقنية والسوشال ميديا.">
-
+    <meta name="description" content="تصفّح جميع مقالات مدونة شات الخليج">
     <link rel="canonical" href="https://blog.chat-alkhaleej.com/archive.html" />
-    <link rel="alternate" type="application/rss+xml" title="مدونة الخليج RSS" href="https://blog.chat-alkhaleej.com/rss.xml" />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://blog.chat-alkhaleej.com/archive.html" />
-    <meta property="og:title" content="أرشيف المقالات | مدونة شات الخليج" />
-    <meta property="og:description" content="تصفّح جميع مقالات مدونة شات الخليج" />
-    <meta property="og:image" content="https://tools.chat-alkhaleej.com/logo.webp" />
-    <meta property="og:locale" content="ar_SA" />
-
+    <link rel="alternate" type="application/rss+xml" href="https://blog.chat-alkhaleej.com/rss.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
     <style>
         :root { --primary: #450C0C; --accent: #ffd86b; --white: #ffffff; --bg: #f8fafc; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Cairo', sans-serif; background-color: var(--bg); line-height: 1.6; color: #1e293b; padding-top: 75px; }
-
-        .navbar { position: fixed; top: 0; right: 0; left: 0; z-index: 1000; background: rgba(69, 12, 12, 0.97); backdrop-filter: blur(6px); border-bottom: 3px solid var(--accent); padding: 10px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        body { font-family: 'Cairo', sans-serif; background-color: var(--bg); padding-top: 75px; }
+        .navbar { position: fixed; top: 0; right: 0; left: 0; z-index: 1000; background: rgba(69, 12, 12, 0.97); border-bottom: 3px solid var(--accent); padding: 10px 0; }
         .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
         .nav-logo img { height: 45px; }
         .nav-links { display: flex; gap: 10px; list-style: none; }
-        .nav-links a { color: #fff; text-decoration: none; font-weight: 700; font-size: 15px; padding: 8px 14px; border-radius: 25px; transition: 0.3s; display: flex; align-items: center; gap: 7px; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 700; font-size: 15px; padding: 8px 14px; border-radius: 25px; display: flex; align-items: center; gap: 7px; }
         .nav-links a i { color: var(--accent); }
         .nav-links a:hover, .nav-links a.active { background: var(--accent); color: var(--primary); }
         .nav-links a:hover i, .nav-links a.active i { color: var(--primary); }
         .nav-toggle { display: none; color: var(--accent); font-size: 24px; cursor: pointer; }
-
-        @media (max-width: 850px) {
-            .nav-links { position: fixed; top: 68px; right: -100%; width: 100%; background: var(--primary); flex-direction: column; padding: 20px; transition: 0.4s; text-align: center; border-bottom: 2px solid var(--accent); }
-            .nav-links.active { right: 0; }
-            .nav-toggle { display: block; }
-        }
-
-        header { background: linear-gradient(135deg, var(--primary) 0%, #631212 100%); padding: 50px 20px; text-align: center; border-bottom: 6px solid var(--accent); clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%); color: #fff; }
+        @media (max-width: 850px) { .nav-links { position: fixed; top: 68px; right: -100%; width: 100%; background: var(--primary); flex-direction: column; padding: 20px; transition: 0.4s; } .nav-links.active { right: 0; } .nav-toggle { display: block; } }
+        header { background: linear-gradient(135deg, var(--primary), #631212); padding: 50px 20px; text-align: center; border-bottom: 6px solid var(--accent); clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%); color: #fff; }
         header h1 { font-size: 32px; font-weight: 900; }
-        header p { font-size: 16px; opacity: 0.9; margin-top: 10px; }
-
         .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
-        .breadcrumb { background: var(--white); padding: 14px 22px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 25px; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+        .breadcrumb { background: var(--white); padding: 14px 22px; border-radius: 12px; margin-bottom: 25px; font-size: 15px; display: flex; align-items: center; gap: 8px; }
         .breadcrumb a { color: var(--primary); text-decoration: none; font-weight: 700; }
-        .breadcrumb span { color: #64748b; }
-
-        .archive-stats { background: linear-gradient(135deg, #fffdf5 0%, #fff8e1 100%); border: 2px solid var(--accent); padding: 20px 25px; border-radius: 14px; margin-bottom: 30px; text-align: center; color: var(--primary); font-weight: 700; font-size: 16px; }
+        .archive-stats { background: #fffdf5; border: 2px solid var(--accent); padding: 20px; border-radius: 14px; margin-bottom: 30px; text-align: center; color: var(--primary); font-weight: 700; }
         .archive-stats strong { font-size: 22px; }
-
-        .latest-posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-bottom: 30px; }
-        .post-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 6px 18px rgba(0,0,0,0.06); transition: all 0.3s ease; border-top: 5px solid var(--accent); display: flex; flex-direction: column; }
-        .post-card:hover { transform: translateY(-8px); box-shadow: 0 18px 35px rgba(69, 12, 12, 0.15); border-top-color: var(--primary); }
+        .latest-posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .post-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 6px 18px rgba(0,0,0,0.06); transition: 0.3s; border-top: 5px solid var(--accent); }
+        .post-card:hover { transform: translateY(-8px); border-top-color: var(--primary); }
         .post-card-link { text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%; }
-        .post-card-img { width: 100%; height: 180px; object-fit: cover; display: block; }
-        .post-card-body { padding: 22px 20px; display: flex; flex-direction: column; flex: 1; }
-        .post-card-date { font-size: 13px; color: #64748b; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+        .post-card-img { width: 100%; height: 180px; object-fit: cover; }
+        .post-card-body { padding: 22px 20px; flex: 1; display: flex; flex-direction: column; }
+        .post-card-date { font-size: 13px; color: #64748b; margin-bottom: 10px; }
         .post-card-date i { color: var(--accent); }
-        .post-card-title { font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 12px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .post-card-desc { font-size: 14.5px; color: #475569; line-height: 1.7; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 15px; flex: 1; }
-        .post-card-read { color: var(--primary); font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 6px; margin-top: auto; }
-        .post-card:hover .post-card-read i { transform: translateX(-5px); }
-        .post-card-read i { transition: 0.3s; }
-
-        .no-posts-yet { background: var(--white); padding: 50px 30px; border-radius: 16px; text-align: center; color: #64748b; border: 2px dashed #e2e8f0; }
-        .no-posts-yet i { font-size: 50px; color: var(--accent); margin-bottom: 15px; }
-
-        footer { text-align: center; padding: 50px 20px; color: #64748b; font-size: 15px; border-top: 1px solid #e2e8f0; background: #fff; margin-top: 40px; }
+        .post-card-title { font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 12px; }
+        .post-card-desc { font-size: 14.5px; color: #475569; flex: 1; margin-bottom: 15px; }
+        .post-card-read { color: var(--primary); font-weight: 700; font-size: 14px; }
+        footer { text-align: center; padding: 50px 20px; color: #64748b; background: #fff; margin-top: 40px; border-top: 1px solid #e2e8f0; }
         .footer-nav { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 550px; margin: 0 auto 30px; }
-        .footer-nav a { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 12px; text-decoration: none; color: var(--primary); font-weight: 700; font-size: 14px; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .footer-nav a i { color: var(--accent); font-size: 16px; }
-        .footer-nav a:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .footer-nav a { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 12px; text-decoration: none; color: var(--primary); font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .footer-nav a i { color: var(--accent); }
         .nav-vip { border: 1.5px solid var(--accent) !important; background: #fffdf5 !important; }
-
         @media (max-width: 900px) { .latest-posts-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .latest-posts-grid { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr; } header h1 { font-size: 24px; } }
+        @media (max-width: 600px) { .latest-posts-grid { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-
-<nav class="navbar" role="navigation">
+<nav class="navbar">
     <div class="nav-container">
-        <a href="https://chat-alkhaleej.com/" class="nav-logo">
-            <img src="https://tools.chat-alkhaleej.com/logo.webp" alt="شات الخليج" height="45">
-        </a>
+        <a href="https://chat-alkhaleej.com/" class="nav-logo"><img src="https://tools.chat-alkhaleej.com/logo.webp" alt="شات الخليج" height="45"></a>
         <ul class="nav-links" id="navLinks">
             <li><a href="https://chat-alkhaleej.com/"><i class="fas fa-home"></i> الرئيسية</a></li>
             <li><a href="https://chat-alkhaleej.com/rooms/"><i class="fas fa-comments"></i> دليل الغرف</a></li>
@@ -102,25 +66,14 @@
         <div class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('active')"><i class="fas fa-bars"></i></div>
     </div>
 </nav>
-
-<header>
-    <h1>📚 أرشيف جميع المقالات</h1>
-    <p>تصفح كل ما نشرناه في مدونة شات الخليج</p>
-</header>
-
+<header><h1>📚 أرشيف جميع المقالات</h1></header>
 <div class="container">
-
     <nav class="breadcrumb">
-        <a href="https://chat-alkhaleej.com/">الرئيسية</a>
-        <span>›</span>
-        <a href="https://blog.chat-alkhaleej.com/">المدونة</a>
-        <span>›</span>
+        <a href="https://chat-alkhaleej.com/">الرئيسية</a> <span>›</span>
+        <a href="https://blog.chat-alkhaleej.com/">المدونة</a> <span>›</span>
         <span>الأرشيف</span>
     </nav>
-
-    <div class="archive-stats">
-        إجمالي المقالات المنشورة: <strong>1</strong> مقال
-    </div>
+    <div class="archive-stats">إجمالي المقالات: <strong>1</strong> مقال</div>
 
         <div class="latest-posts-grid">
 
@@ -142,9 +95,7 @@
                 </article>
             </a>
         </div>
-
 </div>
-
 <footer>
     <div class="footer-nav">
         <a href="https://chat-alkhaleej.com/chat-support-gulf.html"><i class="fas fa-headset"></i> الدعم الفني</a>
@@ -152,8 +103,7 @@
         <a href="https://chat-alkhaleej.com/chat-rules-gulf.html"><i class="fas fa-gavel"></i> القوانين</a>
         <a href="https://chat-alkhaleej.com/chat-vip-gulf.html" class="nav-vip"><i class="fas fa-gem"></i> اشتراكات VIP</a>
     </div>
-    <p>حقوق النشر © 2026 موقع شات الخليج | دردشة الخليج | نجمع العرب تحت سقف واحد بصداقة وأمان.</p>
+    <p>حقوق النشر © 2026 موقع شات الخليج | نجمع العرب تحت سقف واحد بصداقة وأمان.</p>
 </footer>
-
 </body>
 </html>

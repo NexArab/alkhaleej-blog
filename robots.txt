@@ -1,11 +1,5 @@
 User-agent: *
 Allow: /
-
-# لا تفهرس القوالب
 Disallow: /posts/_template.html
-
-# لا تفهرس لوحة الأدمن
 Disallow: /admin/
-
-# Sitemap
 Sitemap: https://blog.chat-alkhaleej.com/sitemap.xml
