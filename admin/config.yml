@@ -7,7 +7,7 @@ backend:
   repo: NexArab/alkhaleej-blog
   branch: main
   # ⚠️ ستضع هنا رابط Cloudflare Worker بعد إنشائه
-  base_url: https://alkhaleej-blog-auth-king-divel2007.workers.dev
+  base_url: https://alkhaleej-blog-auth.king-divel2007.workers.dev
 
 # دعم اللغة العربية والـ RTL
 locale: 'ar'
