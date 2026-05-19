@@ -7,7 +7,7 @@ backend:
   repo: NexArab/alkhaleej-blog
   branch: main
   # ⚠️ ستضع هنا رابط Cloudflare Worker بعد إنشائه
-  base_url: https://YOUR-WORKER-NAME.YOUR-SUBDOMAIN.workers.dev
+  base_url: https://alkhaleej-blog-auth-king-divel2007.workers.dev
 
 # دعم اللغة العربية والـ RTL
 locale: 'ar'
@@ -37,9 +37,8 @@ collections:
     create: true
     delete: true
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
-    extension: 'html'
+    extension: 'md'
     format: 'frontmatter'
-    frontmatter_delimiter: ['<!---', '--->']
 
     # شكل عرض كل مقال في القائمة
     summary: '{{title}} — {{date | date("YYYY-MM-DD")}}'
