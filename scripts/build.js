@@ -1,11 +1,11 @@
 /**
- * 🤖 سكربت بناء مدونة شات الخليج التلقائي (v2)
+ * 🤖 سكربت بناء مدونة شات الخليج (v3)
  *
- * يدعم نوعين من المقالات:
- * 1. مقالات HTML قديمة (يقرأها من <meta> tags)
- * 2. مقالات Markdown جديدة من Sveltia CMS (يقرأها من Frontmatter)
- *
- * المقالات الـ Markdown تتحوّل تلقائياً لـ HTML كامل بقالب موحّد
+ * المميزات:
+ * - يستخدم قالب المقال الحقيقي (_template.html) بكل تصميمه
+ * - يحوّل العناوين العربية لـ slug إنجليزي تلقائياً (Transliteration)
+ * - يدعم المقالات الـ HTML القديمة والـ Markdown الجديدة من Sveltia CMS
+ * - يحذف ملفات .md بعد التحويل (عشان GitHub Pages ما يعرضها بشكل خام)
  */
 
 const fs = require('fs');
@@ -18,13 +18,61 @@ const SITE_DESCRIPTION = 'مدونة شات الخليج: مقالات عربي�
 const POSTS_PER_HOMEPAGE = 6;
 const POSTS_DIR = 'posts';
 
-// ===== الأدوات المساعدة =====
+// ===== خريطة تحويل العربية للإنجليزية (Transliteration) =====
+const ARABIC_TO_LATIN = {
+    'ا': 'a', 'أ': 'a', 'إ': 'i', 'آ': 'aa', 'ء': '', 'ؤ': 'u', 'ئ': 'i',
+    'ب': 'b', 'ت': 't', 'ث': 'th', 'ج': 'j', 'ح': 'h', 'خ': 'kh',
+    'د': 'd', 'ذ': 'dh', 'ر': 'r', 'ز': 'z', 'س': 's', 'ش': 'sh',
+    'ص': 's', 'ض': 'd', 'ط': 't', 'ظ': 'z', 'ع': 'a', 'غ': 'gh',
+    'ف': 'f', 'ق': 'q', 'ك': 'k', 'ل': 'l', 'م': 'm', 'ن': 'n',
+    'ه': 'h', 'و': 'w', 'ي': 'y', 'ى': 'a', 'ة': 'a',
+    'َ': '', 'ُ': '', 'ِ': '', 'ْ': '', 'ّ': '', 'ً': '', 'ٌ': '', 'ٍ': '',
+    ' ': '-', '_': '-'
+};
 
+/**
+ * تحويل نص عربي لـ slug إنجليزي
+ */
+function arabicToSlug(text) {
+    if (!text) return 'post-' + Date.now();
+
+    // إذا النص بالفعل إنجليزي (ما فيه عربي)، رجعه كما هو بس نظّفه
+    if (!/[\u0600-\u06FF]/.test(text)) {
+        return text
+            .toLowerCase()
+            .replace(/[^a-z0-9\-]/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '');
+    }
+
+    let result = '';
+    for (const char of text) {
+        if (ARABIC_TO_LATIN[char] !== undefined) {
+            result += ARABIC_TO_LATIN[char];
+        } else if (/[a-zA-Z0-9]/.test(char)) {
+            result += char.toLowerCase();
+        } else if (/[\-]/.test(char)) {
+            result += '-';
+        }
+    }
+
+    return result
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '')
+        .substring(0, 80);
+}
+
+/**
+ * استخراج بيانات من HTML
+ */
 function extractMeta(html, pattern) {
     const match = html.match(pattern);
     return match ? match[1].trim() : '';
 }
 
+/**
+ * تنسيق التاريخ بالعربي
+ */
 function formatArabicDate(isoDate) {
     if (!isoDate) return '';
     try {
@@ -38,7 +86,7 @@ function formatArabicDate(isoDate) {
 }
 
 /**
- * تحليل Frontmatter (YAML في الأعلى) - بسيط بدون مكتبات
+ * تحليل Frontmatter (YAML)
  */
 function parseFrontmatter(content) {
     const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
@@ -46,7 +94,6 @@ function parseFrontmatter(content) {
 
     const yamlContent = match[1];
     const body = match[2];
-
     const data = {};
     const lines = yamlContent.split(/\r?\n/);
     let currentKey = null;
@@ -105,15 +152,21 @@ function parseFrontmatter(content) {
     return { data, body: body.trim() };
 }
 
+/**
+ * قراءة قالب المقال
+ */
 function getPostTemplate() {
     const templatePath = path.join(POSTS_DIR, '_template.html');
     if (!fs.existsSync(templatePath)) {
-        console.log('⚠️  قالب المقال غير موجود');
+        console.log('❌ خطأ: قالب المقال غير موجود في posts/_template.html');
         return null;
     }
     return fs.readFileSync(templatePath, 'utf-8');
 }
 
+/**
+ * بناء HTML من بيانات Markdown
+ */
 function buildPostHtmlFromMarkdown(mdData, slug) {
     const template = getPostTemplate();
     if (!template) return null;
@@ -125,6 +178,7 @@ function buildPostHtmlFromMarkdown(mdData, slug) {
         return null;
     }
 
+    // بناء tags HTML
     let tagsHtml = '';
     if (Array.isArray(data.tags) && data.tags.length > 0) {
         tagsHtml = data.tags
@@ -132,15 +186,18 @@ function buildPostHtmlFromMarkdown(mdData, slug) {
             .join('\n        ');
     }
 
+    // صورة كاملة
     let imageUrl = data.image || 'https://tools.chat-alkhaleej.com/logo.webp';
     if (imageUrl.startsWith('/')) {
         imageUrl = SITE_URL + imageUrl;
     }
 
+    // تنسيق التاريخ
     const dateIso = data.date || new Date().toISOString();
     const dateDisplay = formatArabicDate(dateIso);
     const modifiedIso = data.modified || dateIso;
 
+    // استبدال المتغيرات في القالب
     const replacements = {
         'POST_TITLE': data.title,
         'POST_DESCRIPTION': data.description,
@@ -165,6 +222,9 @@ function buildPostHtmlFromMarkdown(mdData, slug) {
     return html;
 }
 
+/**
+ * قراءة مقال HTML قديم
+ */
 function parseHtmlPost(filename) {
     const filepath = path.join(POSTS_DIR, filename);
     const html = fs.readFileSync(filepath, 'utf-8');
@@ -194,7 +254,23 @@ function parseHtmlPost(filename) {
     };
 }
 
-function processMarkdownPost(filename) {
+/**
+ * توليد slug فريد (إذا كان موجود، يضيف رقم)
+ */
+function generateUniqueSlug(baseSlug, existingFiles) {
+    let slug = baseSlug;
+    let counter = 1;
+    while (existingFiles.has(slug + '.html')) {
+        slug = baseSlug + '-' + counter;
+        counter++;
+    }
+    return slug;
+}
+
+/**
+ * معالجة مقال Markdown - تحويله لـ HTML
+ */
+function processMarkdownPost(filename, existingFiles) {
     const filepath = path.join(POSTS_DIR, filename);
     const content = fs.readFileSync(filepath, 'utf-8');
 
@@ -204,17 +280,48 @@ function processMarkdownPost(filename) {
         return null;
     }
 
-    const slug = filename.replace(/\.md$/, '');
-    const html = buildPostHtmlFromMarkdown(parsed, slug);
+    const { data } = parsed;
+
+    // توليد slug ذكي:
+    // 1. لو الـ slug موجود وإنجليزي، استخدمه
+    // 2. لو ما فيه slug أو فيه عربي، حوّل العنوان لـ slug إنجليزي
+    let baseSlug;
+    if (data.slug && !/[\u0600-\u06FF]/.test(data.slug)) {
+        baseSlug = data.slug;
+    } else {
+        // استخراج التاريخ من اسم الملف (لو موجود)
+        const dateMatch = filename.match(/^(\d{4}-\d{2}-\d{2})-/);
+        const datePrefix = dateMatch ? dateMatch[1] + '-' : '';
+
+        // تحويل العنوان لـ slug إنجليزي
+        const titleSlug = arabicToSlug(data.title);
+        baseSlug = datePrefix + titleSlug;
+    }
+
+    // ضمان عدم التكرار
+    const finalSlug = generateUniqueSlug(baseSlug, existingFiles);
+
+    // بناء HTML
+    const html = buildPostHtmlFromMarkdown(parsed, finalSlug);
     if (!html) return null;
 
-    const htmlFilename = slug + '.html';
+    // حفظ ملف HTML بالـ slug الإنجليزي
+    const htmlFilename = finalSlug + '.html';
     const htmlPath = path.join(POSTS_DIR, htmlFilename);
     fs.writeFileSync(htmlPath, html, 'utf-8');
 
-    console.log(`✅ تم تحويل: ${filename} → ${htmlFilename}`);
+    // ✨ حذف ملف .md الأصلي (عشان GitHub Pages ما يعرضه)
+    try {
+        fs.unlinkSync(filepath);
+        console.log(`✅ تم تحويل: ${filename} → ${htmlFilename} (وحذف الـ .md)`);
+    } catch (e) {
+        console.log(`✅ تم تحويل: ${filename} → ${htmlFilename}`);
+    }
 
-    const { data } = parsed;
+    // إضافة لقائمة الملفات الموجودة
+    existingFiles.add(htmlFilename);
+
+    // إرجاع بيانات المقال
     let imageUrl = data.image || `${SITE_URL}/images/default.jpg`;
     if (imageUrl.startsWith('/')) {
         imageUrl = SITE_URL + imageUrl;
@@ -222,7 +329,7 @@ function processMarkdownPost(filename) {
 
     return {
         filename: htmlFilename,
-        slug,
+        slug: finalSlug,
         url: `${SITE_URL}/${POSTS_DIR}/${htmlFilename}`,
         title: data.title,
         description: data.description,
@@ -234,6 +341,9 @@ function processMarkdownPost(filename) {
     };
 }
 
+/**
+ * قراءة كل المقالات
+ */
 function getAllPosts() {
     if (!fs.existsSync(POSTS_DIR)) {
         console.log('⚠️  مجلد posts غير موجود');
@@ -241,15 +351,18 @@ function getAllPosts() {
     }
 
     const files = fs.readdirSync(POSTS_DIR).filter(f => !f.startsWith('_'));
+    const existingFiles = new Set(files.filter(f => f.endsWith('.html')));
     const posts = [];
 
+    // أولاً: معالجة Markdown
     const markdownFiles = files.filter(f => f.endsWith('.md'));
     for (const mdFile of markdownFiles) {
-        const post = processMarkdownPost(mdFile);
+        const post = processMarkdownPost(mdFile, existingFiles);
         if (post) posts.push(post);
     }
 
-    const htmlFiles = files.filter(f => f.endsWith('.html'));
+    // ثانياً: قراءة HTML القديمة
+    const htmlFiles = Array.from(existingFiles);
     const processedSlugs = new Set(posts.map(p => p.slug));
 
     for (const htmlFile of htmlFiles) {
@@ -260,6 +373,7 @@ function getAllPosts() {
         if (post) posts.push(post);
     }
 
+    // ترتيب من الأحدث للأقدم
     posts.sort((a, b) => {
         const dateA = new Date(a.publishedTime || 0).getTime();
         const dateB = new Date(b.publishedTime || 0).getTime();
@@ -293,10 +407,7 @@ function buildPostCard(post) {
 
 function updateIndex(posts) {
     const indexPath = 'index.html';
-    if (!fs.existsSync(indexPath)) {
-        console.log('⚠️  index.html غير موجود');
-        return;
-    }
+    if (!fs.existsSync(indexPath)) return;
 
     let html = fs.readFileSync(indexPath, 'utf-8');
 
@@ -323,7 +434,7 @@ ${latestPosts.map(buildPostCard).join('\n')}
     if (regex.test(html)) {
         html = html.replace(regex, replacement);
         fs.writeFileSync(indexPath, html, 'utf-8');
-        console.log(`✅ تم تحديث index.html بـ ${Math.min(posts.length, POSTS_PER_HOMEPAGE)} مقال`);
+        console.log(`✅ تم تحديث index.html`);
     }
 }
 
@@ -354,7 +465,7 @@ ${urls.map(u => `    <url>
 </urlset>`;
 
     fs.writeFileSync('sitemap.xml', xml, 'utf-8');
-    console.log(`✅ تم بناء sitemap.xml (${urls.length} URLs)`);
+    console.log(`✅ sitemap.xml`);
 }
 
 function buildRss(posts) {
@@ -387,7 +498,7 @@ ${items}
 </rss>`;
 
     fs.writeFileSync('rss.xml', xml, 'utf-8');
-    console.log(`✅ تم بناء rss.xml (${latestPosts.length} مقال)`);
+    console.log(`✅ rss.xml`);
 }
 
 function buildArchive(posts) {
@@ -397,7 +508,6 @@ function buildArchive(posts) {
         <div class="no-posts-yet">
             <i class="fas fa-feather-pointed"></i>
             <h3 style="color: var(--primary); margin-bottom: 10px;">لا توجد مقالات بعد</h3>
-            <p>سيتم عرض المقالات هنا بعد النشر.</p>
         </div>`;
     } else {
         archiveContent = `
@@ -412,94 +522,58 @@ ${posts.map(buildPostCard).join('\n')}
     <meta charset="UTF-8">
     <link rel="icon" type="image/webp" href="https://tools.chat-alkhaleej.com/logo.webp">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>أرشيف المقالات | مدونة شات الخليج</title>
-    <meta name="description" content="تصفّح جميع مقالات مدونة شات الخليج: مقالات عربية متنوعة عن الترندات والألعاب والتقنية والسوشال ميديا.">
-
+    <meta name="description" content="تصفّح جميع مقالات مدونة شات الخليج">
     <link rel="canonical" href="${SITE_URL}/archive.html" />
-    <link rel="alternate" type="application/rss+xml" title="مدونة الخليج RSS" href="${SITE_URL}/rss.xml" />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="${SITE_URL}/archive.html" />
-    <meta property="og:title" content="أرشيف المقالات | مدونة شات الخليج" />
-    <meta property="og:description" content="تصفّح جميع مقالات مدونة شات الخليج" />
-    <meta property="og:image" content="https://tools.chat-alkhaleej.com/logo.webp" />
-    <meta property="og:locale" content="ar_SA" />
-
+    <link rel="alternate" type="application/rss+xml" href="${SITE_URL}/rss.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
     <style>
         :root { --primary: #450C0C; --accent: #ffd86b; --white: #ffffff; --bg: #f8fafc; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Cairo', sans-serif; background-color: var(--bg); line-height: 1.6; color: #1e293b; padding-top: 75px; }
-
-        .navbar { position: fixed; top: 0; right: 0; left: 0; z-index: 1000; background: rgba(69, 12, 12, 0.97); backdrop-filter: blur(6px); border-bottom: 3px solid var(--accent); padding: 10px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        body { font-family: 'Cairo', sans-serif; background-color: var(--bg); padding-top: 75px; }
+        .navbar { position: fixed; top: 0; right: 0; left: 0; z-index: 1000; background: rgba(69, 12, 12, 0.97); border-bottom: 3px solid var(--accent); padding: 10px 0; }
         .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
         .nav-logo img { height: 45px; }
         .nav-links { display: flex; gap: 10px; list-style: none; }
-        .nav-links a { color: #fff; text-decoration: none; font-weight: 700; font-size: 15px; padding: 8px 14px; border-radius: 25px; transition: 0.3s; display: flex; align-items: center; gap: 7px; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 700; font-size: 15px; padding: 8px 14px; border-radius: 25px; display: flex; align-items: center; gap: 7px; }
         .nav-links a i { color: var(--accent); }
         .nav-links a:hover, .nav-links a.active { background: var(--accent); color: var(--primary); }
         .nav-links a:hover i, .nav-links a.active i { color: var(--primary); }
         .nav-toggle { display: none; color: var(--accent); font-size: 24px; cursor: pointer; }
-
-        @media (max-width: 850px) {
-            .nav-links { position: fixed; top: 68px; right: -100%; width: 100%; background: var(--primary); flex-direction: column; padding: 20px; transition: 0.4s; text-align: center; border-bottom: 2px solid var(--accent); }
-            .nav-links.active { right: 0; }
-            .nav-toggle { display: block; }
-        }
-
-        header { background: linear-gradient(135deg, var(--primary) 0%, #631212 100%); padding: 50px 20px; text-align: center; border-bottom: 6px solid var(--accent); clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%); color: #fff; }
+        @media (max-width: 850px) { .nav-links { position: fixed; top: 68px; right: -100%; width: 100%; background: var(--primary); flex-direction: column; padding: 20px; transition: 0.4s; } .nav-links.active { right: 0; } .nav-toggle { display: block; } }
+        header { background: linear-gradient(135deg, var(--primary), #631212); padding: 50px 20px; text-align: center; border-bottom: 6px solid var(--accent); clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%); color: #fff; }
         header h1 { font-size: 32px; font-weight: 900; }
-        header p { font-size: 16px; opacity: 0.9; margin-top: 10px; }
-
         .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
-        .breadcrumb { background: var(--white); padding: 14px 22px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 25px; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+        .breadcrumb { background: var(--white); padding: 14px 22px; border-radius: 12px; margin-bottom: 25px; font-size: 15px; display: flex; align-items: center; gap: 8px; }
         .breadcrumb a { color: var(--primary); text-decoration: none; font-weight: 700; }
-        .breadcrumb span { color: #64748b; }
-
-        .archive-stats { background: linear-gradient(135deg, #fffdf5 0%, #fff8e1 100%); border: 2px solid var(--accent); padding: 20px 25px; border-radius: 14px; margin-bottom: 30px; text-align: center; color: var(--primary); font-weight: 700; font-size: 16px; }
+        .archive-stats { background: #fffdf5; border: 2px solid var(--accent); padding: 20px; border-radius: 14px; margin-bottom: 30px; text-align: center; color: var(--primary); font-weight: 700; }
         .archive-stats strong { font-size: 22px; }
-
-        .latest-posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-bottom: 30px; }
-        .post-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 6px 18px rgba(0,0,0,0.06); transition: all 0.3s ease; border-top: 5px solid var(--accent); display: flex; flex-direction: column; }
-        .post-card:hover { transform: translateY(-8px); box-shadow: 0 18px 35px rgba(69, 12, 12, 0.15); border-top-color: var(--primary); }
+        .latest-posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .post-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 6px 18px rgba(0,0,0,0.06); transition: 0.3s; border-top: 5px solid var(--accent); }
+        .post-card:hover { transform: translateY(-8px); border-top-color: var(--primary); }
         .post-card-link { text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%; }
-        .post-card-img { width: 100%; height: 180px; object-fit: cover; display: block; }
-        .post-card-body { padding: 22px 20px; display: flex; flex-direction: column; flex: 1; }
-        .post-card-date { font-size: 13px; color: #64748b; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+        .post-card-img { width: 100%; height: 180px; object-fit: cover; }
+        .post-card-body { padding: 22px 20px; flex: 1; display: flex; flex-direction: column; }
+        .post-card-date { font-size: 13px; color: #64748b; margin-bottom: 10px; }
         .post-card-date i { color: var(--accent); }
-        .post-card-title { font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 12px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .post-card-desc { font-size: 14.5px; color: #475569; line-height: 1.7; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 15px; flex: 1; }
-        .post-card-read { color: var(--primary); font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 6px; margin-top: auto; }
-        .post-card:hover .post-card-read i { transform: translateX(-5px); }
-        .post-card-read i { transition: 0.3s; }
-
-        .no-posts-yet { background: var(--white); padding: 50px 30px; border-radius: 16px; text-align: center; color: #64748b; border: 2px dashed #e2e8f0; }
-        .no-posts-yet i { font-size: 50px; color: var(--accent); margin-bottom: 15px; }
-
-        footer { text-align: center; padding: 50px 20px; color: #64748b; font-size: 15px; border-top: 1px solid #e2e8f0; background: #fff; margin-top: 40px; }
+        .post-card-title { font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 12px; }
+        .post-card-desc { font-size: 14.5px; color: #475569; flex: 1; margin-bottom: 15px; }
+        .post-card-read { color: var(--primary); font-weight: 700; font-size: 14px; }
+        footer { text-align: center; padding: 50px 20px; color: #64748b; background: #fff; margin-top: 40px; border-top: 1px solid #e2e8f0; }
         .footer-nav { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 550px; margin: 0 auto 30px; }
-        .footer-nav a { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 12px; text-decoration: none; color: var(--primary); font-weight: 700; font-size: 14px; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .footer-nav a i { color: var(--accent); font-size: 16px; }
-        .footer-nav a:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .footer-nav a { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 12px; text-decoration: none; color: var(--primary); font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .footer-nav a i { color: var(--accent); }
         .nav-vip { border: 1.5px solid var(--accent) !important; background: #fffdf5 !important; }
-
         @media (max-width: 900px) { .latest-posts-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .latest-posts-grid { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr; } header h1 { font-size: 24px; } }
+        @media (max-width: 600px) { .latest-posts-grid { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-
-<nav class="navbar" role="navigation">
+<nav class="navbar">
     <div class="nav-container">
-        <a href="https://chat-alkhaleej.com/" class="nav-logo">
-            <img src="https://tools.chat-alkhaleej.com/logo.webp" alt="شات الخليج" height="45">
-        </a>
+        <a href="https://chat-alkhaleej.com/" class="nav-logo"><img src="https://tools.chat-alkhaleej.com/logo.webp" alt="شات الخليج" height="45"></a>
         <ul class="nav-links" id="navLinks">
             <li><a href="https://chat-alkhaleej.com/"><i class="fas fa-home"></i> الرئيسية</a></li>
             <li><a href="https://chat-alkhaleej.com/rooms/"><i class="fas fa-comments"></i> دليل الغرف</a></li>
@@ -510,29 +584,16 @@ ${posts.map(buildPostCard).join('\n')}
         <div class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('active')"><i class="fas fa-bars"></i></div>
     </div>
 </nav>
-
-<header>
-    <h1>📚 أرشيف جميع المقالات</h1>
-    <p>تصفح كل ما نشرناه في مدونة شات الخليج</p>
-</header>
-
+<header><h1>📚 أرشيف جميع المقالات</h1></header>
 <div class="container">
-
     <nav class="breadcrumb">
-        <a href="https://chat-alkhaleej.com/">الرئيسية</a>
-        <span>›</span>
-        <a href="${SITE_URL}/">المدونة</a>
-        <span>›</span>
+        <a href="https://chat-alkhaleej.com/">الرئيسية</a> <span>›</span>
+        <a href="${SITE_URL}/">المدونة</a> <span>›</span>
         <span>الأرشيف</span>
     </nav>
-
-    <div class="archive-stats">
-        إجمالي المقالات المنشورة: <strong>${posts.length}</strong> مقال
-    </div>
+    <div class="archive-stats">إجمالي المقالات: <strong>${posts.length}</strong> مقال</div>
 ${archiveContent}
-
 </div>
-
 <footer>
     <div class="footer-nav">
         <a href="https://chat-alkhaleej.com/chat-support-gulf.html"><i class="fas fa-headset"></i> الدعم الفني</a>
@@ -540,36 +601,28 @@ ${archiveContent}
         <a href="https://chat-alkhaleej.com/chat-rules-gulf.html"><i class="fas fa-gavel"></i> القوانين</a>
         <a href="https://chat-alkhaleej.com/chat-vip-gulf.html" class="nav-vip"><i class="fas fa-gem"></i> اشتراكات VIP</a>
     </div>
-    <p>حقوق النشر © 2026 موقع شات الخليج | دردشة الخليج | نجمع العرب تحت سقف واحد بصداقة وأمان.</p>
+    <p>حقوق النشر © 2026 موقع شات الخليج | نجمع العرب تحت سقف واحد بصداقة وأمان.</p>
 </footer>
-
 </body>
 </html>`;
 
     fs.writeFileSync('archive.html', archiveHtml, 'utf-8');
-    console.log(`✅ تم بناء archive.html (${posts.length} مقال)`);
+    console.log(`✅ archive.html`);
 }
 
 function buildRobots() {
     const content = `User-agent: *
 Allow: /
-
-# لا تفهرس القوالب
 Disallow: /posts/_template.html
-
-# لا تفهرس لوحة الأدمن
 Disallow: /admin/
-
-# Sitemap
 Sitemap: ${SITE_URL}/sitemap.xml
 `;
-
     fs.writeFileSync('robots.txt', content, 'utf-8');
-    console.log('✅ تم بناء robots.txt');
+    console.log('✅ robots.txt');
 }
 
 // ===== التنفيذ =====
-console.log('🚀 بدء بناء مدونة شات الخليج (v2)...\n');
+console.log('🚀 بدء بناء مدونة شات الخليج (v3)...\n');
 
 const posts = getAllPosts();
 updateIndex(posts);
