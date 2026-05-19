@@ -310,13 +310,7 @@ function processMarkdownPost(filename, existingFiles) {
     const htmlPath = path.join(POSTS_DIR, htmlFilename);
     fs.writeFileSync(htmlPath, html, 'utf-8');
 
-    // ✨ حذف ملف .md الأصلي (عشان GitHub Pages ما يعرضه)
-    try {
-    fs.unlinkSync(filepath);
-    console.log(`✅ تم تحويل: ${filename} → ${htmlFilename} (وحذف الـ .md)`);
-    } catch (e) {
-    console.log(`✅ تم تحويل: ${filename} → ${htmlFilename} (لكن فشل حذف .md: ${e.message})`);
-    }
+    console.log(`✅ تم تحويل: ${filename} → ${htmlFilename}`);
 
     // إضافة لقائمة الملفات الموجودة
     existingFiles.add(htmlFilename);
