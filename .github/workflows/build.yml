@@ -48,8 +48,8 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # إضافة الملفات المحدّثة
-          git add
-
+          git add posts/*.html posts/*.md index.html archive.html sitemap.xml rss.xml robots.txt
+          
           # تحقق إذا فيه تغييرات قبل الـ commit
           if git diff --staged --quiet; then
             echo "✅ لا توجد تغييرات للحفظ"
