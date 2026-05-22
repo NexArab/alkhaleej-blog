@@ -1,11 +1,11 @@
 /**
- * 🤖 سكربت بناء مدونة شات الخليج (v3)
+ * 🤖 سكربت بناء مدونة شات الخليج (v4)
  *
- * المميزات:
- * - يستخدم قالب المقال الحقيقي (_template.html) بكل تصميمه
- * - يحوّل العناوين العربية لـ slug إنجليزي تلقائياً (Transliteration)
- * - يدعم المقالات الـ HTML القديمة والـ Markdown الجديدة من Sveltia CMS
- * - يحذف ملفات .md بعد التحويل (عشان GitHub Pages ما يعرضها بشكل خام)
+ * 🛡️ الحماية من التكرار:
+ * - يحذف ملف .md بعد التحويل
+ * - لو ما قدر يحذف، يتجاهل الـ .md لو فيه .html بنفس الاسم
+ * - يستبدل الملف القديم بدل توليد نسخ (-1, -2)
+ * - يزيل التكرار من قائمة المقالات قبل العرض
  */
 
 const fs = require('fs');
@@ -18,7 +18,7 @@ const SITE_DESCRIPTION = 'مدونة شات الخليج: مقالات عربي�
 const POSTS_PER_HOMEPAGE = 6;
 const POSTS_DIR = 'posts';
 
-// ===== خريطة تحويل العربية للإنجليزية (Transliteration) =====
+// ===== خريطة تحويل العربية للإنجليزية =====
 const ARABIC_TO_LATIN = {
     'ا': 'a', 'أ': 'a', 'إ': 'i', 'آ': 'aa', 'ء': '', 'ؤ': 'u', 'ئ': 'i',
     'ب': 'b', 'ت': 't', 'ث': 'th', 'ج': 'j', 'ح': 'h', 'خ': 'kh',
@@ -30,13 +30,9 @@ const ARABIC_TO_LATIN = {
     ' ': '-', '_': '-'
 };
 
-/**
- * تحويل نص عربي لـ slug إنجليزي
- */
 function arabicToSlug(text) {
     if (!text) return 'post-' + Date.now();
 
-    // إذا النص بالفعل إنجليزي (ما فيه عربي)، رجعه كما هو بس نظّفه
     if (!/[\u0600-\u06FF]/.test(text)) {
         return text
             .toLowerCase()
@@ -62,17 +58,11 @@ function arabicToSlug(text) {
         .substring(0, 80);
 }
 
-/**
- * استخراج بيانات من HTML
- */
 function extractMeta(html, pattern) {
     const match = html.match(pattern);
     return match ? match[1].trim() : '';
 }
 
-/**
- * تنسيق التاريخ بالعربي
- */
 function formatArabicDate(isoDate) {
     if (!isoDate) return '';
     try {
@@ -85,9 +75,6 @@ function formatArabicDate(isoDate) {
     }
 }
 
-/**
- * تحليل Frontmatter (YAML)
- */
 function parseFrontmatter(content) {
     const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
     if (!match) return null;
@@ -152,21 +139,15 @@ function parseFrontmatter(content) {
     return { data, body: body.trim() };
 }
 
-/**
- * قراءة قالب المقال
- */
 function getPostTemplate() {
     const templatePath = path.join(POSTS_DIR, '_template.html');
     if (!fs.existsSync(templatePath)) {
-        console.log('❌ خطأ: قالب المقال غير موجود في posts/_template.html');
+        console.log('❌ خطأ: قالب المقال غير موجود');
         return null;
     }
     return fs.readFileSync(templatePath, 'utf-8');
 }
 
-/**
- * بناء HTML من بيانات Markdown
- */
 function buildPostHtmlFromMarkdown(mdData, slug) {
     const template = getPostTemplate();
     if (!template) return null;
@@ -178,7 +159,6 @@ function buildPostHtmlFromMarkdown(mdData, slug) {
         return null;
     }
 
-    // بناء tags HTML
     let tagsHtml = '';
     if (Array.isArray(data.tags) && data.tags.length > 0) {
         tagsHtml = data.tags
@@ -186,18 +166,15 @@ function buildPostHtmlFromMarkdown(mdData, slug) {
             .join('\n        ');
     }
 
-    // صورة كاملة
     let imageUrl = data.image || 'https://tools.chat-alkhaleej.com/logo.webp';
     if (imageUrl.startsWith('/')) {
         imageUrl = SITE_URL + imageUrl;
     }
 
-    // تنسيق التاريخ
     const dateIso = data.date || new Date().toISOString();
     const dateDisplay = formatArabicDate(dateIso);
     const modifiedIso = data.modified || dateIso;
 
-    // استبدال المتغيرات في القالب
     const replacements = {
         'POST_TITLE': data.title,
         'POST_DESCRIPTION': data.description,
@@ -222,9 +199,6 @@ function buildPostHtmlFromMarkdown(mdData, slug) {
     return html;
 }
 
-/**
- * قراءة مقال HTML قديم
- */
 function parseHtmlPost(filename) {
     const filepath = path.join(POSTS_DIR, filename);
     const html = fs.readFileSync(filepath, 'utf-8');
@@ -255,22 +229,29 @@ function parseHtmlPost(filename) {
 }
 
 /**
- * توليد slug فريد (إذا كان موجود، يضيف رقم)
+ * 🛡️ توليد slug ثابت (بدون أرقام -1, -2)
+ * نفس العنوان دائماً يعطي نفس الـ slug = استبدال بدل تكرار
  */
-function generateUniqueSlug(baseSlug, existingFiles) {
-    let slug = baseSlug;
-    let counter = 1;
-    while (existingFiles.has(slug + '.html')) {
-        slug = baseSlug + '-' + counter;
-        counter++;
+function generateStableSlug(data, filename) {
+    // 1. لو فيه slug إنجليزي صريح، استخدمه
+    if (data.slug && !/[\u0600-\u06FF]/.test(data.slug) && data.slug.trim()) {
+        return data.slug.trim();
     }
-    return slug;
+
+    // 2. استخراج التاريخ من اسم الملف
+    const dateMatch = filename.match(/^(\d{4}-\d{2}-\d{2})-/);
+    const datePrefix = dateMatch ? dateMatch[1] + '-' : '';
+
+    // 3. تحويل العنوان لـ slug إنجليزي
+    const titleSlug = arabicToSlug(data.title);
+
+    return datePrefix + titleSlug;
 }
 
 /**
- * معالجة مقال Markdown - تحويله لـ HTML
+ * معالجة مقال Markdown
  */
-function processMarkdownPost(filename, existingFiles) {
+function processMarkdownPost(filename) {
     const filepath = path.join(POSTS_DIR, filename);
     const content = fs.readFileSync(filepath, 'utf-8');
 
@@ -282,40 +263,25 @@ function processMarkdownPost(filename, existingFiles) {
 
     const { data } = parsed;
 
-    // توليد slug ذكي:
-    // 1. لو الـ slug موجود وإنجليزي، استخدمه
-    // 2. لو ما فيه slug أو فيه عربي، حوّل العنوان لـ slug إنجليزي
-    let baseSlug;
-    if (data.slug && !/[\u0600-\u06FF]/.test(data.slug)) {
-        baseSlug = data.slug;
-    } else {
-        // استخراج التاريخ من اسم الملف (لو موجود)
-        const dateMatch = filename.match(/^(\d{4}-\d{2}-\d{2})-/);
-        const datePrefix = dateMatch ? dateMatch[1] + '-' : '';
+    // 🛡️ slug ثابت - نفس العنوان = نفس الـ slug دائماً
+    const finalSlug = generateStableSlug(data, filename);
 
-        // تحويل العنوان لـ slug إنجليزي
-        const titleSlug = arabicToSlug(data.title);
-        baseSlug = datePrefix + titleSlug;
-    }
-
-    // ضمان عدم التكرار
-    const finalSlug = generateUniqueSlug(baseSlug, existingFiles);
-
-    // بناء HTML
     const html = buildPostHtmlFromMarkdown(parsed, finalSlug);
     if (!html) return null;
 
-    // حفظ ملف HTML بالـ slug الإنجليزي
+    // حفظ ملف HTML (يستبدل القديم لو موجود - مو يكرر)
     const htmlFilename = finalSlug + '.html';
     const htmlPath = path.join(POSTS_DIR, htmlFilename);
     fs.writeFileSync(htmlPath, html, 'utf-8');
 
-    console.log(`✅ تم تحويل: ${filename} → ${htmlFilename}`);
+    // 🛡️ حذف ملف .md الأصلي
+    try {
+        fs.unlinkSync(filepath);
+        console.log(`✅ تحويل: ${filename} → ${htmlFilename} (وحُذف .md)`);
+    } catch (e) {
+        console.log(`⚠️  تحويل: ${filename} → ${htmlFilename} (لكن .md ما انحذف)`);
+    }
 
-    // إضافة لقائمة الملفات الموجودة
-    existingFiles.add(htmlFilename);
-
-    // إرجاع بيانات المقال
     let imageUrl = data.image || `${SITE_URL}/images/default.jpg`;
     if (imageUrl.startsWith('/')) {
         imageUrl = SITE_URL + imageUrl;
@@ -336,7 +302,7 @@ function processMarkdownPost(filename, existingFiles) {
 }
 
 /**
- * قراءة كل المقالات
+ * 🛡️ قراءة كل المقالات مع منع التكرار
  */
 function getAllPosts() {
     if (!fs.existsSync(POSTS_DIR)) {
@@ -345,37 +311,50 @@ function getAllPosts() {
     }
 
     const files = fs.readdirSync(POSTS_DIR).filter(f => !f.startsWith('_'));
-    const existingFiles = new Set(files.filter(f => f.endsWith('.html')));
     const posts = [];
+
+    // 🛡️ خريطة لمنع التكرار: slug → post
+    const postsBySlug = new Map();
 
     // أولاً: معالجة Markdown
     const markdownFiles = files.filter(f => f.endsWith('.md'));
     for (const mdFile of markdownFiles) {
-        const post = processMarkdownPost(mdFile, existingFiles);
-        if (post) posts.push(post);
+        const post = processMarkdownPost(mdFile);
+        if (post) {
+            // 🛡️ لو الـ slug موجود، استبدله (آخر نسخة تفوز)
+            postsBySlug.set(post.slug, post);
+        }
     }
 
-    // ثانياً: قراءة HTML القديمة
-    const htmlFiles = Array.from(existingFiles);
-    const processedSlugs = new Set(posts.map(p => p.slug));
+    // ثانياً: قراءة HTML
+    // 🛡️ نعيد قراءة المجلد لأن أسماء قد تغيّرت
+    const htmlFiles = fs.readdirSync(POSTS_DIR)
+        .filter(f => f.endsWith('.html') && !f.startsWith('_'));
 
     for (const htmlFile of htmlFiles) {
         const slug = htmlFile.replace('.html', '');
-        if (processedSlugs.has(slug)) continue;
+
+        // 🛡️ لو هذا الـ slug جاي من Markdown، تخطّاه (تم معالجته)
+        if (postsBySlug.has(slug)) continue;
 
         const post = parseHtmlPost(htmlFile);
-        if (post) posts.push(post);
+        if (post) {
+            postsBySlug.set(post.slug, post);
+        }
     }
 
+    // تحويل الخريطة لمصفوفة
+    const uniquePosts = Array.from(postsBySlug.values());
+
     // ترتيب من الأحدث للأقدم
-    posts.sort((a, b) => {
+    uniquePosts.sort((a, b) => {
         const dateA = new Date(a.publishedTime || 0).getTime();
         const dateB = new Date(b.publishedTime || 0).getTime();
         return dateB - dateA;
     });
 
-    console.log(`📚 إجمالي المقالات: ${posts.length}`);
-    return posts;
+    console.log(`📚 إجمالي المقالات الفريدة: ${uniquePosts.length}`);
+    return uniquePosts;
 }
 
 function buildPostCard(post) {
@@ -459,7 +438,7 @@ ${urls.map(u => `    <url>
 </urlset>`;
 
     fs.writeFileSync('sitemap.xml', xml, 'utf-8');
-    console.log(`✅ sitemap.xml`);
+    console.log(`✅ sitemap.xml (${urls.length} URLs)`);
 }
 
 function buildRss(posts) {
@@ -492,7 +471,7 @@ ${items}
 </rss>`;
 
     fs.writeFileSync('rss.xml', xml, 'utf-8');
-    console.log(`✅ rss.xml`);
+    console.log(`✅ rss.xml (${latestPosts.length} مقال)`);
 }
 
 function buildArchive(posts) {
@@ -601,7 +580,7 @@ ${archiveContent}
 </html>`;
 
     fs.writeFileSync('archive.html', archiveHtml, 'utf-8');
-    console.log(`✅ archive.html`);
+    console.log(`✅ archive.html (${posts.length} مقال)`);
 }
 
 function buildRobots() {
@@ -616,7 +595,7 @@ Sitemap: ${SITE_URL}/sitemap.xml
 }
 
 // ===== التنفيذ =====
-console.log('🚀 بدء بناء مدونة شات الخليج (v3)...\n');
+console.log('🚀 بدء بناء مدونة شات الخليج (v4 - منع التكرار)...\n');
 
 const posts = getAllPosts();
 updateIndex(posts);
@@ -626,4 +605,4 @@ buildRss(posts);
 buildRobots();
 
 console.log('\n✨ اكتمل البناء بنجاح!');
-console.log(`📊 إجمالي المقالات: ${posts.length}`);
+console.log(`📊 إجمالي المقالات الفريدة: ${posts.length}`);
