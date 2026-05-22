@@ -12,4 +12,10 @@
         <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
+    <url>
+        <loc>https://blog.chat-alkhaleej.com/posts/2026-05-22-adwat-shat-alkhlyj-afdl-22-adaa-mjanya-awnlayn-llnsws-walswr-wseo.html</loc>
+        <lastmod>2026-05-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
 </urlset>
