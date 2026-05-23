@@ -2,15 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://blog.chat-alkhaleej.com/</loc>
-        <lastmod>2026-05-22</lastmod>
+        <lastmod>2026-05-23</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://blog.chat-alkhaleej.com/archive.html</loc>
-        <lastmod>2026-05-22</lastmod>
+        <lastmod>2026-05-23</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://blog.chat-alkhaleej.com/posts/2026-05-23-nqat-daf-brj-aljwza-alaatfya-alkhfaya-althmanya-alty-ydaryha-altwam-khlf-qnaa-al.html</loc>
+        <lastmod>2026-05-23</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://blog.chat-alkhaleej.com/posts/2026-05-22-sfat-brj-aljwza-llrjl-walmraa-aldlyl-alnfsy-alkaml-lfk-shfrat-altwam-alhwaiy-alm.html</loc>
