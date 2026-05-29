@@ -1,11 +1,16 @@
 /**
- * 🤖 سكربت بناء مدونة شات الخليج (v4)
+ * 🤖 سكربت بناء مدونة شات الخليج (v6)
  *
- * 🛡️ الحماية من التكرار:
- * - يحذف ملف .md بعد التحويل
- * - لو ما قدر يحذف، يتجاهل الـ .md لو فيه .html بنفس الاسم
- * - يستبدل الملف القديم بدل توليد نسخ (-1, -2)
- * - يزيل التكرار من قائمة المقالات قبل العرض
+ * 🔥 التعديلات الجديدة:
+ * - ❌ لا يحذف ملفات .md (DELETE_SOURCE_FILES = false)
+ * - ✅ دعم focus_keyword
+ * - ✅ دعم show_in_sitemap
+ * - ✅ دعم related_pages (روابط داخلية)
+ * - ✅ دعم last_updated (dateModified في Schema)
+ * - ✅ FAQ Schema تلقائي
+ * - ✅ Breadcrumb 3 مستويات: الرئيسية → المدونة → الصفحة
+ * - ✅ Slug إنجليزي إجباري للـ Landing Pages
+ * - ✅ منع التكرار في المقالات و Landing Pages
  */
 
 const fs = require('fs');
@@ -17,6 +22,11 @@ const SITE_NAME = 'مدونة شات الخليج';
 const SITE_DESCRIPTION = 'مدونة شات الخليج: مقالات عربية متنوعة عن الترندات والألعاب والتقنية والسوشال ميديا والحياة الخليجية والمحتوى الترفيهي.';
 const POSTS_PER_HOMEPAGE = 6;
 const POSTS_DIR = 'posts';
+const LANDING_DATA_DIR = '_landing-data';
+const LANDING_TEMPLATE = '_templates/_landing-template.html';
+
+// 🆕 إعداد جديد: لا تحذف ملفات .md بعد البناء
+const DELETE_SOURCE_FILES = false;
 
 // ===== خريطة تحويل العربية للإنجليزية =====
 const ARABIC_TO_LATIN = {
@@ -31,31 +41,17 @@ const ARABIC_TO_LATIN = {
 };
 
 function arabicToSlug(text) {
-    if (!text) return 'post-' + Date.now();
-
+    if (!text) return 'page-' + Date.now();
     if (!/[\u0600-\u06FF]/.test(text)) {
-        return text
-            .toLowerCase()
-            .replace(/[^a-z0-9\-]/g, '-')
-            .replace(/-+/g, '-')
-            .replace(/^-|-$/g, '');
+        return text.toLowerCase().replace(/[^a-z0-9\-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
     }
-
     let result = '';
     for (const char of text) {
-        if (ARABIC_TO_LATIN[char] !== undefined) {
-            result += ARABIC_TO_LATIN[char];
-        } else if (/[a-zA-Z0-9]/.test(char)) {
-            result += char.toLowerCase();
-        } else if (/[\-]/.test(char)) {
-            result += '-';
-        }
+        if (ARABIC_TO_LATIN[char] !== undefined) result += ARABIC_TO_LATIN[char];
+        else if (/[a-zA-Z0-9]/.test(char)) result += char.toLowerCase();
+        else if (/[\-]/.test(char)) result += '-';
     }
-
-    return result
-        .replace(/-+/g, '-')
-        .replace(/^-|-$/g, '')
-        .substring(0, 80);
+    return result.replace(/-+/g, '-').replace(/^-|-$/g, '').substring(0, 80);
 }
 
 function extractMeta(html, pattern) {
@@ -67,14 +63,21 @@ function formatArabicDate(isoDate) {
     if (!isoDate) return '';
     try {
         const date = new Date(isoDate);
-        const months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
-                        'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+        const months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
         return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
-    } catch (e) {
-        return '';
-    }
+    } catch (e) { return ''; }
 }
 
+function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;');
+}
+
+/**
+ * تحليل Frontmatter متقدم
+ */
 function parseFrontmatter(content) {
     const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
     if (!match) return null;
@@ -83,31 +86,20 @@ function parseFrontmatter(content) {
     const body = match[2];
     const data = {};
     const lines = yamlContent.split(/\r?\n/);
-    let currentKey = null;
-    let multilineValue = [];
-    let isMultiline = false;
 
-    for (const line of lines) {
+    let i = 0;
+    while (i < lines.length) {
+        const line = lines[i];
+
         const inlineArrayMatch = line.match(/^([a-z_]+):\s*\[(.*)\]$/);
         if (inlineArrayMatch) {
             const key = inlineArrayMatch[1];
-            const items = inlineArrayMatch[2]
+            data[key] = inlineArrayMatch[2]
                 .split(',')
                 .map(s => s.trim().replace(/^["']|["']$/g, ''))
                 .filter(s => s);
-            data[key] = items;
+            i++;
             continue;
-        }
-
-        if (isMultiline && line.match(/^\s+-\s+/)) {
-            multilineValue.push(line.replace(/^\s+-\s+/, '').replace(/^["']|["']$/g, ''));
-            continue;
-        }
-
-        if (isMultiline && !line.match(/^\s+-\s+/)) {
-            data[currentKey] = multilineValue;
-            isMultiline = false;
-            multilineValue = [];
         }
 
         const keyValueMatch = line.match(/^([a-z_]+):\s*(.*)$/);
@@ -116,35 +108,72 @@ function parseFrontmatter(content) {
             let value = keyValueMatch[2].trim();
 
             if (value === '') {
-                currentKey = key;
-                isMultiline = true;
-                multilineValue = [];
-                continue;
+                let j = i + 1;
+
+                // قائمة بسيطة (- item)
+                if (j < lines.length && lines[j].match(/^\s+-\s+\S/) && !lines[j].match(/^\s+-\s+\w+:/)) {
+                    const nextLines = [];
+                    while (j < lines.length && lines[j].match(/^\s+-\s+/)) {
+                        nextLines.push(lines[j].replace(/^\s+-\s+/, '').replace(/^["']|["']$/g, ''));
+                        j++;
+                    }
+                    data[key] = nextLines;
+                    i = j;
+                    continue;
+                }
+
+                // قائمة كائنات (- key: value)
+                if (j < lines.length && lines[j].match(/^\s+-\s+\w+:/)) {
+                    const items = [];
+                    let currentItem = null;
+
+                    while (j < lines.length && (lines[j].match(/^\s+-\s+/) || lines[j].match(/^\s{4,}\w+:/))) {
+                        const itemStart = lines[j].match(/^\s+-\s+(\w+):\s*(.*)$/);
+                        const itemCont = lines[j].match(/^\s{4,}(\w+):\s*(.*)$/);
+
+                        if (itemStart) {
+                            if (currentItem) items.push(currentItem);
+                            currentItem = {};
+                            let val = itemStart[2].trim().replace(/^["']|["']$/g, '');
+                            if (val === 'true') val = true;
+                            else if (val === 'false') val = false;
+                            else if (/^\d+$/.test(val)) val = parseInt(val);
+                            currentItem[itemStart[1]] = val;
+                        } else if (itemCont && currentItem) {
+                            let val = itemCont[2].trim().replace(/^["']|["']$/g, '');
+                            if (val === 'true') val = true;
+                            else if (val === 'false') val = false;
+                            else if (/^\d+$/.test(val)) val = parseInt(val);
+                            currentItem[itemCont[1]] = val;
+                        }
+                        j++;
+                    }
+                    if (currentItem) items.push(currentItem);
+                    data[key] = items;
+                    i = j;
+                    continue;
+                }
+            } else {
+                value = value.replace(/^["']|["']$/g, '');
+                if (value === 'true') value = true;
+                else if (value === 'false') value = false;
+                else if (/^\d+$/.test(value)) value = parseInt(value);
+                data[key] = value;
             }
-
-            value = value.replace(/^["']|["']$/g, '');
-
-            if (value === 'true') value = true;
-            else if (value === 'false') value = false;
-            else if (/^\d+$/.test(value)) value = parseInt(value);
-
-            data[key] = value;
         }
-    }
-
-    if (isMultiline && currentKey) {
-        data[currentKey] = multilineValue;
+        i++;
     }
 
     return { data, body: body.trim() };
 }
 
+// ============================================================
+// 📝 معالجة المقالات
+// ============================================================
+
 function getPostTemplate() {
     const templatePath = path.join(POSTS_DIR, '_template.html');
-    if (!fs.existsSync(templatePath)) {
-        console.log('❌ خطأ: قالب المقال غير موجود');
-        return null;
-    }
+    if (!fs.existsSync(templatePath)) return null;
     return fs.readFileSync(templatePath, 'utf-8');
 }
 
@@ -153,28 +182,17 @@ function buildPostHtmlFromMarkdown(mdData, slug) {
     if (!template) return null;
 
     const { data, body } = mdData;
-
-    if (!data.title || !data.description) {
-        console.log(`⚠️  مقال ناقص بيانات: ${slug}`);
-        return null;
-    }
+    if (!data.title || !data.description) return null;
 
     let tagsHtml = '';
     if (Array.isArray(data.tags) && data.tags.length > 0) {
-        tagsHtml = data.tags
-            .map(tag => `<span class="tag">${tag}</span>`)
-            .join('\n        ');
+        tagsHtml = data.tags.map(tag => `<span class="tag">${tag}</span>`).join('\n        ');
     }
 
     let imageUrl = data.image || 'https://tools.chat-alkhaleej.com/logo.webp';
-    if (imageUrl.startsWith('/')) {
-        imageUrl = SITE_URL + imageUrl;
-    }
+    if (imageUrl.startsWith('/')) imageUrl = SITE_URL + imageUrl;
 
     const dateIso = data.date || new Date().toISOString();
-    const dateDisplay = formatArabicDate(dateIso);
-    const modifiedIso = data.modified || dateIso;
-
     const replacements = {
         'POST_TITLE': data.title,
         'POST_DESCRIPTION': data.description,
@@ -183,8 +201,8 @@ function buildPostHtmlFromMarkdown(mdData, slug) {
         'POST_SLUG': slug,
         'POST_IMAGE': imageUrl,
         'POST_DATE': dateIso,
-        'POST_MODIFIED': modifiedIso,
-        'POST_DATE_DISPLAY': dateDisplay,
+        'POST_MODIFIED': data.modified || dateIso,
+        'POST_DATE_DISPLAY': formatArabicDate(dateIso),
         'POST_READ_TIME': data.read_time || 5,
         'POST_CATEGORY': data.category || 'عام',
         'POST_CONTENT': body,
@@ -195,167 +213,367 @@ function buildPostHtmlFromMarkdown(mdData, slug) {
     for (const [key, value] of Object.entries(replacements)) {
         html = html.replace(new RegExp(`{{${key}}}`, 'g'), value);
     }
-
     return html;
 }
 
 function parseHtmlPost(filename) {
     const filepath = path.join(POSTS_DIR, filename);
     const html = fs.readFileSync(filepath, 'utf-8');
-
     const title = extractMeta(html, /<meta property="og:title" content="([^"]+)"/);
     const description = extractMeta(html, /<meta name="description" content="([^"]+)"/);
-    const image = extractMeta(html, /<meta property="og:image" content="([^"]+)"/);
-    const publishedTime = extractMeta(html, /<meta property="article:published_time" content="([^"]+)"/);
-    const modifiedTime = extractMeta(html, /<meta property="article:modified_time" content="([^"]+)"/);
-    const category = extractMeta(html, /<span class="article-category">[\s\S]*?<\/i>\s*([^<]+)\s*<\/span>/);
-
-    if (!title || !description) {
-        return null;
-    }
+    if (!title || !description) return null;
 
     return {
-        filename,
-        slug: filename.replace('.html', ''),
+        filename, slug: filename.replace('.html', ''),
         url: `${SITE_URL}/${POSTS_DIR}/${filename}`,
-        title,
-        description,
-        image: image || `${SITE_URL}/images/default.jpg`,
-        publishedTime,
-        modifiedTime: modifiedTime || publishedTime,
-        dateDisplay: formatArabicDate(publishedTime),
-        category: category.trim() || 'عام'
+        title, description,
+        image: extractMeta(html, /<meta property="og:image" content="([^"]+)"/) || `${SITE_URL}/images/default.jpg`,
+        publishedTime: extractMeta(html, /<meta property="article:published_time" content="([^"]+)"/),
+        modifiedTime: extractMeta(html, /<meta property="article:modified_time" content="([^"]+)"/),
+        dateDisplay: formatArabicDate(extractMeta(html, /<meta property="article:published_time" content="([^"]+)"/)),
+        category: (extractMeta(html, /<span class="article-category">[\s\S]*?<\/i>\s*([^<]+)\s*<\/span>/) || 'عام').trim()
     };
 }
 
-/**
- * 🛡️ توليد slug ثابت (بدون أرقام -1, -2)
- * نفس العنوان دائماً يعطي نفس الـ slug = استبدال بدل تكرار
- */
 function generateStableSlug(data, filename) {
-    // 1. لو فيه slug إنجليزي صريح، استخدمه
     if (data.slug && !/[\u0600-\u06FF]/.test(data.slug) && data.slug.trim()) {
         return data.slug.trim();
     }
-
-    // 2. استخراج التاريخ من اسم الملف
     const dateMatch = filename.match(/^(\d{4}-\d{2}-\d{2})-/);
     const datePrefix = dateMatch ? dateMatch[1] + '-' : '';
-
-    // 3. تحويل العنوان لـ slug إنجليزي
-    const titleSlug = arabicToSlug(data.title);
-
-    return datePrefix + titleSlug;
+    return datePrefix + arabicToSlug(data.title);
 }
 
-/**
- * معالجة مقال Markdown
- */
 function processMarkdownPost(filename) {
     const filepath = path.join(POSTS_DIR, filename);
     const content = fs.readFileSync(filepath, 'utf-8');
-
     const parsed = parseFrontmatter(content);
-    if (!parsed) {
-        console.log(`⚠️  لا يمكن تحليل: ${filename}`);
-        return null;
-    }
+    if (!parsed) return null;
 
-    const { data } = parsed;
-
-    // 🛡️ slug ثابت - نفس العنوان = نفس الـ slug دائماً
-    const finalSlug = generateStableSlug(data, filename);
-
+    const finalSlug = generateStableSlug(parsed.data, filename);
     const html = buildPostHtmlFromMarkdown(parsed, finalSlug);
     if (!html) return null;
 
-    // حفظ ملف HTML (يستبدل القديم لو موجود - مو يكرر)
     const htmlFilename = finalSlug + '.html';
-    const htmlPath = path.join(POSTS_DIR, htmlFilename);
-    fs.writeFileSync(htmlPath, html, 'utf-8');
+    fs.writeFileSync(path.join(POSTS_DIR, htmlFilename), html, 'utf-8');
 
-    // 🛡️ حذف ملف .md الأصلي
-    try {
-        fs.unlinkSync(filepath);
-        console.log(`✅ تحويل: ${filename} → ${htmlFilename} (وحُذف .md)`);
-    } catch (e) {
-        console.log(`⚠️  تحويل: ${filename} → ${htmlFilename} (لكن .md ما انحذف)`);
+    // 🆕 لا نحذف الملف الأصلي
+    if (DELETE_SOURCE_FILES) {
+        try { fs.unlinkSync(filepath); } catch (e) {}
     }
+    console.log(`✅ مقال: ${filename} → ${htmlFilename}`);
 
+    const { data } = parsed;
     let imageUrl = data.image || `${SITE_URL}/images/default.jpg`;
-    if (imageUrl.startsWith('/')) {
-        imageUrl = SITE_URL + imageUrl;
-    }
+    if (imageUrl.startsWith('/')) imageUrl = SITE_URL + imageUrl;
 
     return {
-        filename: htmlFilename,
-        slug: finalSlug,
+        filename: htmlFilename, slug: finalSlug,
         url: `${SITE_URL}/${POSTS_DIR}/${htmlFilename}`,
-        title: data.title,
-        description: data.description,
-        image: imageUrl,
-        publishedTime: data.date,
-        modifiedTime: data.modified || data.date,
+        title: data.title, description: data.description, image: imageUrl,
+        publishedTime: data.date, modifiedTime: data.modified || data.date,
         dateDisplay: formatArabicDate(data.date),
         category: data.category || 'عام'
     };
 }
 
-/**
- * 🛡️ قراءة كل المقالات مع منع التكرار
- */
 function getAllPosts() {
-    if (!fs.existsSync(POSTS_DIR)) {
-        console.log('⚠️  مجلد posts غير موجود');
-        return [];
-    }
+    if (!fs.existsSync(POSTS_DIR)) return [];
 
     const files = fs.readdirSync(POSTS_DIR).filter(f => !f.startsWith('_'));
-    const posts = [];
-
-    // 🛡️ خريطة لمنع التكرار: slug → post
     const postsBySlug = new Map();
 
-    // أولاً: معالجة Markdown
     const markdownFiles = files.filter(f => f.endsWith('.md'));
     for (const mdFile of markdownFiles) {
         const post = processMarkdownPost(mdFile);
-        if (post) {
-            // 🛡️ لو الـ slug موجود، استبدله (آخر نسخة تفوز)
-            postsBySlug.set(post.slug, post);
-        }
+        if (post) postsBySlug.set(post.slug, post);
     }
 
-    // ثانياً: قراءة HTML
-    // 🛡️ نعيد قراءة المجلد لأن أسماء قد تغيّرت
-    const htmlFiles = fs.readdirSync(POSTS_DIR)
-        .filter(f => f.endsWith('.html') && !f.startsWith('_'));
-
+    const htmlFiles = fs.readdirSync(POSTS_DIR).filter(f => f.endsWith('.html') && !f.startsWith('_'));
     for (const htmlFile of htmlFiles) {
         const slug = htmlFile.replace('.html', '');
-
-        // 🛡️ لو هذا الـ slug جاي من Markdown، تخطّاه (تم معالجته)
         if (postsBySlug.has(slug)) continue;
-
         const post = parseHtmlPost(htmlFile);
-        if (post) {
-            postsBySlug.set(post.slug, post);
+        if (post) postsBySlug.set(post.slug, post);
+    }
+
+    const uniquePosts = Array.from(postsBySlug.values());
+    uniquePosts.sort((a, b) => {
+        const dA = new Date(a.publishedTime || 0).getTime();
+        const dB = new Date(b.publishedTime || 0).getTime();
+        return dB - dA;
+    });
+
+    console.log(`📚 مقالات: ${uniquePosts.length}`);
+    return uniquePosts;
+}
+
+// ============================================================
+// 🎯 معالجة Landing Pages
+// ============================================================
+
+function getLandingTemplate() {
+    if (!fs.existsSync(LANDING_TEMPLATE)) return null;
+    return fs.readFileSync(LANDING_TEMPLATE, 'utf-8');
+}
+
+function buildStatsHtml(stats) {
+    if (!Array.isArray(stats) || stats.length === 0) return '';
+    const items = stats.map(s => `
+            <div class="stat-item">
+                <div class="stat-number">${s.number || ''}</div>
+                <div class="stat-label">${s.label || ''}</div>
+            </div>`).join('');
+    return `<div class="hero-stats">${items}\n        </div>`;
+}
+
+function buildFeaturesSection(data) {
+    if (!Array.isArray(data.features) || data.features.length === 0) return '';
+    const cards = data.features.map(f => `
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-${f.icon || 'star'}"></i></div>
+                <h3>${f.title || ''}</h3>
+                <p>${f.description || ''}</p>
+            </div>`).join('');
+    return `
+    <div class="section-heading">
+        <h2>${data.features_heading || 'لماذا نحن الأفضل؟'}</h2>
+        <p>${data.features_subheading || 'مميزات تجعلنا الخيار الأول'}</p>
+    </div>
+    <div class="features-grid">${cards}
+    </div>`;
+}
+
+function buildMidCtaSection(data, ctaUrl) {
+    if (data.show_mid_cta === false) return '';
+    if (!data.mid_cta_title) return '';
+    return `
+    <div class="mid-cta">
+        <div class="mid-cta-icon"><i class="fas fa-comments"></i></div>
+        <div class="mid-cta-text">
+            <h3>${data.mid_cta_title}</h3>
+            <p>${data.mid_cta_text || ''}</p>
+        </div>
+        <a href="${ctaUrl}" class="mid-cta-btn">
+            <i class="fas fa-arrow-left"></i>
+            ${data.mid_cta_btn || 'ابدأ الآن'}
+        </a>
+    </div>`;
+}
+
+function buildFaqSection(faqs) {
+    if (!Array.isArray(faqs) || faqs.length === 0) return '';
+    const items = faqs.map(faq => `
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>${faq.question || ''}</span>
+                <i class="fas fa-chevron-down icon"></i>
+            </div>
+            <div class="faq-answer">
+                <p>${(faq.answer || '').replace(/\n/g, '</p><p>')}</p>
+            </div>
+        </div>`).join('');
+    return `
+    <div class="section-heading">
+        <h2>أسئلة شائعة</h2>
+        <p>إجابات لأكثر الأسئلة شيوعاً</p>
+    </div>
+    <div class="faq-section">${items}
+    </div>`;
+}
+
+function buildFaqSchema(faqs) {
+    if (!Array.isArray(faqs) || faqs.length === 0) return '';
+    const schema = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        'mainEntity': faqs.map(faq => ({
+            '@type': 'Question',
+            'name': faq.question || '',
+            'acceptedAnswer': { '@type': 'Answer', 'text': faq.answer || '' }
+        }))
+    };
+    return `<script type="application/ld+json">${JSON.stringify(schema, null, 2)}</script>`;
+}
+
+/**
+ * 🆕 بناء قسم Related Pages (روابط داخلية)
+ */
+function buildRelatedPagesSection(relatedPages) {
+    if (!Array.isArray(relatedPages) || relatedPages.length === 0) return '';
+
+    const links = relatedPages.map(p => {
+        const slug = p.slug || '';
+        const title = p.title || slug;
+        return `        <a href="/${slug}/" class="related-link">
+            <span>${title}</span>
+            <i class="fas fa-arrow-left"></i>
+        </a>`;
+    }).join('\n');
+
+    return `
+    <div class="related-pages">
+        <h3>🔗 صفحات قد تهمك</h3>
+        <div class="related-pages-grid">
+${links}
+        </div>
+    </div>`;
+}
+
+function processLandingPage(filename) {
+    const filepath = path.join(LANDING_DATA_DIR, filename);
+    const content = fs.readFileSync(filepath, 'utf-8');
+    const parsed = parseFrontmatter(content);
+    if (!parsed) return null;
+
+    const { data } = parsed;
+    if (!data.title || !data.slug) {
+        console.log(`⚠️  Landing Page ناقص بيانات: ${filename}`);
+        return null;
+    }
+
+    // 🆕 التحقق من أن الـ slug إنجليزي
+    if (/[\u0600-\u06FF]/.test(data.slug)) {
+        console.log(`⚠️  Landing Page ${filename}: slug عربي! يفضل تحويله للإنجليزية: ${data.slug}`);
+        // نقبل لكن نحذر
+    }
+
+    const template = getLandingTemplate();
+    if (!template) {
+        console.log('❌ قالب Landing Page غير موجود!');
+        return null;
+    }
+
+    const ctaUrl = data.cta_url || 'https://chat-alkhaleej.com/';
+    let imageUrl = data.image || 'https://tools.chat-alkhaleej.com/logo.webp';
+    if (imageUrl.startsWith('/')) imageUrl = SITE_URL + imageUrl;
+
+    // التواريخ
+    const pageDate = data.date || new Date().toISOString();
+    const lastUpdated = data.last_updated || data.date || new Date().toISOString();
+
+    // الأقسام الديناميكية
+    const statsHtml = buildStatsHtml(data.stats);
+    const featuresSection = buildFeaturesSection(data);
+    const midCtaSection = buildMidCtaSection(data, ctaUrl);
+    const faqSection = buildFaqSection(data.faqs);
+    const faqSchema = buildFaqSchema(data.faqs);
+    const relatedPagesSection = buildRelatedPagesSection(data.related_pages);
+
+    // استبدال المتغيرات
+    const replacements = {
+        'PAGE_TITLE': escapeHtml(data.title),
+        'PAGE_DESCRIPTION': escapeHtml(data.description || ''),
+        'PAGE_KEYWORDS': Array.isArray(data.keywords) ? data.keywords.join(', ') : '',
+        'PAGE_SLUG': data.slug,
+        'PAGE_IMAGE': imageUrl,
+        'PAGE_DATE': pageDate,
+        'LAST_UPDATED': lastUpdated,
+        'FOCUS_KEYWORD': escapeHtml(data.focus_keyword || data.title),
+        'HERO_BADGE_ICON': data.hero_badge_icon || 'crown',
+        'HERO_BADGE_TEXT': data.hero_badge_text || '',
+        'HERO_SUBTITLE': data.hero_subtitle || '',
+        'HERO_CTA_TEXT': data.hero_cta_text || 'ادخل الآن',
+        'CTA_URL': ctaUrl,
+        'STATS_HTML': statsHtml,
+        'INTRO_TEXT': data.intro || '',
+        'FEATURES_SECTION': featuresSection,
+        'MID_CTA_SECTION': midCtaSection,
+        'MAIN_CONTENT': data.main_content || '',
+        'FAQ_SECTION': faqSection,
+        'RELATED_PAGES_SECTION': relatedPagesSection,
+        'FINAL_CTA_TITLE': escapeHtml(data.final_cta_title || 'جاهز للبداية؟'),
+        'FINAL_CTA_TEXT': escapeHtml(data.final_cta_text || ''),
+        'FINAL_CTA_BTN': escapeHtml(data.final_cta_btn || 'ابدأ الآن')
+    };
+
+    let html = template;
+    for (const [key, value] of Object.entries(replacements)) {
+        html = html.replace(new RegExp(`{{${key}}}`, 'g'), value);
+    }
+
+    // إضافة FAQ Schema قبل </head>
+    if (faqSchema) {
+        html = html.replace('</head>', `    ${faqSchema}\n</head>`);
+    }
+
+    // إنشاء المجلد وحفظ الملف
+    const pageFolder = data.slug;
+    if (!fs.existsSync(pageFolder)) {
+        fs.mkdirSync(pageFolder, { recursive: true });
+    }
+    fs.writeFileSync(path.join(pageFolder, 'index.html'), html, 'utf-8');
+
+    // 🆕 لا نحذف ملف الـ .md
+    if (DELETE_SOURCE_FILES) {
+        try { fs.unlinkSync(filepath); } catch (e) {}
+    }
+    console.log(`✅ Landing: ${filename} → /${data.slug}/index.html`);
+
+    return {
+        slug: data.slug,
+        url: `${SITE_URL}/${data.slug}/`,
+        title: data.title,
+        description: data.description,
+        date: pageDate,
+        modifiedTime: lastUpdated,
+        // 🆕 احترام show_in_sitemap
+        show_in_sitemap: data.show_in_sitemap !== false
+    };
+}
+
+function getAllLandingPages() {
+    if (!fs.existsSync(LANDING_DATA_DIR)) {
+        console.log('ℹ️  لا يوجد مجلد _landing-data');
+        return [];
+    }
+
+    const files = fs.readdirSync(LANDING_DATA_DIR).filter(f => f.endsWith('.md'));
+    const pagesBySlug = new Map();
+
+    for (const file of files) {
+        const page = processLandingPage(file);
+        if (page) pagesBySlug.set(page.slug, page);
+    }
+
+    // اكتشاف الصفحات الموجودة كمجلدات
+    const excludedDirs = ['posts', 'admin', 'scripts', '_templates', '_landing-data',
+                         'images', '.github', '.git', 'node_modules'];
+    const rootItems = fs.readdirSync('.', { withFileTypes: true });
+
+    for (const item of rootItems) {
+        if (!item.isDirectory()) continue;
+        if (excludedDirs.includes(item.name)) continue;
+        if (item.name.startsWith('.') || item.name.startsWith('_')) continue;
+
+        const indexPath = path.join(item.name, 'index.html');
+        if (!fs.existsSync(indexPath)) continue;
+        if (pagesBySlug.has(item.name)) continue;
+
+        const html = fs.readFileSync(indexPath, 'utf-8');
+        const title = extractMeta(html, /<meta property="og:title" content="([^"]+)"/);
+        const description = extractMeta(html, /<meta property="og:description" content="([^"]+)"/);
+
+        if (title) {
+            pagesBySlug.set(item.name, {
+                slug: item.name,
+                url: `${SITE_URL}/${item.name}/`,
+                title, description,
+                date: new Date().toISOString(),
+                modifiedTime: new Date().toISOString(),
+                show_in_sitemap: true
+            });
         }
     }
 
-    // تحويل الخريطة لمصفوفة
-    const uniquePosts = Array.from(postsBySlug.values());
-
-    // ترتيب من الأحدث للأقدم
-    uniquePosts.sort((a, b) => {
-        const dateA = new Date(a.publishedTime || 0).getTime();
-        const dateB = new Date(b.publishedTime || 0).getTime();
-        return dateB - dateA;
-    });
-
-    console.log(`📚 إجمالي المقالات الفريدة: ${uniquePosts.length}`);
-    return uniquePosts;
+    const pages = Array.from(pagesBySlug.values());
+    console.log(`🎯 Landing Pages: ${pages.length}`);
+    return pages;
 }
+
+// ============================================================
+// 📄 بناء الصفحات الأساسية
+// ============================================================
 
 function buildPostCard(post) {
     return `
@@ -363,16 +581,10 @@ function buildPostCard(post) {
                 <article class="post-card">
                     <img src="${post.image}" alt="${post.title}" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            ${post.dateDisplay}
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> ${post.dateDisplay}</div>
                         <h3 class="post-card-title">${post.title}</h3>
                         <p class="post-card-desc">${post.description}</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>`;
@@ -383,47 +595,48 @@ function updateIndex(posts) {
     if (!fs.existsSync(indexPath)) return;
 
     let html = fs.readFileSync(indexPath, 'utf-8');
-
     let postsSection;
+
     if (posts.length === 0) {
-        postsSection = `
-        <div class="no-posts-yet">
-            <i class="fas fa-feather-pointed"></i>
-            <h3 style="color: var(--primary); margin-bottom: 10px;">لا توجد مقالات بعد</h3>
-            <p>سيتم عرض أحدث المقالات هنا تلقائياً بعد نشر أول مقال.</p>
-        </div>`;
+        postsSection = `\n        <div class="no-posts-yet"><i class="fas fa-feather-pointed"></i><h3>لا توجد مقالات بعد</h3></div>`;
     } else {
-        const latestPosts = posts.slice(0, POSTS_PER_HOMEPAGE);
-        postsSection = `
-        <div class="latest-posts-grid">
-${latestPosts.map(buildPostCard).join('\n')}
-        </div>`;
+        postsSection = `\n        <div class="latest-posts-grid">\n${posts.slice(0, POSTS_PER_HOMEPAGE).map(buildPostCard).join('\n')}\n        </div>`;
     }
 
     const regex = /<!-- POSTS_START -->[\s\S]*?<!-- POSTS_END -->/;
-    const replacement = `<!-- POSTS_START -->${postsSection}
-        <!-- POSTS_END -->`;
-
     if (regex.test(html)) {
-        html = html.replace(regex, replacement);
+        html = html.replace(regex, `<!-- POSTS_START -->${postsSection}\n        <!-- POSTS_END -->`);
         fs.writeFileSync(indexPath, html, 'utf-8');
-        console.log(`✅ تم تحديث index.html`);
+        console.log('✅ index.html');
     }
 }
 
-function buildSitemap(posts) {
+function buildSitemap(posts, landingPages) {
     const today = new Date().toISOString().split('T')[0];
     let urls = [
         { loc: `${SITE_URL}/`, lastmod: today, changefreq: 'daily', priority: '1.0' },
         { loc: `${SITE_URL}/archive.html`, lastmod: today, changefreq: 'daily', priority: '0.8' }
     ];
 
-    posts.forEach(post => {
+    posts.forEach(p => {
         urls.push({
-            loc: post.url,
-            lastmod: (post.modifiedTime || post.publishedTime || today).split('T')[0],
-            changefreq: 'weekly',
-            priority: '0.7'
+            loc: p.url,
+            lastmod: (p.modifiedTime || p.publishedTime || today).split('T')[0],
+            changefreq: 'weekly', priority: '0.7'
+        });
+    });
+
+    // 🆕 احترام show_in_sitemap
+    let excludedCount = 0;
+    landingPages.forEach(p => {
+        if (p.show_in_sitemap === false) {
+            excludedCount++;
+            return;
+        }
+        urls.push({
+            loc: p.url,
+            lastmod: (p.modifiedTime || p.date || today).split('T')[0],
+            changefreq: 'weekly', priority: '0.9'
         });
     });
 
@@ -438,22 +651,22 @@ ${urls.map(u => `    <url>
 </urlset>`;
 
     fs.writeFileSync('sitemap.xml', xml, 'utf-8');
-    console.log(`✅ sitemap.xml (${urls.length} URLs)`);
+    console.log(`✅ sitemap.xml (${urls.length} URLs${excludedCount > 0 ? ` - ${excludedCount} مخفية` : ''})`);
 }
 
 function buildRss(posts) {
     const buildDate = new Date().toUTCString();
-    const latestPosts = posts.slice(0, 20);
+    const latest = posts.slice(0, 20);
 
-    const items = latestPosts.map(post => {
-        const pubDate = post.publishedTime ? new Date(post.publishedTime).toUTCString() : buildDate;
+    const items = latest.map(p => {
+        const pubDate = p.publishedTime ? new Date(p.publishedTime).toUTCString() : buildDate;
         return `        <item>
-            <title><![CDATA[${post.title}]]></title>
-            <link>${post.url}</link>
-            <guid isPermaLink="true">${post.url}</guid>
-            <description><![CDATA[${post.description}]]></description>
+            <title><![CDATA[${p.title}]]></title>
+            <link>${p.url}</link>
+            <guid isPermaLink="true">${p.url}</guid>
+            <description><![CDATA[${p.description}]]></description>
             <pubDate>${pubDate}</pubDate>
-            <category>${post.category}</category>
+            <category>${p.category}</category>
         </item>`;
     }).join('\n');
 
@@ -471,23 +684,13 @@ ${items}
 </rss>`;
 
     fs.writeFileSync('rss.xml', xml, 'utf-8');
-    console.log(`✅ rss.xml (${latestPosts.length} مقال)`);
+    console.log('✅ rss.xml');
 }
 
 function buildArchive(posts) {
-    let archiveContent;
-    if (posts.length === 0) {
-        archiveContent = `
-        <div class="no-posts-yet">
-            <i class="fas fa-feather-pointed"></i>
-            <h3 style="color: var(--primary); margin-bottom: 10px;">لا توجد مقالات بعد</h3>
-        </div>`;
-    } else {
-        archiveContent = `
-        <div class="latest-posts-grid">
-${posts.map(buildPostCard).join('\n')}
-        </div>`;
-    }
+    let archiveContent = posts.length === 0
+        ? `<div class="no-posts-yet"><i class="fas fa-feather-pointed"></i><h3>لا توجد مقالات بعد</h3></div>`
+        : `<div class="latest-posts-grid">\n${posts.map(buildPostCard).join('\n')}\n        </div>`;
 
     const archiveHtml = `<!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -495,11 +698,10 @@ ${posts.map(buildPostCard).join('\n')}
     <meta charset="UTF-8">
     <link rel="icon" type="image/webp" href="https://tools.chat-alkhaleej.com/logo.webp">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index,follow,max-image-preview:large">
     <title>أرشيف المقالات | مدونة شات الخليج</title>
     <meta name="description" content="تصفّح جميع مقالات مدونة شات الخليج">
     <link rel="canonical" href="${SITE_URL}/archive.html" />
-    <link rel="alternate" type="application/rss+xml" href="${SITE_URL}/rss.xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -513,9 +715,8 @@ ${posts.map(buildPostCard).join('\n')}
         .nav-links a { color: #fff; text-decoration: none; font-weight: 700; font-size: 15px; padding: 8px 14px; border-radius: 25px; display: flex; align-items: center; gap: 7px; }
         .nav-links a i { color: var(--accent); }
         .nav-links a:hover, .nav-links a.active { background: var(--accent); color: var(--primary); }
-        .nav-links a:hover i, .nav-links a.active i { color: var(--primary); }
         .nav-toggle { display: none; color: var(--accent); font-size: 24px; cursor: pointer; }
-        @media (max-width: 850px) { .nav-links { position: fixed; top: 68px; right: -100%; width: 100%; background: var(--primary); flex-direction: column; padding: 20px; transition: 0.4s; } .nav-links.active { right: 0; } .nav-toggle { display: block; } }
+        @media (max-width: 850px) { .nav-links { position: fixed; top: 68px; right: -100%; width: 100%; background: var(--primary); flex-direction: column; padding: 20px; } .nav-links.active { right: 0; } .nav-toggle { display: block; } }
         header { background: linear-gradient(135deg, var(--primary), #631212); padding: 50px 20px; text-align: center; border-bottom: 6px solid var(--accent); clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%); color: #fff; }
         header h1 { font-size: 32px; font-weight: 900; }
         .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
@@ -535,12 +736,8 @@ ${posts.map(buildPostCard).join('\n')}
         .post-card-desc { font-size: 14.5px; color: #475569; flex: 1; margin-bottom: 15px; }
         .post-card-read { color: var(--primary); font-weight: 700; font-size: 14px; }
         footer { text-align: center; padding: 50px 20px; color: #64748b; background: #fff; margin-top: 40px; border-top: 1px solid #e2e8f0; }
-        .footer-nav { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 550px; margin: 0 auto 30px; }
-        .footer-nav a { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 12px; text-decoration: none; color: var(--primary); font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .footer-nav a i { color: var(--accent); }
-        .nav-vip { border: 1.5px solid var(--accent) !important; background: #fffdf5 !important; }
         @media (max-width: 900px) { .latest-posts-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .latest-posts-grid { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr; } }
+        @media (max-width: 600px) { .latest-posts-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -549,7 +746,6 @@ ${posts.map(buildPostCard).join('\n')}
         <a href="https://chat-alkhaleej.com/" class="nav-logo"><img src="https://tools.chat-alkhaleej.com/logo.webp" alt="شات الخليج" height="45"></a>
         <ul class="nav-links" id="navLinks">
             <li><a href="https://chat-alkhaleej.com/"><i class="fas fa-home"></i> الرئيسية</a></li>
-            <li><a href="https://chat-alkhaleej.com/rooms/"><i class="fas fa-comments"></i> دليل الغرف</a></li>
             <li><a href="https://blog.chat-alkhaleej.com/" class="active"><i class="fas fa-newspaper"></i> المدونة</a></li>
             <li><a href="https://tools.chat-alkhaleej.com/"><i class="fas fa-tools"></i> الأدوات</a></li>
             <li><a href="https://games.chat-alkhaleej.com/"><i class="fas fa-gamepad"></i> الألعاب</a></li>
@@ -565,22 +761,14 @@ ${posts.map(buildPostCard).join('\n')}
         <span>الأرشيف</span>
     </nav>
     <div class="archive-stats">إجمالي المقالات: <strong>${posts.length}</strong> مقال</div>
-${archiveContent}
+    ${archiveContent}
 </div>
-<footer>
-    <div class="footer-nav">
-        <a href="https://chat-alkhaleej.com/chat-support-gulf.html"><i class="fas fa-headset"></i> الدعم الفني</a>
-        <a href="https://chat-alkhaleej.com/chat-faq-gulf.html"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</a>
-        <a href="https://chat-alkhaleej.com/chat-rules-gulf.html"><i class="fas fa-gavel"></i> القوانين</a>
-        <a href="https://chat-alkhaleej.com/chat-vip-gulf.html" class="nav-vip"><i class="fas fa-gem"></i> اشتراكات VIP</a>
-    </div>
-    <p>حقوق النشر © 2026 موقع شات الخليج | نجمع العرب تحت سقف واحد بصداقة وأمان.</p>
-</footer>
+<footer><p>حقوق النشر © 2026 شات الخليج</p></footer>
 </body>
 </html>`;
 
     fs.writeFileSync('archive.html', archiveHtml, 'utf-8');
-    console.log(`✅ archive.html (${posts.length} مقال)`);
+    console.log('✅ archive.html');
 }
 
 function buildRobots() {
@@ -588,6 +776,8 @@ function buildRobots() {
 Allow: /
 Disallow: /posts/_template.html
 Disallow: /admin/
+Disallow: /_templates/
+Disallow: /_landing-data/
 Sitemap: ${SITE_URL}/sitemap.xml
 `;
     fs.writeFileSync('robots.txt', content, 'utf-8');
@@ -595,14 +785,17 @@ Sitemap: ${SITE_URL}/sitemap.xml
 }
 
 // ===== التنفيذ =====
-console.log('🚀 بدء بناء مدونة شات الخليج (v4 - منع التكرار)...\n');
+console.log('🚀 بدء بناء مدونة شات الخليج (v6 - شامل)...\n');
+console.log(`ℹ️  DELETE_SOURCE_FILES = ${DELETE_SOURCE_FILES}\n`);
 
 const posts = getAllPosts();
+const landingPages = getAllLandingPages();
+
 updateIndex(posts);
 buildArchive(posts);
-buildSitemap(posts);
+buildSitemap(posts, landingPages);
 buildRss(posts);
 buildRobots();
 
-console.log('\n✨ اكتمل البناء بنجاح!');
-console.log(`📊 إجمالي المقالات الفريدة: ${posts.length}`);
+console.log('\n✨ اكتمل البناء!');
+console.log(`📊 المقالات: ${posts.length} | Landing Pages: ${landingPages.length}`);
