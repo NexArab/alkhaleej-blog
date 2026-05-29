@@ -6,29 +6,19 @@ backend:
   name: github
   repo: NexArab/alkhaleej-blog
   branch: main
-  # ⚠️ ستضع هنا رابط Cloudflare Worker بعد إنشائه
   base_url: https://alkhaleej-blog-auth.king-divel2007.workers.dev
 
-# دعم اللغة العربية والـ RTL
 locale: 'ar'
-
-# اللغة الافتراضية للمحرر
 display_url: https://blog.chat-alkhaleej.com
-
-# الموقع المباشر للمعاينة
 site_url: https://blog.chat-alkhaleej.com
 
-# مجلد رفع الصور
 media_folder: 'images/uploads'
 public_folder: '/images/uploads'
 
-# ============================================================
-# 📚 المجموعات (Collections) - أنواع المحتوى
-# ============================================================
-
 collections:
+
   # ============================================
-  # 📝 مجموعة المقالات
+  # 📝 المقالات
   # ============================================
   - name: 'posts'
     label: '📝 المقالات'
@@ -39,36 +29,19 @@ collections:
     slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     extension: 'md'
     format: 'frontmatter'
-
-    # شكل عرض كل مقال في القائمة
     summary: '{{title}} — {{date | date("YYYY-MM-DD")}}'
 
-    # الحقول الظاهرة عند إنشاء/تعديل المقال
     fields:
-
-      # ─────── الحقول الأساسية ───────
-
-      - label: '📌 عنوان المقال'
-        name: 'title'
-        widget: 'string'
-        required: true
-        hint: 'العنوان الذي سيظهر في قوقل وفي بطاقة المقال (يفضّل 50-60 حرف)'
+      - { label: '📌 عنوان المقال', name: 'title', widget: 'string', required: true }
 
       - label: '📝 وصف المقال (Meta Description)'
         name: 'description'
         widget: 'text'
         required: true
-        hint: 'الوصف الذي يظهر في نتائج بحث قوقل (150-160 حرف)'
-        pattern: ['^.{50,200}$', 'يجب أن يكون بين 50 و 200 حرف']
+        hint: '150-160 حرف'
+        pattern: ['^.{50,200}$', 'بين 50 و 200 حرف']
 
-      - label: '🖼️ الصورة الرئيسية'
-        name: 'image'
-        widget: 'image'
-        required: true
-        hint: 'صورة بعرض 1200×630px (مهمة للسوشيال ميديا والـ SEO)'
-        media_library:
-          config:
-            max_file_size: 5120000  # 5MB
+      - { label: '🖼️ الصورة الرئيسية', name: 'image', widget: 'image', required: true }
 
       - label: '🏷️ التصنيف'
         name: 'category'
@@ -87,47 +60,17 @@ collections:
           - { label: '📰 معلومات عامة', value: 'معلومات عامة' }
         default: 'معلومات عامة'
 
-      - label: '🔖 الكلمات الدلالية (Tags)'
-        name: 'tags'
-        widget: 'list'
-        required: false
-        default: []
-        hint: 'كلمات مفتاحية مرتبطة بالمقال (مثلاً: شات، تعارف، خليج)'
-
-      # ─────── إعدادات متقدمة ───────
-
-      - label: '✍️ اسم الكاتب'
-        name: 'author'
-        widget: 'string'
-        default: 'فريق شات الخليج'
-        required: false
+      - { label: '🔖 الكلمات الدلالية (Tags)', name: 'tags', widget: 'list', required: false, default: [] }
+      - { label: '✍️ اسم الكاتب', name: 'author', widget: 'string', default: 'فريق شات الخليج', required: false }
 
       - label: '📅 تاريخ النشر'
         name: 'date'
         widget: 'datetime'
         required: true
-        default: ''
         format: "YYYY-MM-DDTHH:mm:ssZ"
-        date_format: "YYYY-MM-DD"
-        time_format: "HH:mm"
-        picker_utc: false
 
-      - label: '⏱️ وقت القراءة (دقائق)'
-        name: 'read_time'
-        widget: 'number'
-        required: false
-        default: 5
-        min: 1
-        max: 60
-        hint: 'الوقت التقريبي لقراءة المقال'
-
-      - label: '🔗 الرابط (Slug)'
-        name: 'slug'
-        widget: 'string'
-        required: false
-        hint: 'يُولّد تلقائياً من العنوان. اتركه فارغاً إذا تبي توليد تلقائي'
-
-      # ─────── محتوى المقال ───────
+      - { label: '⏱️ وقت القراءة (دقائق)', name: 'read_time', widget: 'number', required: false, default: 5, min: 1, max: 60 }
+      - { label: '🔗 الرابط (Slug)', name: 'slug', widget: 'string', required: false }
 
       - label: '💻 محتوى المقال (HTML)'
         name: 'body'
@@ -136,19 +79,223 @@ collections:
         allow_language_selection: false
         output_code_only: true
         required: true
-        hint: '⚠️ انسخ والصق كود HTML للمقال هنا. سيُعرض كما هو على المدونة.'
 
-      # ─────── خيارات إضافية ───────
+      - { label: '⭐ مقال مميز', name: 'featured', widget: 'boolean', default: false, required: false }
+      - { label: '🔕 إخفاء CTA الشات', name: 'hide_cta', widget: 'boolean', default: false, required: false }
 
-      - label: '⭐ مقال مميز (يظهر في الأعلى)'
-        name: 'featured'
-        widget: 'boolean'
-        default: false
+
+  # ============================================
+  # 🎯 Landing Pages
+  # ============================================
+  - name: 'landing_pages'
+    label: '🎯 صفحات الهبوط'
+    label_singular: 'صفحة هبوط'
+    folder: '_landing-data'
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    extension: 'md'
+    format: 'frontmatter'
+    summary: '{{title}} - /{{slug}}/'
+
+    fields:
+
+      # ─────────── الأساسيات ───────────
+
+      - label: '📌 عنوان الصفحة (H1)'
+        name: 'title'
+        widget: 'string'
+        required: true
+        hint: 'العنوان الكبير في أعلى الصفحة (50-60 حرف للسيو)'
+
+      - label: '🎯 الكلمة المفتاحية الرئيسية'
+        name: 'focus_keyword'
+        widget: 'string'
+        required: true
+        hint: 'الكلمة التي تستهدفها في قوقل (مثال: شات الرياض)'
+
+      - label: '📝 وصف SEO (Meta Description)'
+        name: 'description'
+        widget: 'text'
+        required: true
+        hint: '150-160 حرف يظهرون في نتائج قوقل'
+        pattern: ['^.{50,200}$', 'بين 50 و 200 حرف']
+
+      - label: '🔗 رابط الصفحة (Slug)'
+        name: 'slug'
+        widget: 'string'
+        required: true
+        pattern: ['^[a-z0-9\-]+$', 'يجب أن يكون بالإنجليزية فقط (أحرف صغيرة، أرقام، وشرطات)']
+        hint: '⚠️ بالإنجليزية فقط! مثال: chat-riyadh, chat-kuwait, chat-jeddah'
+
+      - label: '🖼️ الصورة الرئيسية'
+        name: 'image'
+        widget: 'image'
+        required: true
+        hint: 'تُستخدم كـ og:image و twitter:image تلقائياً'
+
+      - label: '🔖 الكلمات الدلالية (للسيو)'
+        name: 'keywords'
+        widget: 'list'
         required: false
+        default: []
+        hint: 'اختياري - تأثيرها محدود اليوم'
 
-      - label: '🔕 إخفاء CTA الشات'
-        name: 'hide_cta'
-        widget: 'boolean'
-        default: false
+      # ─────────── Hero ───────────
+
+      - label: '⭐ Hero - أيقونة Badge'
+        name: 'hero_badge_icon'
+        widget: 'select'
         required: false
-        hint: 'فعّل هذا الخيار فقط إذا ما تبي يظهر زر "ادخل الشات" في هذا المقال'
+        options:
+          - { label: '👑 تاج', value: 'crown' }
+          - { label: '🔥 نار', value: 'fire' }
+          - { label: '⭐ نجمة', value: 'star' }
+          - { label: '💬 محادثة', value: 'comments' }
+          - { label: '🚀 صاروخ', value: 'rocket' }
+          - { label: '💎 ماسة', value: 'gem' }
+          - { label: '✨ بريق', value: 'sparkles' }
+          - { label: '🏆 كأس', value: 'trophy' }
+        default: 'crown'
+
+      - { label: '⭐ Hero - نص Badge', name: 'hero_badge_text', widget: 'string', required: true }
+      - { label: '⭐ Hero - الوصف الفرعي', name: 'hero_subtitle', widget: 'text', required: true, hint: '120 حرف' }
+      - { label: '⭐ Hero - نص زر CTA', name: 'hero_cta_text', widget: 'string', required: true, default: 'ادخل شات الخليج الآن' }
+
+      # ─────────── CTA ───────────
+
+      - label: '🔗 رابط CTA الرئيسي'
+        name: 'cta_url'
+        widget: 'string'
+        required: true
+        default: 'https://chat-alkhaleej.com/'
+        hint: '⚠️ كل أزرار الصفحة ستوجه لهذا الرابط'
+
+      # ─────────── الإحصائيات ───────────
+
+      - label: '📊 الإحصائيات'
+        name: 'stats'
+        widget: 'list'
+        required: false
+        min: 0
+        max: 4
+        hint: 'اتركها فارغة لإخفاء القسم'
+        default: []
+        fields:
+          - { label: 'الرقم', name: 'number', widget: 'string' }
+          - { label: 'الوصف', name: 'label', widget: 'string' }
+
+      # ─────────── المقدمة ───────────
+
+      - label: '📝 المقدمة (Intro)'
+        name: 'intro'
+        widget: 'code'
+        default_language: 'html'
+        allow_language_selection: false
+        output_code_only: true
+        required: true
+        hint: 'مقدمة جذابة بصيغة HTML (2-3 فقرات)'
+
+      # ─────────── المميزات ───────────
+
+      - { label: '⭐ عنوان قسم المميزات', name: 'features_heading', widget: 'string', required: false, default: 'لماذا نحن الأفضل؟' }
+      - { label: '⭐ نص فرعي للمميزات', name: 'features_subheading', widget: 'string', required: false, default: 'مميزات تجعلنا الخيار الأول' }
+
+      - label: '⭐ المميزات (بطاقات)'
+        name: 'features'
+        widget: 'list'
+        required: false
+        hint: 'يمكن إضافة أي عدد. اتركها فارغة لإخفاء القسم'
+        default: []
+        fields:
+          - label: 'الأيقونة'
+            name: 'icon'
+            widget: 'select'
+            options:
+              - { label: '🎤 ميكروفون', value: 'microphone' }
+              - { label: '💬 محادثة', value: 'comments' }
+              - { label: '🛡️ درع أمان', value: 'shield-alt' }
+              - { label: '📱 جوال', value: 'mobile-alt' }
+              - { label: '⚡ سرعة', value: 'bolt' }
+              - { label: '👥 مستخدمين', value: 'users' }
+              - { label: '🎁 هدية', value: 'gift' }
+              - { label: '❤️ قلب', value: 'heart' }
+              - { label: '🏆 كأس', value: 'trophy' }
+              - { label: '✅ صح', value: 'check-circle' }
+              - { label: '🔒 قفل', value: 'lock' }
+              - { label: '🌟 نجمة', value: 'star' }
+              - { label: '🎮 لعبة', value: 'gamepad' }
+              - { label: '🎯 هدف', value: 'bullseye' }
+              - { label: '🎨 فن', value: 'palette' }
+              - { label: '🌍 عالم', value: 'globe' }
+          - { label: 'العنوان', name: 'title', widget: 'string' }
+          - { label: 'الوصف', name: 'description', widget: 'text' }
+
+      # ─────────── Mid CTA ───────────
+
+      - { label: '🎯 Mid CTA - تفعيل', name: 'show_mid_cta', widget: 'boolean', default: true }
+      - { label: '🎯 Mid CTA - العنوان', name: 'mid_cta_title', widget: 'string', required: false, default: 'تبي تجرب الآن؟' }
+      - { label: '🎯 Mid CTA - النص', name: 'mid_cta_text', widget: 'string', required: false, default: 'انضم لآلاف الأعضاء في ثوانٍ معدودة' }
+      - { label: '🎯 Mid CTA - نص الزر', name: 'mid_cta_btn', widget: 'string', required: false, default: 'دخول مباشر' }
+
+      # ─────────── المحتوى الرئيسي ───────────
+
+      - label: '📚 المحتوى الرئيسي (HTML)'
+        name: 'main_content'
+        widget: 'code'
+        default_language: 'html'
+        allow_language_selection: false
+        output_code_only: true
+        required: true
+        hint: '⚠️ 1200-2000 كلمة بصيغة HTML (استخدم h2, h3, p, ul, blockquote)'
+
+      # ─────────── FAQs ───────────
+
+      - label: '❓ الأسئلة الشائعة'
+        name: 'faqs'
+        widget: 'list'
+        required: false
+        hint: 'يمكن إضافة أي عدد. تظهر تلقائياً كـ FAQ Schema في قوقل'
+        default: []
+        fields:
+          - { label: 'السؤال', name: 'question', widget: 'string' }
+          - { label: 'الإجابة', name: 'answer', widget: 'text' }
+
+      # ─────────── Final CTA ───────────
+
+      - { label: '🎯 Final CTA - العنوان', name: 'final_cta_title', widget: 'string', required: true, default: 'جاهز لبدء تجربتك؟' }
+      - { label: '🎯 Final CTA - النص', name: 'final_cta_text', widget: 'text', required: true, default: 'انضم لآلاف الأعضاء في أكبر منصة دردشة عربية' }
+      - { label: '🎯 Final CTA - نص الزر', name: 'final_cta_btn', widget: 'string', required: true, default: 'ادخل الشات الآن' }
+
+      # ─────────── Internal Linking ───────────
+
+      - label: '🔗 الصفحات ذات الصلة (روابط داخلية)'
+        name: 'related_pages'
+        widget: 'list'
+        required: false
+        default: []
+        hint: '⭐ مهم للسيو! أضف slugs صفحات أخرى لربطها بهذه الصفحة (مثال: chat-kuwait, chat-qatar)'
+        fields:
+          - { label: 'Slug الصفحة', name: 'slug', widget: 'string', hint: 'مثال: chat-kuwait' }
+          - { label: 'العنوان الظاهر', name: 'title', widget: 'string', hint: 'مثال: شات الكويت' }
+
+      # ─────────── إعدادات SEO ───────────
+
+      - label: '📅 تاريخ النشر'
+        name: 'date'
+        widget: 'datetime'
+        required: true
+        format: "YYYY-MM-DDTHH:mm:ssZ"
+
+      - label: '🔄 تاريخ آخر تحديث'
+        name: 'last_updated'
+        widget: 'datetime'
+        required: false
+        format: "YYYY-MM-DDTHH:mm:ssZ"
+        hint: 'حدّثه عند تعديل المحتوى - يُستخدم في dateModified Schema'
+
+      - label: '🤖 إدراج في Sitemap'
+        name: 'show_in_sitemap'
+        widget: 'boolean'
+        default: true
+        hint: 'إذا كنت تريد إخفاء الصفحة من قوقل، أوقف هذا'
