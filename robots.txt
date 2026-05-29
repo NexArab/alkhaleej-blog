@@ -2,4 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /posts/_template.html
 Disallow: /admin/
+Disallow: /_templates/
+Disallow: /_landing-data/
 Sitemap: https://blog.chat-alkhaleej.com/sitemap.xml

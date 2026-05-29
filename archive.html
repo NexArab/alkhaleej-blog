@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/webp" href="https://tools.chat-alkhaleej.com/logo.webp">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index,follow,max-image-preview:large">
     <title>أرشيف المقالات | مدونة شات الخليج</title>
     <meta name="description" content="تصفّح جميع مقالات مدونة شات الخليج">
     <link rel="canonical" href="https://blog.chat-alkhaleej.com/archive.html" />
-    <link rel="alternate" type="application/rss+xml" href="https://blog.chat-alkhaleej.com/rss.xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -22,9 +21,8 @@
         .nav-links a { color: #fff; text-decoration: none; font-weight: 700; font-size: 15px; padding: 8px 14px; border-radius: 25px; display: flex; align-items: center; gap: 7px; }
         .nav-links a i { color: var(--accent); }
         .nav-links a:hover, .nav-links a.active { background: var(--accent); color: var(--primary); }
-        .nav-links a:hover i, .nav-links a.active i { color: var(--primary); }
         .nav-toggle { display: none; color: var(--accent); font-size: 24px; cursor: pointer; }
-        @media (max-width: 850px) { .nav-links { position: fixed; top: 68px; right: -100%; width: 100%; background: var(--primary); flex-direction: column; padding: 20px; transition: 0.4s; } .nav-links.active { right: 0; } .nav-toggle { display: block; } }
+        @media (max-width: 850px) { .nav-links { position: fixed; top: 68px; right: -100%; width: 100%; background: var(--primary); flex-direction: column; padding: 20px; } .nav-links.active { right: 0; } .nav-toggle { display: block; } }
         header { background: linear-gradient(135deg, var(--primary), #631212); padding: 50px 20px; text-align: center; border-bottom: 6px solid var(--accent); clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%); color: #fff; }
         header h1 { font-size: 32px; font-weight: 900; }
         .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
@@ -44,12 +42,8 @@
         .post-card-desc { font-size: 14.5px; color: #475569; flex: 1; margin-bottom: 15px; }
         .post-card-read { color: var(--primary); font-weight: 700; font-size: 14px; }
         footer { text-align: center; padding: 50px 20px; color: #64748b; background: #fff; margin-top: 40px; border-top: 1px solid #e2e8f0; }
-        .footer-nav { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 550px; margin: 0 auto 30px; }
-        .footer-nav a { background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 12px; text-decoration: none; color: var(--primary); font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .footer-nav a i { color: var(--accent); }
-        .nav-vip { border: 1.5px solid var(--accent) !important; background: #fffdf5 !important; }
         @media (max-width: 900px) { .latest-posts-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .latest-posts-grid { grid-template-columns: 1fr; } .footer-nav { grid-template-columns: 1fr; } }
+        @media (max-width: 600px) { .latest-posts-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -58,7 +52,6 @@
         <a href="https://chat-alkhaleej.com/" class="nav-logo"><img src="https://tools.chat-alkhaleej.com/logo.webp" alt="شات الخليج" height="45"></a>
         <ul class="nav-links" id="navLinks">
             <li><a href="https://chat-alkhaleej.com/"><i class="fas fa-home"></i> الرئيسية</a></li>
-            <li><a href="https://chat-alkhaleej.com/rooms/"><i class="fas fa-comments"></i> دليل الغرف</a></li>
             <li><a href="https://blog.chat-alkhaleej.com/" class="active"><i class="fas fa-newspaper"></i> المدونة</a></li>
             <li><a href="https://tools.chat-alkhaleej.com/"><i class="fas fa-tools"></i> الأدوات</a></li>
             <li><a href="https://games.chat-alkhaleej.com/"><i class="fas fa-gamepad"></i> الألعاب</a></li>
@@ -74,23 +67,16 @@
         <span>الأرشيف</span>
     </nav>
     <div class="archive-stats">إجمالي المقالات: <strong>121</strong> مقال</div>
-
-        <div class="latest-posts-grid">
+    <div class="latest-posts-grid">
 
             <a href="/posts/2026-05-24-aljanb-alaatfy-fy-shkhsya-brj-alhwt-rhla-ila-aamaq-arq-alqlwb-wakthrha-ghmwda.html" class="post-card-link">
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/123.jpg" alt="الجانب العاطفي في شخصية برج الحوت: رحلة إلى أعماق أرق القلوب وأكثرها غموضاً!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">الجانب العاطفي في شخصية برج الحوت: رحلة إلى أعماق أرق القلوب وأكثرها غموضاً!</h3>
                         <p class="post-card-desc">هل تود فهم الجانب العاطفي في شخصية برج الحوت؟ اكتشف أسرار العاطفة الجياشة، حساسية الحوت المفرطة، وكيف يبني هذا البرج الحالم علاقاته الإنسانية والعاطفية بعمق وصدق.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -99,16 +85,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/122.jpg" alt="هل برج الحوت ينسى بسهولة؟ خفايا الذاكرة العاطفية لأكثر الأبراج حنيناً!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">هل برج الحوت ينسى بسهولة؟ خفايا الذاكرة العاطفية لأكثر الأبراج حنيناً!</h3>
                         <p class="post-card-desc">هل يتجاوز برج الحوت خيبات الماضي بسهولة؟ اكتشف حقيقة ذاكرة برج الحوت العاطفية، لماذا يصعب عليه النسيان، وكيف يتعامل مع ذكرياته في رحلة البحث عن السلام الداخلي.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -117,16 +97,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/121.jpg" alt="نقاط ضعف برج الحوت النفسية: خفايا "القلب الحالم" وكيف تتجاوز تحدياتك العاطفية؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">نقاط ضعف برج الحوت النفسية: خفايا "القلب الحالم" وكيف تتجاوز تحدياتك العاطفية؟</h3>
                         <p class="post-card-desc">هل أنت من مواليد برج الحوت؟ تعرف على نقاط ضعفك النفسية الأكثر تأثيراً في حياتك، وكيف تحول حساسيتك المفرطة إلى قوة تدفعك نحو التميز والاستقرار العاطفي.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -135,16 +109,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/120.jpg" alt="رجل برج الحوت في الحب: أسرار "العاشق الحالم" وكيف تملك قلبه للأبد؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">رجل برج الحوت في الحب: أسرار "العاشق الحالم" وكيف تملك قلبه للأبد؟</h3>
                         <p class="post-card-desc">هل تقعين في حب رجل برج الحوت؟ اكتشفي صفات رجل الحوت في الحب، كيف يعبر عن مشاعره العميقة، وأهم النصائح لكسب قلبه الغامض في هذا الدليل الشامل.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -153,16 +121,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/119.jpg" alt="كيف يتصرف برج الحوت بعد الانفصال؟ رحلة التعافي من بحر الأحزان إلى شاطئ النسيان!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">كيف يتصرف برج الحوت بعد الانفصال؟ رحلة التعافي من بحر الأحزان إلى شاطئ النسيان!</h3>
                         <p class="post-card-desc">هل مررت بانفصال مؤلم مع برج الحوت؟ اكتشف المراحل النفسية التي يمر بها هذا البرج الحساس بعد الفراق، وكيف يغلق صفحات الماضي ليبدأ حياة جديدة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -171,16 +133,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/117.jpg" alt="أسرار برج الحوت في العلاقات: كيف تروض "سيد العاطفة" وتكسب قلبه الأبدي؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">أسرار برج الحوت في العلاقات: كيف تروض "سيد العاطفة" وتكسب قلبه الأبدي؟</h3>
                         <p class="post-card-desc">هل أنت مهتم بشخص من برج الحوت؟ اكتشف أسرار برج الحوت في العلاقات، كيف يفكر هذا البرج الحالم، وما الذي يحتاجه ليشعر بالأمان والحب الحقيقي.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -189,16 +145,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/116.png" alt="من هو توأم روح برج الحوت؟ اكتشف أكثر الأبراج توافقًا مع "سيد الأحلام" في الحب والحياة!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">من هو توأم روح برج الحوت؟ اكتشف أكثر الأبراج توافقًا مع "سيد الأحلام" في الحب والحياة!</h3>
                         <p class="post-card-desc">تبحث عن الحب الحقيقي مع برج الحوت؟ تعرف على أكثر الأبراج توافقًا مع الحوت، الأسرار العاطفية لكل علاقة، وكيف يبني الحوت علاقات تدوم طويلاً مع الأبراج المتناغمة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -207,16 +157,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/115.png" alt="لماذا برج الحوت حساس جدًا؟ اكتشف أسرار الروح المائية التي تشعر بكل شيء!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">لماذا برج الحوت حساس جدًا؟ اكتشف أسرار الروح المائية التي تشعر بكل شيء!</h3>
                         <p class="post-card-desc">هل تساءلت يوماً لماذا يبدو برج الحوت شديد الحساسية؟ اكتشف الأسباب النفسية والفلكية وراء رقة مشاعر الحوت، وكيف تتعامل مع هذا القلب الذي يشعر بكل شيء من حوله.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -225,16 +169,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/114.png" alt="هل يغار برج الحوت عليك؟ اكتشف علامات الغيرة الخفية لدى "البرج الحالم" وكيف يترجم حبه في صمت!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">هل يغار برج الحوت عليك؟ اكتشف علامات الغيرة الخفية لدى "البرج الحالم" وكيف يترجم حبه في صمت!</h3>
                         <p class="post-card-desc">هل أنت محتار من تصرفات شريكك من برج الحوت؟ تعرف على علامات غيرة برج الحوت عندما يتعلق بالطرف الآخر، وكيف يتعامل هذا البرج الحساس مع مشاعر التملك والغيرة العميقة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -243,16 +181,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/113.png" alt="كيف يحب برج الحوت بصدق؟ أسرار القلب الأكثر رقة في الأبراج ورحلة العشق في عالم الخيال والواقع!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">كيف يحب برج الحوت بصدق؟ أسرار القلب الأكثر رقة في الأبراج ورحلة العشق في عالم الخيال والواقع!</h3>
                         <p class="post-card-desc">هل تعشق شخصاً من برج الحوت؟ اكتشف كيف يحب برج الحوت بصدق، وعلامات تعلقه العاطفي، وكيف يعبر عن مشاعره العميقة التي تفوق الخيال. دليلك الكامل لفهم هذا القلب الرقيق.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -261,16 +193,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/112.png" alt="الجانب الغريب في شخصية برج الدلو: ما الذي يخفيه "صاحب العقل الكوني" عن الجميع؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">الجانب الغريب في شخصية برج الدلو: ما الذي يخفيه "صاحب العقل الكوني" عن الجميع؟</h3>
                         <p class="post-card-desc">هل تظن أنك تفهم برج الدلو؟ استعد لاكتشاف الجانب الغريب والمظلم في شخصيته، من الانعزال المفاجئ إلى أفكاره غير التقليدية. دليلك لفهم الدلو وما وراء الغموض.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -279,16 +205,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/111.png" alt="كيف تعرف أن برج الدلو يحبك؟ 8 علامات سرية تكشف عشق "صاحب العقل المتمرد" بصدق!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">كيف تعرف أن برج الدلو يحبك؟ 8 علامات سرية تكشف عشق "صاحب العقل المتمرد" بصدق!</h3>
                         <p class="post-card-desc">هل أنت في حيرة من أمرك تجاه شخص من برج الدلو؟ اكتشف العلامات الحقيقية التي تدل على حب برج الدلو، وكيف يترجم هذا البرج الغامض مشاعره إلى أفعال ملموسة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -297,16 +217,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/110.png" alt="نقاط ضعف برج الدلو في الحب: لماذا يهرب "سيد الاستقلالية" عندما تصبح الأمور عاطفية؟ كشف المستور!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">نقاط ضعف برج الدلو في الحب: لماذا يهرب "سيد الاستقلالية" عندما تصبح الأمور عاطفية؟ كشف المستور!</h3>
                         <p class="post-card-desc">هل تظن أن برج الدلو لا يضعف؟ اكتشف نقاط ضعف برج الدلو في الحب والعلاقات، الأسباب الخفية وراء هروبه من العاطفة، وكيف تتعامل مع هذه التحديات بذكاء.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -315,16 +229,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/109.png" alt="امرأة برج الدلو: "ملكة التمرد والذكاء" .. اكتشف أسرار شخصيتها وكيف تأسر قلبها الغامض!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">امرأة برج الدلو: "ملكة التمرد والذكاء" .. اكتشف أسرار شخصيتها وكيف تأسر قلبها الغامض!</h3>
                         <p class="post-card-desc">هل تبحث عن فهم أعماق امرأة برج الدلو؟ دليل شامل يكشف أسرار شخصيتها، ذكائها الفطري، نظرتها للحب، وكيفية التعامل مع طبيعتها المتمردة والمحبة للحرية.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -333,16 +241,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/108.png" alt="لماذا يتجاهل برج الدلو من يحب؟ اكتشف الحقيقة الصادمة وراء صمت "سيد الحرية" وكيف تتعامل مع تجاهله بذكاء!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">لماذا يتجاهل برج الدلو من يحب؟ اكتشف الحقيقة الصادمة وراء صمت "سيد الحرية" وكيف تتعامل مع تجاهله بذكاء!</h3>
                         <p class="post-card-desc">هل تشعر أن شريكك من برج الدلو يتجاهلك فجأة؟ لا تقلق، اكتشف الأسباب الحقيقية وراء تجاهل برج الدلو لمن يحب، وهل هو هروب أم اختبار؟ دليل شامل لفهم نفسية الدلو.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -351,16 +253,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/107.png" alt="أسرار برج الدلو في العلاقات: كيف تروض "قلب الحرية" وتكسب حب الشخص الأكثر غموضاً في الأبراج؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">أسرار برج الدلو في العلاقات: كيف تروض "قلب الحرية" وتكسب حب الشخص الأكثر غموضاً في الأبراج؟</h3>
                         <p class="post-card-desc">هل تعشق شخصاً من برج الدلو؟ اكتشف أسرار برج الدلو في العلاقات، وكيف يفكر، وما الذي يجعله يهرب أو يقترب. دليل شامل لفهم طبيعة الدلو العاطفية المتمردة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -369,16 +265,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/106.png" alt="من هو توأم روح برج الدلو؟ اكتشف أكثر الأبراج توافقاً مع "صاحب العقل المبتكر" وعيش قصة حب استثنائية!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">من هو توأم روح برج الدلو؟ اكتشف أكثر الأبراج توافقاً مع "صاحب العقل المبتكر" وعيش قصة حب استثنائية!</h3>
                         <p class="post-card-desc">هل أنت من مواليد برج الدلو وتبحث عن الشريك المثالي؟ تعرف على أكثر الأبراج توافقاً مع الدلو في الحب والصداقة، واكتشف كيف تبني علاقة متينة مع الشريك الأنسب لطبيعتك الفريدة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -387,16 +277,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/105.png" alt="هل يغار برج الدلو؟ إليك 7 علامات تكشف غيرة "سيد الحرية" الصامتة وكيف يتعامل مع مشاعره!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">هل يغار برج الدلو؟ إليك 7 علامات تكشف غيرة "سيد الحرية" الصامتة وكيف يتعامل مع مشاعره!</h3>
                         <p class="post-card-desc">يُعرف برج الدلو بالاستقلالية والهدوء، فهل يعرف الغيرة؟ اكتشف علامات غيرة برج الدلو الخفية، وكيف يعبر عنها بطريقته غير التقليدية، وما الذي يثير قلقه في العلاقات.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -405,16 +289,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/104.png" alt="كيف يحب برج الدلو عندما يتعلق؟ رحلة في أعماق قلب "المتمرد" الذي سيهديك حريته!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">كيف يحب برج الدلو عندما يتعلق؟ رحلة في أعماق قلب "المتمرد" الذي سيهديك حريته!</h3>
                         <p class="post-card-desc">هل تتساءل كيف يحب برج الدلو عندما يتعلق بشريكه؟ اكتشف أسرار العشق عند الدلو، علامات تعلقه الحقيقية، وكيف يحول هذا البرج الغامض علاقته إلى تجربة استثنائية لا تُنسى.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -423,16 +301,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/103.png" alt="لماذا يبدو برج الدلو غامضاً في الحب؟ فك شفرة "سيد الحرية" واكتشف كيف تأسر قلبه المحير!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">لماذا يبدو برج الدلو غامضاً في الحب؟ فك شفرة "سيد الحرية" واكتشف كيف تأسر قلبه المحير!</h3>
                         <p class="post-card-desc">هل تعشق شخصاً من برج الدلو وتشعر بالحيرة من غموضه؟ اكتشف الأسباب الحقيقية وراء برود الدلو الظاهري في الحب، وكيف تتقرب منه وتجعل علاقته بك قصة استثنائية.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -441,16 +313,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/102.png" alt="ما لا تعرفه عن برج الجدي: 7 أسرار خفية في شخصيته ستغير نظرتك تماماً لـ "سيد الطموح"!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">ما لا تعرفه عن برج الجدي: 7 أسرار خفية في شخصيته ستغير نظرتك تماماً لـ "سيد الطموح"!</h3>
                         <p class="post-card-desc">هل تعتقد أنك تعرف برج الجدي جيداً؟ اكتشف الجانب الخفي في شخصية برج الجدي، مشاعره المكتومة، وأسرار قلبه التي يخبئها خلف قناع الجدية والرزانة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -459,16 +325,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/101.png" alt="هل برج الجدي صعب في العلاقات؟ كشف أسرار الغموض في شخصية "سيد الطموح" وكيف تجعل حياتك معه جنة!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">هل برج الجدي صعب في العلاقات؟ كشف أسرار الغموض في شخصية "سيد الطموح" وكيف تجعل حياتك معه جنة!</h3>
                         <p class="post-card-desc">كثيرون يصفون برج الجدي بالصعوبة في الحب.. هل هذا صحيح؟ اكتشف حقيقة طباع الجدي العاطفية، كيف تفك شفرة صمته، وطرق التعامل الذكية لبناء علاقة حب متينة ومستقرة معه.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -477,16 +337,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/100.png" alt="نقاط ضعف برج الجدي النفسية: ما الذي يكسر صمود "صخرة الأبراج"؟ وكيف تتعامل مع الجانب الخفي في شخصيته؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">نقاط ضعف برج الجدي النفسية: ما الذي يكسر صمود "صخرة الأبراج"؟ وكيف تتعامل مع الجانب الخفي في شخصيته؟</h3>
                         <p class="post-card-desc">هل تظن أن برج الجدي لا يقهر؟ اكتشف نقاط الضعف النفسية لبرج الجدي، خفايا قلقه الدفين، ومخاوفه العميقة التي يخبئها خلف قناع القوة والرزانة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -495,16 +349,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/99.png" alt="رجل برج الجدي في الحب: رحلة في أعماق "القلب الصامد".. كيف تحبُّه وتجعلُه يمنحك مفاتيح حياته؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">رجل برج الجدي في الحب: رحلة في أعماق "القلب الصامد".. كيف تحبُّه وتجعلُه يمنحك مفاتيح حياته؟</h3>
                         <p class="post-card-desc">هل تعشق رجلاً من برج الجدي؟ اكتشف أسرار شخصيته في الحب، كيف يعبر عن مشاعره الخفية، وما هي الصفات التي تجعله الشريك الأكثر وفاءً واستقراراً في حياتك.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -513,16 +361,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/98.png" alt="لماذا يتبع برج الجدي سياسة الصمت؟ اكتشف دلالات تجاهل الجدي عند الغضب وكيف تعيد المياه إلى مجاريها!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">لماذا يتبع برج الجدي سياسة الصمت؟ اكتشف دلالات تجاهل الجدي عند الغضب وكيف تعيد المياه إلى مجاريها!</h3>
                         <p class="post-card-desc">هل يمارس عليك شريكك من برج الجدي التجاهل عند الغضب؟ تعرف على الأسباب الخفية وراء صمت الجدي، وكيف تقرأ رسائله المبطنة، وما هي أفضل الطرق لكسر هذا الجليد.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -531,16 +373,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/97.png" alt="أسرار برج الجدي في العلاقات: كيف تكسب قلب "سيد الرزانة" وتعيش معه قصة حب استثنائية؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">أسرار برج الجدي في العلاقات: كيف تكسب قلب "سيد الرزانة" وتعيش معه قصة حب استثنائية؟</h3>
                         <p class="post-card-desc">هل أنت مرتبط بشخص من برج الجدي؟ اكتشف أسرار برج الجدي في العلاقات، خفايا مشاعره العميقة، وكيف تبني معه جسوراً من الثقة والاستقرار الأبدي.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -549,16 +385,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/96.png" alt="من هو توأم روح برج الجدي؟ اكتشف أكثر الأبراج توافقاً مع الجدي لبناء علاقة حب أبدية وثابتة!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">من هو توأم روح برج الجدي؟ اكتشف أكثر الأبراج توافقاً مع الجدي لبناء علاقة حب أبدية وثابتة!</h3>
                         <p class="post-card-desc">هل تبحث عن شريك يقدّر طموحك؟ تعرف على أكثر الأبراج توافقاً مع برج الجدي في الحب والزواج، وكيف يجد "سيد الطموح" شريك عمره المثالي وفقاً لعلم الفلك.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -567,16 +397,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/95.png" alt="كيف يغار برج الجدي؟ 8 علامات سرية تكشف غيرة "صخرة الأبراج" وتؤكد حبه العميق!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">كيف يغار برج الجدي؟ 8 علامات سرية تكشف غيرة "صخرة الأبراج" وتؤكد حبه العميق!</h3>
                         <p class="post-card-desc">هل تظن أن برج الجدي لا يغار؟ اكتشف علامات غيرة برج الجدي الخفية، وكيف يعبر عن مشاعره بأسلوبه الغامض، ولماذا تعتبر غيرته مؤشراً قوياً على تمسكه بك.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -585,16 +409,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/94.png" alt="لماذا يظهر برج الجدي بارداً عاطفيًا؟ حقيقة مشاعر "سيد الرزانة" وكيف تذيب جليده بذكاء!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">لماذا يظهر برج الجدي بارداً عاطفيًا؟ حقيقة مشاعر "سيد الرزانة" وكيف تذيب جليده بذكاء!</h3>
                         <p class="post-card-desc">هل تظن أن برج الجدي بارد في الحب؟ اكتشف السر وراء تحفظ الجدي العاطفي، وكيف يخبئ قلباً دافئاً خلف قناع الجدية، مع نصائح ذهبية لكسب وده.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -603,16 +421,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/93.png" alt="حب برج الجدي الصامت: عندما يتحدث القلب بلغة الأفعال لا الكلمات.. كيف تكشف مشاعر الجدي الغامضة؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">حب برج الجدي الصامت: عندما يتحدث القلب بلغة الأفعال لا الكلمات.. كيف تكشف مشاعر الجدي الغامضة؟</h3>
                         <p class="post-card-desc">هل تظن أن برج الجدي بارد المشاعر؟ اكتشف سر حب برج الجدي الصامت، وكيف يعبر عن عشقه العميق من خلال أفعاله، وكيف يمكنك قراءة رسائله العاطفية الخفية.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -621,16 +433,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/92.png" alt="الجانب العفوي في شخصية برج القوس: كيف تعيش الحب والمغامرة بقلب طفل وروح لا تهدأ؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">الجانب العفوي في شخصية برج القوس: كيف تعيش الحب والمغامرة بقلب طفل وروح لا تهدأ؟</h3>
                         <p class="post-card-desc">هل تعشق العفوية؟ اكتشف الجانب العفوي في شخصية برج القوس، ولماذا يعتبر "القوس" الأبرز في عالم الأبراج بإلقاء الحذر خلف ظهره والعيش في اللحظة بكل شغف.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -639,16 +445,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/91.png" alt="هل يبتعد برج القوس؟ 7 علامات أكيدة تخبرك بأن برج القوس فقد اهتمامه بك وكيف تتصرف!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">هل يبتعد برج القوس؟ 7 علامات أكيدة تخبرك بأن برج القوس فقد اهتمامه بك وكيف تتصرف!</h3>
                         <p class="post-card-desc">هل بدأت تشعر ببرود في علاقتك مع برج القوس؟ اكتشف علامات فقدان الاهتمام عند القوس، الأسباب الخفية وراء ابتعاده، وكيف يمكنك استعادة شغفه مرة أخرى.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -657,16 +457,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/90.png" alt="نقاط ضعف برج القوس في الحب: أسرار لا يخبرك بها "المسافر" عن صراعات قلبه وعيوبه العاطفية!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">نقاط ضعف برج القوس في الحب: أسرار لا يخبرك بها "المسافر" عن صراعات قلبه وعيوبه العاطفية!</h3>
                         <p class="post-card-desc">هل تعيش قصة حب مع برج القوس؟ اكتشف نقاط ضعف برج القوس في الحب، وكيف تؤثر طبيعته المحبة للحرية على استقراره العاطفي، مع نصائح ذهبية لفهم أعمق لشريكك.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -675,16 +469,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/89.jpg" alt="امرأة برج القوس: سحر الحرية والغموض.. تعرفي على صفات هذه الأنثى الاستثنائية التي لا تُنسى!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">امرأة برج القوس: سحر الحرية والغموض.. تعرفي على صفات هذه الأنثى الاستثنائية التي لا تُنسى!</h3>
                         <p class="post-card-desc">هل أنتِ من مواليد برج القوس أم تودين معرفة خفايا امرأة القوس؟ اكتشفي صفات امرأة برج القوس بالتفصيل، من شخصيتها القوية وعشقها للحرية إلى أسرار قلبها في الحب والعلاقات.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -693,16 +481,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/88.png" alt="هل برج القوس يمل بسرعة؟ حقائق عن روح القوس المنطلقة وكيف تبقي جذوة الحب مشتعلة معه!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">هل برج القوس يمل بسرعة؟ حقائق عن روح القوس المنطلقة وكيف تبقي جذوة الحب مشتعلة معه!</h3>
                         <p class="post-card-desc">يطاردك سؤال "هل برج القوس يمل بسرعة؟" إليك الإجابة الشافية عن طبيعة هذا البرج المتمرد، وما الذي يجعله يشعر بالملل، وطرق ذكية لاستعادة حماسه في العلاقة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -711,16 +493,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/87.png" alt="أسرار برج القوس في العلاقات: كيف تروض قلب "المسافر" وتجعله يستقر في حبك إلى الأبد؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">أسرار برج القوس في العلاقات: كيف تروض قلب "المسافر" وتجعله يستقر في حبك إلى الأبد؟</h3>
                         <p class="post-card-desc">هل ترغب في كشف أسرار برج القوس في العلاقات؟ تعرف على خفايا شخصية القوس العاطفية، ما الذي يجذبه، ما الذي ينفره، وكيف تبني علاقة ناجحة مع أكثر الأبراج حريةً وإثارة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -729,16 +505,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/86.png" alt="من هو توأم روح برج القوس؟ اكتشف أكثر الأبراج توافقاً مع القوس في الحب والصداقة!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">من هو توأم روح برج القوس؟ اكتشف أكثر الأبراج توافقاً مع القوس في الحب والصداقة!</h3>
                         <p class="post-card-desc">هل تبحث عن الشريك المثالي لبرج القوس؟ تعرف على أكثر الأبراج توافقاً مع القوس في العلاقات العاطفية، واكتشف سر الكيمياء الخاصة التي تجمع القوس بغيره من الأبراج.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -747,16 +517,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/85.png" alt="هل يغار برج القوس؟ علامات غيرة القوس الخفية والظاهرة وكيف تتعامل معها دون أن تخسر حريته!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">هل يغار برج القوس؟ علامات غيرة القوس الخفية والظاهرة وكيف تتعامل معها دون أن تخسر حريته!</h3>
                         <p class="post-card-desc">يُعرف برج القوس بحبه للحرية، فهل يغار فعلاً؟ تعرف على علامات غيرة برج القوس غير المتوقعة، وكيف يعبر عن مشاعره العميقة عندما يشعر بالتهديد في علاقاته.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -765,16 +529,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/844.png" alt="كيف يحب رجل وامرأة برج القوس عندما يتعلقان؟ أسرار العشق في قلب "المسافر" الذي وجد موطنه!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">كيف يحب رجل وامرأة برج القوس عندما يتعلقان؟ أسرار العشق في قلب "المسافر" الذي وجد موطنه!</h3>
                         <p class="post-card-desc">هل وقعت في حب برج القوس؟ اكتشف كيف يحب برج القوس عندما يتعلق بصدق، وتعرف على الطريقة التي يظهر بها هذا البرج الطليق مشاعره العميقة تجاه شريكه.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -783,16 +541,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/83.png" alt="لماذا برج القوس يحب الحرية بجنون؟ اكتشف سر روح هذا البرج الطليقة التي لا تقبل القيود!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">لماذا برج القوس يحب الحرية بجنون؟ اكتشف سر روح هذا البرج الطليقة التي لا تقبل القيود!</h3>
                         <p class="post-card-desc">هل تتساءل لماذا يهرب برج القوس من الالتزامات التقليدية؟ اكتشف الأسباب النفسية وراء عشق برج القوس للحرية، وكيف تتعامل مع شريكك "المنطلق" دون أن تخسره.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -801,16 +553,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/82.png" alt="الجانب المظلم في شخصية برج العقرب: حقائق صادمة وخفايا لا يعرفها الكثيرون عن هذا البرج الغامض!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">الجانب المظلم في شخصية برج العقرب: حقائق صادمة وخفايا لا يعرفها الكثيرون عن هذا البرج الغامض!</h3>
                         <p class="post-card-desc">هل تظن أنك تعرف كل شيء عن برج العقرب؟ اكتشف الجانب المظلم في شخصية العقرب، من حدة الطباع إلى الغموض العميق، واعرف كيف تتعامل مع هذه الجوانب بذكاء وتوازن.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -819,16 +565,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/81.png" alt="هل برج العقرب يسامح الخيانة؟ كشف المستور عن أعمق مخاوف البرج الأكثر وفاءً وإخلاصاً!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">هل برج العقرب يسامح الخيانة؟ كشف المستور عن أعمق مخاوف البرج الأكثر وفاءً وإخلاصاً!</h3>
                         <p class="post-card-desc">يطرح الكثيرون هذا السؤال المحير: هل برج العقرب يسامح الخيانة؟ اكتشف الحقيقة الصادمة حول نظرة العقرب للغدر، وكيف يتصرف فعلياً عند تعرضه للخيانة العاطفية.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -837,16 +577,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/80.png" alt="نقاط ضعف برج العقرب العاطفية: أسرار خلف قناع القوة التي قد تكسر قلب هذا البرج الغامض!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">نقاط ضعف برج العقرب العاطفية: أسرار خلف قناع القوة التي قد تكسر قلب هذا البرج الغامض!</h3>
                         <p class="post-card-desc">هل تظن أن برج العقرب لا يُقهر؟ اكتشف نقاط ضعف برج العقرب العاطفية، والمخاوف الخفية التي تؤثر على علاقاته، وكيف تتعامل مع هذا البرج المليء بالمشاعر العميقة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -855,16 +589,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/79.png" alt="كيف يعامل رجل برج العقرب المرأة التي يحبها؟ أسرار العشق في قلب أكثر الرجال غموضاً!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">كيف يعامل رجل برج العقرب المرأة التي يحبها؟ أسرار العشق في قلب أكثر الرجال غموضاً!</h3>
                         <p class="post-card-desc">هل أنتِ مهتمة برجل من برج العقرب؟ اكتشفي صفات رجل العقرب مع المرأة التي يحبها، وكيف يعبر عن مشاعره العميقة، وما هي العلامات التي تؤكد أنه وقع في حبكِ بصدق.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -873,16 +601,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/78.png" alt="أسرار برج العقرب في العلاقات: حقائق لا يعرفها الجميع عن البرج الأكثر عمقاً وجاذبية!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">أسرار برج العقرب في العلاقات: حقائق لا يعرفها الجميع عن البرج الأكثر عمقاً وجاذبية!</h3>
                         <p class="post-card-desc">هل ترغب في فهم خفايا برج العقرب في الحب؟ اكتشف أسرار برج العقرب في العلاقات العاطفية، وكيف تتعامل مع شخصيته الغامضة والمثيرة لتكسب قلبه للأبد.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -891,16 +613,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/77.png" alt="كيف ينتقم برج العقرب عند الغضب؟ أسرار الشخصية التي لا تنسى الإساءة وكيف يحمي نفسه من الأذى!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">كيف ينتقم برج العقرب عند الغضب؟ أسرار الشخصية التي لا تنسى الإساءة وكيف يحمي نفسه من الأذى!</h3>
                         <p class="post-card-desc">هل تغيّرت معاملة برج العقرب معك فجأة؟ اكتشف حقيقة انتقام برج العقرب عند الغضب، وكيف يفكر، وهل هو فعلاً البرج الأكثر حقداً كما يشاع؟ دليلك لفهم سيكولوجية العقرب.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -909,16 +625,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/76.png" alt="من هو توأم روح العقرب؟ دليلك الشامل لأكثر الأبراج توافقاً مع برج العقرب في الحب والزواج!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">من هو توأم روح العقرب؟ دليلك الشامل لأكثر الأبراج توافقاً مع برج العقرب في الحب والزواج!</h3>
                         <p class="post-card-desc">هل أنت من مواليد برج العقرب وتبحث عن شريك يقدّر عمق مشاعرك؟ اكتشف أكثر الأبراج توافقاً مع برج العقرب، وفهم سر الكيمياء العاطفية التي تربطك ببعض الأبراج دون غيرها.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -927,16 +637,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/75.png" alt="لماذا برج العقرب غامض جدًا؟ اكتشف أسرار الشخصية الأكثر جاذبية وتعقيداً في عالم الأبراج!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">لماذا برج العقرب غامض جدًا؟ اكتشف أسرار الشخصية الأكثر جاذبية وتعقيداً في عالم الأبراج!</h3>
                         <p class="post-card-desc">هل تشعر بالحيرة أمام غموض برج العقرب؟ تعرف على الأسباب النفسية وراء صمت وتحفظ هذا البرج، وكيف يمكنك الوصول إلى قلبه وفهم عالمة الداخلي المليء بالأسرار.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -945,16 +649,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/74.png" alt="علامات غيرة برج العقرب الخطيرة: كيف تعرف أن العقرب يغار عليك وما الذي يجب أن تحذر منه؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">علامات غيرة برج العقرب الخطيرة: كيف تعرف أن العقرب يغار عليك وما الذي يجب أن تحذر منه؟</h3>
                         <p class="post-card-desc">تتساءل عن غيرة برج العقرب؟ اكتشف العلامات الخفية والخطيرة لغيرة العقرب، وكيف يتعامل هذا البرج العاطفي مع مشاعر التملك والولاء في علاقاته.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -963,16 +661,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/73.png" alt="كيف يحب برج العقرب بصدق؟ أسرار الولاء المطلق في قلب البرج الأكثر غموضاً وعمقاً!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">كيف يحب برج العقرب بصدق؟ أسرار الولاء المطلق في قلب البرج الأكثر غموضاً وعمقاً!</h3>
                         <p class="post-card-desc">هل وقعت في حب برج العقرب وتتساءل عن طبيعة مشاعره؟ اكتشف كيف يحب برج العقرب بصدق، وعلامات تعلقه العاطفي العميق، وكيف تبني معه علاقة أبدية قائمة على الثقة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -981,16 +673,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/72.png" alt="الجانب الخفي في شخصية برج الميزان: أسرار الوجه الآخر لملك الدبلوماسية والسلام!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">الجانب الخفي في شخصية برج الميزان: أسرار الوجه الآخر لملك الدبلوماسية والسلام!</h3>
                         <p class="post-card-desc">هل تظن أنك تعرف كل شيء عن برج الميزان؟ اكتشف الجانب الخفي في شخصية برج الميزان، وأسرار الوجه الآخر الذي يخفيه وراء قناع المثالية والدبلوماسية والهدوء.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -999,16 +685,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/71.png" alt="هل برج الميزان يحب الاهتمام الزائد؟ اكتشف مفاتيح قلب الميزان وفن الموازنة بين الدلع والحرية!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">هل برج الميزان يحب الاهتمام الزائد؟ اكتشف مفاتيح قلب الميزان وفن الموازنة بين الدلع والحرية!</h3>
                         <p class="post-card-desc">هل تتساءل عن طبيعة برج الميزان في العلاقات؟ اكتشف حقيقة حب الميزان للاهتمام الزائد، وكيف يمكنك إرضاء هذا البرج الهوائي المرهف دون أن تشعره بالاختناق.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1017,16 +697,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/70.png" alt="نقاط ضعف برج الميزان العاطفية: أسرار لا يخبرك بها أحد عن أكثر الأبراج غموضاً وجاذبية!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">نقاط ضعف برج الميزان العاطفية: أسرار لا يخبرك بها أحد عن أكثر الأبراج غموضاً وجاذبية!</h3>
                         <p class="post-card-desc">هل تعيش قصة حب مع برج الميزان؟ اكتشف نقاط ضعف برج الميزان العاطفية، وكيف تتعامل مع تردده وحاجته المستمرة للاطمئنان لتعيش معه علاقة متوازنة وسعيدة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1035,16 +709,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/69.png" alt="صفات امرأة برج الميزان في الحب: أنثى السحر والجمال التي تبحث عن توازن القلب والعقل!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">صفات امرأة برج الميزان في الحب: أنثى السحر والجمال التي تبحث عن توازن القلب والعقل!</h3>
                         <p class="post-card-desc">هل تود فهم أعماق أنثى الميزان في الحب؟ اكتشف صفات امرأة برج الميزان العاطفية، كيف تعبر عن مشاعرها، وما الذي يجعله شريكة حياة استثنائية لا تُنسى.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1053,16 +721,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/68.png" alt="كيف تعرف أن برج الميزان معجب بك؟ 7 علامات سرية لا يفعلها إلا إذا وقع في حبك!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">كيف تعرف أن برج الميزان معجب بك؟ 7 علامات سرية لا يفعلها إلا إذا وقع في حبك!</h3>
                         <p class="post-card-desc">هل يراودك الشك حول مشاعر شخص من برج الميزان؟ اكتشف العلامات الخفية التي تؤكد إعجاب برج الميزان بك، وكيف يغازل بذكائه المعهود في صمت.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1071,16 +733,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/67.png" alt="أسرار برج الميزان في العلاقات: كيف تكسب قلب هذا البرج المرهف وتعيش معه قصة حب لا تُنسى؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">أسرار برج الميزان في العلاقات: كيف تكسب قلب هذا البرج المرهف وتعيش معه قصة حب لا تُنسى؟</h3>
                         <p class="post-card-desc">هل تنجذب لشخص من برج الميزان؟ اكتشف أسرار برج الميزان في العلاقات العاطفية، وما الذي يجعله شريكاً مثالياً، وكيف تتعامل مع تقلبات مزاجه وطلبه الدائم للتوازن.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1089,16 +745,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/66.png" alt="أكثر الأبراج توافقًا مع برج الميزان: من هو الشريك المثالي لملك التناغم العاطفي؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">أكثر الأبراج توافقًا مع برج الميزان: من هو الشريك المثالي لملك التناغم العاطفي؟</h3>
                         <p class="post-card-desc">تبحث عن شريك العمر لمولود الميزان؟ اكتشف قائمة أكثر الأبراج توافقًا مع برج الميزان في الحب والزواج، وفهم أسرار الانسجام العاطفي بين الأبراج.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1107,16 +757,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/65.png" alt="لماذا برج الميزان متردد دائمًا؟ سر الحيرة في عقل الميزان وكيف تتجاوز معه هذا التردد!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">لماذا برج الميزان متردد دائمًا؟ سر الحيرة في عقل الميزان وكيف تتجاوز معه هذا التردد!</h3>
                         <p class="post-card-desc">هل تعبت من حيرة برج الميزان؟ اكتشف الأسباب الحقيقية وراء تردد الميزان في اتخاذ القرارات، وفهم أعمق لشخصيته الرائعة وكيفية التعامل مع هذا التردد بذكاء.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1125,16 +769,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/64.png" alt="علامات غيرة برج الميزان: كيف يغار ملك التوازن عندما يعشق بصدق؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">علامات غيرة برج الميزان: كيف يغار ملك التوازن عندما يعشق بصدق؟</h3>
                         <p class="post-card-desc">هل تساءلت يومًا كيف يغار برج الميزان الهادئ؟ تعرف على علامات غيرة الميزان الخفية والواضحة في الحب، وكيف يحاول الحفاظ على توازن علاقته العاطفية بذكاء.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1143,16 +781,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/63.png" alt="كيف يحب برج الميزان؟ اكتشف سحر الرومانسية في عالم توازن القلوب والأحلام!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">كيف يحب برج الميزان؟ اكتشف سحر الرومانسية في عالم توازن القلوب والأحلام!</h3>
                         <p class="post-card-desc">هل تنجذب لشخص من برج الميزان؟ تعرف على أسرار الحب عند الميزان، وكيف يصنع أجواءً رومانسية لا تُنسى، وما الذي يبحث عنه في شريك حياته. دليل شامل لكل ما يخص عاطفة الميزان.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1161,16 +793,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/62.png" alt="هل برج العذراء بارد عاطفيًا؟ حقيقة المشاعر خلف قناع الهدوء والتحليل!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">هل برج العذراء بارد عاطفيًا؟ حقيقة المشاعر خلف قناع الهدوء والتحليل!</h3>
                         <p class="post-card-desc">هل تظن أن شريكك من برج العذراء بارد المشاعر؟ اكتشف الحقيقة المذهلة خلف هذا الهدوء، وكيف يعبر العذراء عن حبه بطريقته الخاصة والفريدة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1179,16 +805,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/61.png" alt="ماذا يكره برج العذراء في الشريك؟ 7 صفات قد تجعله يهرب بعيداً عنك فوراً!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            24 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 24 مايو 2026</div>
                         <h3 class="post-card-title">ماذا يكره برج العذراء في الشريك؟ 7 صفات قد تجعله يهرب بعيداً عنك فوراً!</h3>
                         <p class="post-card-desc">هل تتساءل لماذا انسحب شريكك العذراء فجأة؟ اكتشف ما يكرهه برج العذراء في شريك حياته، وتعرف على السلوكيات التي تفسد العلاقة مع هذا البرج التحليلي.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1197,16 +817,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/60.png" alt="نقاط ضعف برج العذراء في الحب: هل يدمر "الكمال" علاقتك العاطفية؟ اكتشف الحقيقة!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">نقاط ضعف برج العذراء في الحب: هل يدمر "الكمال" علاقتك العاطفية؟ اكتشف الحقيقة!</h3>
                         <p class="post-card-desc">يُعرف برج العذراء بالدقة والتحليل، لكن هذه الصفات تتحول إلى تحديات في الحب. اكتشف نقاط ضعف برج العذراء في العلاقات وكيف يمكن تحويلها إلى نقاط قوة لاستقرار عاطفي دائم.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1215,16 +829,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/59.png" alt="صفات رجل برج العذراء بالتفصيل: رحلة في أعماق العقل المدبر والقلب المخلص" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">صفات رجل برج العذراء بالتفصيل: رحلة في أعماق العقل المدبر والقلب المخلص</h3>
                         <p class="post-card-desc">هل تود فهم شخصية رجل برج العذراء؟ اكتشف صفاته بالتفصيل، من دقة الملاحظة والذكاء التحليلي إلى طبيعته الحنونة في الحب. دليل شامل لفهم هذا الرجل الغامض.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1233,16 +841,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/58.png" alt="أسرار برج العذراء في العلاقات: كيف تروض "عقل" الملك العذراء وتكسب قلبه للأبد؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">أسرار برج العذراء في العلاقات: كيف تروض "عقل" الملك العذراء وتكسب قلبه للأبد؟</h3>
                         <p class="post-card-desc">هل أنت في علاقة مع برج العذراء وتريد فهم أعماقه؟ اكتشف أسرار برج العذراء في الحب والعلاقات، وكيف تتعامل مع دقة ملاحظته، واحتياجه للأمان، ولماذا يعتبر الشريك الأكثر وفاءً.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1251,16 +853,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/57.png" alt="كيف يتجاهلك برج العذراء عندما ينزعج؟ أسرار صمت "العذراء" وكيف تقرأ رسائل التجاهل الغامضة!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">كيف يتجاهلك برج العذراء عندما ينزعج؟ أسرار صمت "العذراء" وكيف تقرأ رسائل التجاهل الغامضة!</h3>
                         <p class="post-card-desc">هل شعرت فجأة ببرود وتجاهل من شريكك العذراء؟ اكتشف الأسباب الحقيقية وراء صمت برج العذراء عند الانزعاج، وكيفية التعامل مع هذا التجاهل لاستعادة الدفء في العلاقة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1269,16 +865,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/56.png" alt="أكثر الأبراج توافقاً مع برج العذراء: من هو الشريك المثالي الذي يفهم صمتك ويقدر دقة تفاصيلك؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">أكثر الأبراج توافقاً مع برج العذراء: من هو الشريك المثالي الذي يفهم صمتك ويقدر دقة تفاصيلك؟</h3>
                         <p class="post-card-desc">هل أنت من مواليد برج العذراء وتبحث عن شريك يفهم طبيعتك التحليلية؟ اكتشف أكثر الأبراج توافقاً مع العذراء، وأسرار نجاح هذه العلاقات العاطفية، وكيف تجد الحب الحقيقي.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1287,16 +877,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/55.png" alt="علامات غيرة برج العذراء: كيف تعرف أن "المنظم الهادئ" فقد صوابه بسبب مشاعر الغيرة؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">علامات غيرة برج العذراء: كيف تعرف أن "المنظم الهادئ" فقد صوابه بسبب مشاعر الغيرة؟</h3>
                         <p class="post-card-desc">هل يغار برج العذراء؟ اكتشف العلامات الخفية والمباشرة لغيرة برج العذراء، وكيف يتحول هذا الشخص الهادئ والتحليلي إلى كتلة من المشاعر الجياشة عندما يشعر بالتهديد في علاقته.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1305,16 +889,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/54.png" alt="كيف يحب برج العذراء بصمت؟ دليلك لاكتشاف مشاعر "الجندي المجهول" في عالم الأبراج" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">كيف يحب برج العذراء بصمت؟ دليلك لاكتشاف مشاعر "الجندي المجهول" في عالم الأبراج</h3>
                         <p class="post-card-desc">هل تظن أن شريكك العذراء لا يبادلك المشاعر؟ اكتشف كيف يحب برج العذراء بصمت، وما هي الإشارات الخفية التي يرسلها للتعبير عن حبه العميق دون كلمات.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1323,16 +901,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/53.png" alt="لماذا برج العذراء كثير الانتقاد؟ اكتشف سر العقل التحليلي الذي يبحث عن الكمال في عالم غير مثالي" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">لماذا برج العذراء كثير الانتقاد؟ اكتشف سر العقل التحليلي الذي يبحث عن الكمال في عالم غير مثالي</h3>
                         <p class="post-card-desc">هل تعبت من انتقادات برج العذراء المستمرة؟ تعرف على الأسباب النفسية الحقيقية وراء هذه الصفة، وكيف تحول هذا "النقد" إلى دليل حب واهتمام بدلاً من أن يكون مصدراً للإزعاج.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1341,16 +913,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/52.png" alt="الجانب المظلم في شخصية برج الأسد: ما الذي يخفيه "ملك الغابة" خلف قناع الكبرياء؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">الجانب المظلم في شخصية برج الأسد: ما الذي يخفيه "ملك الغابة" خلف قناع الكبرياء؟</h3>
                         <p class="post-card-desc">هل تظن أن برج الأسد مثالي؟ اكتشف الجانب المظلم في شخصية برج الأسد، وكيف يمكن لثقته المفرطة أن تتحول إلى تحديات في علاقاته. تحليل شامل يكشف الخفايا بصراحة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1359,16 +925,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/51.png" alt="نقاط ضعف برج الأسد أمام الحب: أسرار لا يعرفها أحد عن "قلب الملك" حين يقع في العشق" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">نقاط ضعف برج الأسد أمام الحب: أسرار لا يعرفها أحد عن "قلب الملك" حين يقع في العشق</h3>
                         <p class="post-card-desc">هل يمتلك الأسد القوي نقاط ضعف في الحب؟ نعم! اكتشف الجوانب العاطفية المخفية لبرج الأسد، وكيف تجعله مشاعره أكثر عفوية وأحياناً أكثر احتياجاً للشريك. دليلك لفهم "ملك الأبراج" بعمق.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1377,16 +937,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/50.png" alt="هل برج الأسد مغرور فعلاً؟ حقيقة "الغرور" المزعوم وكيف يرى ملك الأبراج نفسه بصدق!" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">هل برج الأسد مغرور فعلاً؟ حقيقة "الغرور" المزعوم وكيف يرى ملك الأبراج نفسه بصدق!</h3>
                         <p class="post-card-desc">كثيرون يتهمون برج الأسد بالغرور، لكن هل هذه هي الحقيقة؟ اكتشف الأسباب النفسية وراء شخصية الأسد القوية، وكيف يخلط الناس بين الثقة بالنفس والتعالي. دليل شامل لفهم أعماق "ملك الأبراج".</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1395,16 +949,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/48.png" alt="صفات امرأة برج الأسد في الحب: كيف تملك قلب "الملكة" وتجعلها تعشقك بجنون؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">صفات امرأة برج الأسد في الحب: كيف تملك قلب "الملكة" وتجعلها تعشقك بجنون؟</h3>
                         <p class="post-card-desc">هل أنت مفتون بامرأة برج الأسد؟ اكتشفي صفات امرأة برج الأسد في الحب، أسرارها العاطفية، وما الذي تبحث عنه في شريك حياتها. دليلك الشامل للفوز بقلبها.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1413,16 +961,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/47.png" alt="أسرار برج الأسد في العلاقات العاطفية: كيف تخطف قلب ملك الأبراج وتجعله متيماً بك؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">أسرار برج الأسد في العلاقات العاطفية: كيف تخطف قلب ملك الأبراج وتجعله متيماً بك؟</h3>
                         <p class="post-card-desc">هل أنت واقع في حب مولود برج الأسد؟ اكتشف أسرار برج الأسد في العلاقات العاطفية، وما الذي يحرك مشاعره، وكيف يمكنك بناء علاقة أبدية مع هذا البرج الناري الطموح.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1431,16 +973,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/46.png" alt="علامات انسحاب برج الأسد: كيف تعرف أن "ملك الأبراج" فقد اهتمامه بك نهائياً؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">علامات انسحاب برج الأسد: كيف تعرف أن "ملك الأبراج" فقد اهتمامه بك نهائياً؟</h3>
                         <p class="post-card-desc">هل لاحظت بروداً مفاجئاً من شريكك الأسد؟ اكتشف العلامات الدقيقة التي تشير إلى أن برج الأسد فقد اهتمامه بالعلاقة، وكيف تتعامل مع هذه اللحظة الحاسمة بذكاء.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1449,16 +985,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/45.png" alt="أكثر الأبراج توافقًا مع برج الأسد في الحب: من هو الشريك الذي يستحق قلب "ملك الأبراج"؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">أكثر الأبراج توافقًا مع برج الأسد في الحب: من هو الشريك الذي يستحق قلب "ملك الأبراج"؟</h3>
                         <p class="post-card-desc">هل تبحث عن نصفك الآخر؟ اكتشف أكثر الأبراج توافقاً مع برج الأسد في الحب والصداقة. دليل شامل يساعدك في فهم ديناميكيات علاقة الأسد العاطفية وكيف تجد الشريك المثالي.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1467,16 +997,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/44.png" alt="لماذا يحب برج الأسد السيطرة؟ أسرار الشخصية القيادية التي تجعله يتربع على عرش العلاقات" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">لماذا يحب برج الأسد السيطرة؟ أسرار الشخصية القيادية التي تجعله يتربع على عرش العلاقات</h3>
                         <p class="post-card-desc">هل تساءلت يوماً عن سر رغبة برج الأسد في السيطرة؟ نكشف لك الدوافع النفسية خلف شخصية "ملك الأبراج" وكيف تحول هذه السيطرة إلى حماية واهتمام لا مثيل لهما.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1485,16 +1009,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/43.png" alt="علامات غيرة برج الأسد عندما يحب: كيف يكشف ملك الغابة مشاعره بملامح حادة؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">علامات غيرة برج الأسد عندما يحب: كيف يكشف ملك الغابة مشاعره بملامح حادة؟</h3>
                         <p class="post-card-desc">هل لاحظت تصرفات غريبة على شريكك من برج الأسد؟ اكتشف علامات غيرة برج الأسد عندما يحب، وكيف يترجم "ملك الغابة" حبه العميق إلى تصرفات واضحة تعكس خوفه من فقدان من يحب.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1503,16 +1021,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/42.png" alt="كيف يحب برج الأسد باهتمام مبالغ فيه؟ دليلك لاكتشاف ملك الغابة حين يقرر منح قلبه بالكامل" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">كيف يحب برج الأسد باهتمام مبالغ فيه؟ دليلك لاكتشاف ملك الغابة حين يقرر منح قلبه بالكامل</h3>
                         <p class="post-card-desc">هل تساءلت يوماً كيف يحب برج الأسد باهتمام مبالغ فيه؟ اكتشف أسرار العشق عند ملك الأبراج، وكيف يتحول بلمح البصر من شخص واثق إلى عاشق يغمر شريكه بالحب والتدليل.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1521,16 +1033,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/34.png" alt="نقاط ضعف برج السرطان النفسية: كواليس القوقعة وماذا يحدث عندما ينهار "قلب الأبراج"؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">نقاط ضعف برج السرطان النفسية: كواليس القوقعة وماذا يحدث عندما ينهار "قلب الأبراج"؟</h3>
                         <p class="post-card-desc">هل أنت من مواليد برج السرطان؟ اكتشف نقاط ضعفك النفسية التي قد تؤثر على علاقاتك وسعادتك. دليل شامل لفهم الذات وكيفية تحويل الحساسية المفرطة إلى قوة محصنة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1539,16 +1045,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/3332.png" alt="هل برج السرطان يسامح الخيانة؟ حقيقة موقف "قلب الأبراج الحنون" عندما ينكسر جدار الثقة" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">هل برج السرطان يسامح الخيانة؟ حقيقة موقف "قلب الأبراج الحنون" عندما ينكسر جدار الثقة</h3>
                         <p class="post-card-desc">هل يمكن لبرج السرطان أن يغفر طعنة الغدر؟ نكشف لك السيكولوجية العميقة لمولود السرطان عند التعرض للخيانة، وموقفه من الفرصة الثانية وهل ينسى أم يرحل للأبد؟</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1557,16 +1057,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/9898.png" alt="ماذا يكره برج السرطان في الشريك؟ 7 تصرفات قد تجعل قلب "كابوريا" الأبراج يغلق أبوابه للأبد" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">ماذا يكره برج السرطان في الشريك؟ 7 تصرفات قد تجعل قلب "كابوريا" الأبراج يغلق أبوابه للأبد</h3>
                         <p class="post-card-desc">هل تود الحفاظ على علاقتك بمولود السرطان؟ اكتشف ماذا يكره برج السرطان في الشريك وتجنب هذه الأخطاء التي قد تدفع هذا البرج الحساس للانسحاب من حياتك فوراً.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1575,16 +1069,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/-=-.png" alt="صفات رجل برج السرطان في العلاقات: دليل كشف أسرار القلب الأكثر حناناً وغموضاً" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">صفات رجل برج السرطان في العلاقات: دليل كشف أسرار القلب الأكثر حناناً وغموضاً</h3>
                         <p class="post-card-desc">هل أنتِ معجبة برجل من برج السرطان؟ اكتشفي صفات رجل برج السرطان في العلاقات، وكيف يعبر عن حبه، وكيف تتعاملين مع تقلّباته العاطفية وقوقعته الغامضة لتكسبِي قلبه للأبد.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1593,16 +1081,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/0000.png" alt="أسرار برج السرطان في الحب: كيف تفتح أبواب قلب "كابوريا" الأبراج وتصل إلى أعماق روحه؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">أسرار برج السرطان في الحب: كيف تفتح أبواب قلب "كابوريا" الأبراج وتصل إلى أعماق روحه؟</h3>
                         <p class="post-card-desc">هل تود معرفة أسرار برج السرطان في الحب؟ اكتشف مفاتيح قلب هذا البرج المائي العاطفي، وكيف يعبر عن مشاعره، وما الذي يجعله الشريك الأكثر وفاءً على الإطلاق.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1611,16 +1093,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/3ق3ق3ق3ق.png" alt="كيف يتصرف برج السرطان بعد الانفصال؟ رحلة الشفاء من الجرح العميق والعودة إلى الحياة" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">كيف يتصرف برج السرطان بعد الانفصال؟ رحلة الشفاء من الجرح العميق والعودة إلى الحياة</h3>
                         <p class="post-card-desc">هل مررت بانفصال مؤلم مع شريك من برج السرطان؟ اكتشف كيف يعيش هذا البرج المائي لحظات الفراق، وما هي مراحل تعافيه النفسي، وكيف يغلق قوقعته ليحمي قلبه.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1629,16 +1105,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/ثثثث.png" alt="أكثر الأبراج توافقًا مع برج السرطان: من هو الشريك المثالي الذي سيحتضن قلبك الوفي؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">أكثر الأبراج توافقًا مع برج السرطان: من هو الشريك المثالي الذي سيحتضن قلبك الوفي؟</h3>
                         <p class="post-card-desc">هل تبحث عن نصفك الآخر؟ اكتشف قائمة أكثر الأبراج توافقًا مع برج السرطان في الحب والصداقة. دليل شامل يساعدك في بناء علاقات عاطفية ناجحة ومستقرة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1647,16 +1117,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/صثبصبصب.png" alt="لماذا برج السرطان حساس جدًا؟ اكتشف أسرار القلب المائي الذي يرى العالم بمشاعر الآخرين" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">لماذا برج السرطان حساس جدًا؟ اكتشف أسرار القلب المائي الذي يرى العالم بمشاعر الآخرين</h3>
                         <p class="post-card-desc">هل تساءلت يوماً لماذا برج السرطان حساس جدًا؟ نكشف لك الأسرار الفلكية والنفسية وراء هذا الفيض العاطفي، وكيف يعيش مواليد السرطان مشاعرهم بصدق وعمق لا يضاهى.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1665,16 +1129,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/43ف34ف.png" alt="علامات غيرة برج السرطان عندما يتعلق بك: الشفرات النفسية والجسدية التي تفضح خوف ابن البحر من خسارتك" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">علامات غيرة برج السرطان عندما يتعلق بك: الشفرات النفسية والجسدية التي تفضح خوف ابن البحر من خسارتك</h3>
                         <p class="post-card-desc">اكتشف أسرار وعلامات غيرة برج السرطان عندما يتعلق بك ويحبك بصدق. دليل تفصيلي يشرح كيف يعبر رجل وامرأة السرطان عن غيرتهم المكتومة، وكيف تتعامل مع قوقعتهم بذكاء.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1683,16 +1141,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/-=-=-=.png" alt="كيف يحب برج السرطان بصمت؟ 7 علامات خفية تكشف عشق ابن البحر الخجول قبل أن ينطق لغته" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">كيف يحب برج السرطان بصمت؟ 7 علامات خفية تكشف عشق ابن البحر الخجول قبل أن ينطق لغته</h3>
                         <p class="post-card-desc">كيف يحب برج السرطان بصمت؟ اكتشفت الحقيقة الكاملة وراء نظرات وسلوكيات رجل وامرأة السرطان عند الوقوع في العشق الصامت، ودليلك لفهم لغة جسد هذا البرج المائي الحنون.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1701,16 +1153,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/78787878.png" alt="الجانب الغامض في شخصية برج الجوزاء: الوجه الخفي للتوأم الذي يخشى الجميع كشفه" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">الجانب الغامض في شخصية برج الجوزاء: الوجه الخفي للتوأم الذي يخشى الجميع كشفه</h3>
                         <p class="post-card-desc">اكتشف الجانب الغامض في شخصية برج الجوزاء. دليل فلكي ونفسي عميق يزيح الستار عن أسرار التوأم الهوائي الخفية، ويوضح ما يخبئه وراء قناع المرح والابتسامة الدائمة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1719,16 +1165,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/uuuuuuuuu.png" alt="نقاط ضعف برج الجوزاء العاطفية: الخفايا الثمانية التي يداريها التوأم خلف قناع البرود والمرح" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            23 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 23 مايو 2026</div>
                         <h3 class="post-card-title">نقاط ضعف برج الجوزاء العاطفية: الخفايا الثمانية التي يداريها التوأم خلف قناع البرود والمرح</h3>
                         <p class="post-card-desc">اكتشف أسرار ونقاط ضعف برج الجوزاء العاطفية في الحب والزواج. دليل نفسي عميق يكشف ما يخشاه التوأم الهوائي في العلاقات، وكيف تفك شفرة خوفه من الالتزام والخذلان.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1737,16 +1177,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/88888888888.png" alt="صفات برج الجوزاء للرجل والمرأة: الدليل النفسي الكامل لفك شفرات التوأم الهوائي المتقلب" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">صفات برج الجوزاء للرجل والمرأة: الدليل النفسي الكامل لفك شفرات التوأم الهوائي المتقلب</h3>
                         <p class="post-card-desc">اكتشف بالتفصيل صفات برج الجوزاء للرجل والمرأة. دليل شامل يستعرض مميزات وعيوب التوأم الهوائي، أسرارهم في الحب والعلاقات، وكيفية التعامل مع تقلباتهم المزاجية بذكاء.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1755,16 +1189,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/633333.png" alt="كيف تعرف أن برج الجوزاء غار منك؟ علامات الغيرة الصامتة والمفاجئة عند التوأم الهوائي" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">كيف تعرف أن برج الجوزاء غار منك؟ علامات الغيرة الصامتة والمفاجئة عند التوأم الهوائي</h3>
                         <p class="post-card-desc">كيف تعرف أن برج الجوزاء غار منك؟ دليلكِ الفلكي والنفسي لكشف علامات الغيرة الخفية عند رجل وامرأة الجوزاء، وكيف يتحول التوأم المنفتح إلى كائن غامض عندما تشتعل مشاعره.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1773,16 +1201,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/34ق3.png" alt="هل برج الجوزاء لعوب في الحب؟ حقائق صادمة تبرئ التوأم الهوائي وتكشف سر هروبه من العلاقات" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">هل برج الجوزاء لعوب في الحب؟ حقائق صادمة تبرئ التوأم الهوائي وتكشف سر هروبه من العلاقات</h3>
                         <p class="post-card-desc">هل برج الجوزاء لعوب في الحب حقاً أم أنه مظلوم فلكياً؟ اكتشف الحقيقة الكاملة وراء اتهام برج الجوزاء بالتلاعب، وتعرّف على سيكولوجية التوأم وسر استقراره العاطفي الأبدي.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1791,16 +1213,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/2003.png" alt="أسرار برج الجوزاء في العلاقات: خفايا مذهلة لا يخبرك بها التوأم الهوائي عن قلبه" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">أسرار برج الجوزاء في العلاقات: خفايا مذهلة لا يخبرك بها التوأم الهوائي عن قلبه</h3>
                         <p class="post-card-desc">اكتشف أسرار برج الجوزاء في العلاقات العاطفية والاجتماعية. دليل نفسي وفلكي يكشف لك خفايا قلب التوأم الهوائي، وكيف يتعامل رجل وامرأة الجوزاء مع الحب الحقيقي والالتزام.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1809,16 +1225,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/7.png" alt="أكثر الأبراج توافقًا مع برج الجوزاء: من هو الشريك المثالي الذي يمتلك مفتاح قلب التوأم الهوائي؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">أكثر الأبراج توافقًا مع برج الجوزاء: من هو الشريك المثالي الذي يمتلك مفتاح قلب التوأم الهوائي؟</h3>
                         <p class="post-card-desc">اكتشف بالتفصيل أكثر الأبراج توافقًا مع برج الجوزاء في الحب والزواج. دليل فلكي ونفسي يكشف أسرار كيمياء التوأم الهوائي، ومن هم الشركاء القادرون على احتواء تقلباته وكسب قلبه للأبد.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1827,16 +1237,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/999999999999999999.png" alt="علامات تجاهل برج الجوزاء لك: كيف تفك شفرة الانسحاب الصامت للتوأم الهوائي قبل فوات الأوان؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">علامات تجاهل برج الجوزاء لك: كيف تفك شفرة الانسحاب الصامت للتوأم الهوائي قبل فوات الأوان؟</h3>
                         <p class="post-card-desc">دليلكِ النفسي والفلكي الشامل لمعرفة أشهر علامات تجاهل برج الجوزاء لكِ. اكتشفي أسباب برود رجل وامرأة الجوزاء المفاجئ، والفرق بين انشغالهم الطبيعي والانسحاب الحقيقي.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1845,16 +1249,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/2023_9_19_18_31_37_143.webp" alt="كيف يحب برج الجوزاء بصدق؟ العلامات الخفية التي تفضح مشاعر التوأم الهوائي عندما يعشق حقاً" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">كيف يحب برج الجوزاء بصدق؟ العلامات الخفية التي تفضح مشاعر التوأم الهوائي عندما يعشق حقاً</h3>
                         <p class="post-card-desc">كيف يحب برج الجوزاء بصدق؟ دليل فلكي ونفسي عميق يكشف لكِ علامات الحب الحقيقي عند رجل وامرأة الجوزاء، وكيف يتحول التوأم المتقلب إلى عاشق مخلص ومستقر للأبد.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1863,16 +1261,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/20580312941578926345.jpg" alt="لماذا برج الجوزاء متقلب المزاج؟ حقائق مذهلة تكشف سيكولوجية التوأم الهوائي وسر مشاعره المتناقضة" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">لماذا برج الجوزاء متقلب المزاج؟ حقائق مذهلة تكشف سيكولوجية التوأم الهوائي وسر مشاعره المتناقضة</h3>
                         <p class="post-card-desc">لماذا برج الجوزاء متقلب المزاج ومحير في علاقاته العاطفية؟ اكتشف السر الفلكي والنفسي وراء تقلبات الجوزاء المفاجئة، وكيف تتعامل مع شخصيتيه المتناقضتين بذكاء.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1881,16 +1273,10 @@
                 <article class="post-card">
                     <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2" alt="ماذا يكره برج الثور في الشريك؟ الخطوط الحمراء التي تدمر علاقتك بالملك الترابي" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">ماذا يكره برج الثور في الشريك؟ الخطوط الحمراء التي تدمر علاقتك بالملك الترابي</h3>
                         <p class="post-card-desc">اكتشف بالتفصيل ماذا يكره برج الثور في الشريك. دليل فلكي ونفسي يكشف الخطوط الحمراء والأخطاء القاتلة التي تجعل رجل وامرأة الثور ينسحبون من العلاقة العاطفية فوراً وبلا عودة.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1899,16 +1285,10 @@
                 <article class="post-card">
                     <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?" alt="صفات امرأة برج الثور بالتفصيل: أسرار وكواليس شخصية سيدة الأرض وفاتنة كوكب الزهرة" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">صفات امرأة برج الثور بالتفصيل: أسرار وكواليس شخصية سيدة الأرض وفاتنة كوكب الزهرة</h3>
                         <p class="post-card-desc">دليلكِ الكامل لاكتشاف صفات امرأة برج الثور بالتفصيل. تعرفي على خفايا شخصيتها في الحب، الزواج، والعمل، وكيفية التعامل مع عنادها الأسطوري وكسب قلبها المخلص للأبد.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1917,16 +1297,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/تاريخ-برج-الثور-القديم.jpg" alt="نقاط ضعف برج الثور في الحب: الخفايا والأسير العاطفي خلف قناع القوة الصلب" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">نقاط ضعف برج الثور في الحب: الخفايا والأسير العاطفي خلف قناع القوة الصلب</h3>
                         <p class="post-card-desc">اكتشف أشهر نقاط ضعف برج الثور في الحب والعلاقات العاطفية. دليل مفصل يكشف خفايا رجل وامرأة الثور عند الوقوع في العشق، وكيف تنهار دفاعاتهم الترابية أمام الحنان.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1935,16 +1309,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/2391644_0.jpg" alt="هل برج الثور يحب التملك؟ حقائق مثيرة عن غيرة الشريك الترابي ورغبته في السيطرة العاطفية" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">هل برج الثور يحب التملك؟ حقائق مثيرة عن غيرة الشريك الترابي ورغبته في السيطرة العاطفية</h3>
                         <p class="post-card-desc">هل برج الثور يحب التملك والسيطرة في العلاقات العاطفية؟ اكتشفي الحقيقة الكاملة وراء غيرة رجل وامرأة الثور، سيكولوجية حب التملك لديهم، وكيفية التعامل مع عنادهم بذكاء.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1953,16 +1321,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/6837127a07cc0.webp" alt="أسرار برج الثور في العلاقات العاطفية: الدليل الخفي لكسب قلب الملك الترابي للأبد" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">أسرار برج الثور في العلاقات العاطفية: الدليل الخفي لكسب قلب الملك الترابي للأبد</h3>
                         <p class="post-card-desc">اكتشف أسرار برج الثور في العلاقات العاطفية والحب. دليل نفسي وفلكي يشرح لغة جسد رجل وامرأة الثور، كيف يعبرون عن مشاعرهم، وما هي مفاتيح كسب ثقتهم واستقرارهم.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1971,16 +1333,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/341289.jpg.webp" alt="أكثر الأبراج توافقًا مع برج الثور في الحب والزواج: من يمتلك مفتاح قلب الملك الترابي؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">أكثر الأبراج توافقًا مع برج الثور في الحب والزواج: من يمتلك مفتاح قلب الملك الترابي؟</h3>
                         <p class="post-card-desc">اكتشف أكثر الأبراج توافقًا مع برج الثور في الحب، الزواج، والعلاقات العاطفية. دليل فلكي مفصل يكشف الأبراج التي تمنح الثور الأمان والاستقرار والأبراج التي تبتعد عنه.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -1989,16 +1345,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/image-452.jpg" alt="كيف تعرف أن برج الثور فقد اهتمامه؟ (المؤشرات الصامتة والنهايات الباردة لملك الاستقرار)" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">كيف تعرف أن برج الثور فقد اهتمامه؟ (المؤشرات الصامتة والنهايات الباردة لملك الاستقرار)</h3>
                         <p class="post-card-desc">كيف تعرف أن برج الثور فقد اهتمامه بك ويخطط للرحيل؟ اكتشف أهم علامات برود رجل وامرأة برج الثور في العلاقات، وأسرار تفسير صمتهم القاتل وتراجع شغفهم العاطفي.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -2007,16 +1357,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/676-=-=-=-=-=.jpg" alt="علامات غيرة برج الثور عندما يحب: كيف تكتشف اشتعال النار في قلب الملك الترابي؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">علامات غيرة برج الثور عندما يحب: كيف تكتشف اشتعال النار في قلب الملك الترابي؟</h3>
                         <p class="post-card-desc">اكتشفي أشهر علامات غيرة برج الثور عندما يحب بصدق. دليل فلكي ونفسي يشرح لغة جسد وتصرفات رجل وامرأة الثور عند اشتعال الغيرة وحب التملك لديهم، وكيفية التعامل معها.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -2025,16 +1369,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/2323232.jpg" alt="لماذا برج الثور عنيد جدًا؟ (السر الفلكي والتحليل النفسي لملك الإصرار والصلابة)" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">لماذا برج الثور عنيد جدًا؟ (السر الفلكي والتحليل النفسي لملك الإصرار والصلابة)</h3>
                         <p class="post-card-desc">لماذا برج الثور عنيد جدًا؟ اكتشف الأسباب الفلكية والنفسية وراء عناد مولود الثور في الحب والعلاقات، وأسرار ترويض هذا العناد والتعامل معه بذكاء ودبلوماسية.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -2043,16 +1381,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/معلومات-حول-برج-الثور-.webp" alt="كيف يعبر برج الثور عن حبه؟ (أسرار لغة الجسد والأفعال الصامتة لملك الاستقرار)" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">كيف يعبر برج الثور عن حبه؟ (أسرار لغة الجسد والأفعال الصامتة لملك الاستقرار)</h3>
                         <p class="post-card-desc">هل ترغبين في كشف حقيقة مشاعر مولود الثور؟ اكتشفي كيف يعبر برج الثور عن حبه للطرف الآخر من خلال أفعاله الصامتة، لغة جسده، وعلامات تعلقه العاطفي والعميق بالشريك.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -2061,16 +1393,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/مميزات_وعيوب_برج_الحمل.jpg" alt="الجانب المظلم في شخصية برج الحمل: عيوب خفية وأسرار صادمة لا يكشفها البركان الناري" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">الجانب المظلم في شخصية برج الحمل: عيوب خفية وأسرار صادمة لا يكشفها البركان الناري</h3>
                         <p class="post-card-desc">اكتشف الجانب المظلم في شخصية برج الحمل وعيوبه الخفية في الحب والعلاقات. دليل فلكي ونفسي جريء يشرح نوبات غضب، تملك، وأنانية مولود الحمل وكيفية التعامل معها بذكاء.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -2079,16 +1405,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/32323.jpg" alt="صفات رجل برج الحمل مع المرأة التي يحبها: عندما يذوب المحارب في عشق أميرته" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">صفات رجل برج الحمل مع المرأة التي يحبها: عندما يذوب المحارب في عشق أميرته</h3>
                         <p class="post-card-desc">اكتشفي الأسرار الحقيقية وتفاصيل صفات رجل برج الحمل مع المرأة التي يحبها. كيف يعبر عن عشقه الناري؟ وما هي تصرفاته وعلامات تعلقه الخفي بملكة قلبه؟</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -2097,16 +1417,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/3968701-1996334359.jpg" alt="كيف تعرف أن برج الحمل معجب بك؟ (العلامات الفاضحة والمؤكدة لقلبه الناري)" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">كيف تعرف أن برج الحمل معجب بك؟ (العلامات الفاضحة والمؤكدة لقلبه الناري)</h3>
                         <p class="post-card-desc">كيف تعرف أن برج الحمل معجب بك ويحبك سرًا؟ اكتشف أهم علامات إعجاب رجل وامرأة برج الحمل، وتصرفاتهم العفوية والنارية التي تفضح مشاعرهم الحقيقية تجاهك.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -2115,16 +1429,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/1647873942.jpg" alt="هل برج الحمل سريع الملل؟ (حقائق مثيرة عن مزاجه المتقلب وسر الحفاظ على شغفه)" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">هل برج الحمل سريع الملل؟ (حقائق مثيرة عن مزاجه المتقلب وسر الحفاظ على شغفه)</h3>
                         <p class="post-card-desc">هل يعاني برج الحمل من الملل السريع في العلاقات والعمل؟ اكتشف السيكولوجية النارية لمولود الحمل، والأسباب الحقيقية وراء تقلب مزاجه، مع نصائح ذكية لإشعال شغفه الدائم.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -2133,16 +1441,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/12102_0.jpg" alt="أسرار شخصية برج الحمل التي لا يعرفها أحد: الجانب المخفي من المحارب الشجاع" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">أسرار شخصية برج الحمل التي لا يعرفها أحد: الجانب المخفي من المحارب الشجاع</h3>
                         <p class="post-card-desc">اكتشف أسرار شخصية برج الحمل الأكثر غموضاً وخفاءً. دليل فلكي ونفسي يكشف الجانب العاطفي والطفولي وراء القناع القوي لرجل وامرأة الحمل وما لا يخبرك به أحد.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -2151,16 +1453,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/shutterstock_2141763183(1).jpg" alt="نقاط ضعف برج الحمل في العلاقات العاطفية: الثغرات الخفية خلف القناع الشجاع" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">نقاط ضعف برج الحمل في العلاقات العاطفية: الثغرات الخفية خلف القناع الشجاع</h3>
                         <p class="post-card-desc">تعرف على أبرز نقاط ضعف برج الحمل في العلاقات العاطفية والحب. دليل مشوق يكشف الثغرات الخفية في شخصية رجل وامرأة الحمل، وكيفية التعامل مع كبريائه وغضبه بذكاء.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -2169,16 +1465,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/pm--1779485957532.png.webp" alt="لماذا يتجاهلك برج الحمل فجأة؟ (سر الاختفاء المفاجئ وكيف تعيده إليك)" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">لماذا يتجاهلك برج الحمل فجأة؟ (سر الاختفاء المفاجئ وكيف تعيده إليك)</h3>
                         <p class="post-card-desc">هل اختفى رجل أو امرأة برج الحمل فجأة؟ اكتشف الأسباب الحقيقية وراء تجاهل برج الحمل المفاجئ، وطرق التعامل الذكية لإشعال شغفه وإعادته إليك فورًا.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -2187,16 +1477,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/Screenshot 2026-05-23 at 00-40-29 2601179_0.jpeg (صورة JPEG، 674×485 بكسل).png" alt="علامات غيرة برج الحمل بالتفصيل: كيف تكشف اشتعال نار الغيرة عند مولود الحمل؟" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">علامات غيرة برج الحمل بالتفصيل: كيف تكشف اشتعال نار الغيرة عند مولود الحمل؟</h3>
                         <p class="post-card-desc">اكتشف بالتفصيل علامات غيرة برج الحمل للرجل والمرأة. كيف يتصرف مولود الحمل عندما يغار؟ دليل شامل يحلل تصرفات البرج الناري في الحب بأسلوب عاطفي شيق وممتع.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -2205,16 +1489,10 @@
                 <article class="post-card">
                     <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?" alt="كيف يحب رجل وأنثى برج الحمل؟ أسرار وخفايا الحب عند مولود الحمل الغامض" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">كيف يحب رجل وأنثى برج الحمل؟ أسرار وخفايا الحب عند مولود الحمل الغامض</h3>
                         <p class="post-card-desc">اكتشف أسرار برج الحمل في الحب والزواج. كيف يعبر مولود الحمل عن مشاعره؟ وما هي علامات وقوعه في الغرام؟ دليل شامل يفهم عاطفة الحمل الجياشة بأسلوب ممتع.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -2223,16 +1501,10 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/شات الخليج, دردشة الخليج, شات خليجي, شات الخليج الصوتي.webp" alt="شات الخليج: غرف دردشة الخليج الكتابية والصوتية للجوال أونلاين" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">شات الخليج: غرف دردشة الخليج الكتابية والصوتية للجوال أونلاين</h3>
                         <p class="post-card-desc">انضم إلى شات الخليج، المنصة الأكبر للتواصل العربي. استمتع بغرف شات الخليج الصوتي والكتابي المخصصة للجوال أونلاين. تعرف على أصدقاء جدد في بيئة آمنة ومحترمة ومجانية.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
@@ -2241,29 +1513,15 @@
                 <article class="post-card">
                     <img src="https://blog.chat-alkhaleej.com/images/uploads/ChatGPT Image 19 مايو 2026، 12_43_26 م.png" alt="أدوات شات الخليج: أفضل 22 أداة مجانية أونلاين للنصوص والصور وSEO" class="post-card-img" loading="lazy" />
                     <div class="post-card-body">
-                        <div class="post-card-date">
-                            <i class="fas fa-calendar"></i>
-                            22 مايو 2026
-                        </div>
+                        <div class="post-card-date"><i class="fas fa-calendar"></i> 22 مايو 2026</div>
                         <h3 class="post-card-title">أدوات شات الخليج: أفضل 22 أداة مجانية أونلاين للنصوص والصور وSEO</h3>
                         <p class="post-card-desc">اكتشف منصة أدوات شات الخليج الرقمية المجانية بالكامل. أكثر من 22 أداة احترافية لتعديل النصوص، تحويل الصور، فحص السيو SEO، وأدوات المطورين مباشرة من المتصفح بدون تسجيل.</p>
-                        <span class="post-card-read">
-                            اقرأ المزيد
-                            <i class="fas fa-arrow-left"></i>
-                        </span>
+                        <span class="post-card-read">اقرأ المزيد <i class="fas fa-arrow-left"></i></span>
                     </div>
                 </article>
             </a>
         </div>
 </div>
-<footer>
-    <div class="footer-nav">
-        <a href="https://chat-alkhaleej.com/chat-support-gulf.html"><i class="fas fa-headset"></i> الدعم الفني</a>
-        <a href="https://chat-alkhaleej.com/chat-faq-gulf.html"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</a>
-        <a href="https://chat-alkhaleej.com/chat-rules-gulf.html"><i class="fas fa-gavel"></i> القوانين</a>
-        <a href="https://chat-alkhaleej.com/chat-vip-gulf.html" class="nav-vip"><i class="fas fa-gem"></i> اشتراكات VIP</a>
-    </div>
-    <p>حقوق النشر © 2026 موقع شات الخليج | نجمع العرب تحت سقف واحد بصداقة وأمان.</p>
-</footer>
+<footer><p>حقوق النشر © 2026 شات الخليج</p></footer>
 </body>
 </html>
