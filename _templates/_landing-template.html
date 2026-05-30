@@ -5,7 +5,7 @@
     <link rel="icon" type="image/webp" href="https://tools.chat-alkhaleej.com/logo.webp">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{PAGE_TITLE}} | شات الخليج</title>
+    <title>{{PAGE_TITLE}}</title>
     <meta name="description" content="{{PAGE_DESCRIPTION}}">
     <meta name="keywords" content="{{PAGE_KEYWORDS}}">
 
@@ -124,6 +124,37 @@
         @media (max-width: 600px) { .hero { padding: 50px 20px 60px; } .hero h1 { font-size: 28px; } .hero-subtitle { font-size: 16px; } .hero-cta { padding: 15px 30px; font-size: 16px; } .hero-stats { gap: 20px; } .stat-number { font-size: 24px; } }
 
         .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+
+        /* Featured Image - الصورة الرئيسية للصفحة */
+        .featured-image-wrapper {
+            margin-bottom: 30px;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(69, 12, 12, 0.12);
+            background: var(--white);
+            position: relative;
+        }
+        .featured-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent), var(--primary), var(--accent));
+            z-index: 2;
+        }
+        .featured-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .featured-image-wrapper:hover .featured-image {
+            transform: scale(1.02);
+        }
+        @media (max-width: 600px) {
+            .featured-image-wrapper { margin-bottom: 20px; border-radius: 14px; }
+        }
 
         .breadcrumb { background: var(--white); padding: 14px 22px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 30px; font-size: 14px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
         .breadcrumb a { color: var(--primary); text-decoration: none; font-weight: 700; }
@@ -255,6 +286,11 @@
         <span>›</span>
         <span class="current">{{PAGE_TITLE}}</span>
     </nav>
+
+    <!-- 🆕 الصورة الرئيسية للصفحة -->
+    <div class="featured-image-wrapper">
+        <img src="{{PAGE_IMAGE}}" alt="{{PAGE_TITLE}}" class="featured-image" loading="eager" fetchpriority="high" width="1200" height="630" />
+    </div>
 
     <div class="intro-text">
         {{INTRO_TEXT}}
