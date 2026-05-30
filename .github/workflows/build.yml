@@ -42,7 +42,7 @@ jobs:
           cache: 'npm'
 
       - name: 📦 تثبيت Dependencies (js-yaml)
-        run: npm ci --omit=dev || npm install --omit=dev
+        run: npm install --omit=dev
 
       - name: 🏗️ بناء المدونة وLanding Pages
         run: node scripts/build.js
