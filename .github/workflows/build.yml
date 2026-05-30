@@ -12,12 +12,14 @@ on:
   push:
     branches: [main]
     paths:
-      - 'posts/**'                       # المقالات
-      - '_landing-data/**'               # 🆕 بيانات Landing Pages
-      - '_templates/**'                  # 🆕 القوالب
-      - 'scripts/build.js'               # السكربت
-      - '.github/workflows/build.yml'    # الـ workflow
-  workflow_dispatch:  # السماح بالتشغيل اليدوي
+      - 'posts/**'
+      - '_landing-data/**'
+      - '_templates/**'
+      - 'scripts/build.js'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/build.yml'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -37,6 +39,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 تثبيت Dependencies (js-yaml)
+        run: npm ci --omit=dev || npm install --omit=dev
 
       - name: 🏗️ بناء المدونة وLanding Pages
         run: node scripts/build.js
@@ -46,14 +52,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # 🆕 إضافة كل الملفات الجديدة والمعدّلة (بما فيها مجلدات Landing Pages)
+          # إضافة كل الملفات الجديدة والمعدّلة (بما فيها مجلدات Landing Pages)
+          # لا نضيف node_modules (موجود في .gitignore)
           git add -A
 
-          # تحقق من وجود تغييرات
           if git diff --staged --quiet; then
             echo "✅ لا توجد تغييرات للحفظ"
           else
-            # عرض الملفات المتغيرة (للتشخيص)
             echo "📋 الملفات المتغيرة:"
             git diff --staged --name-only
 
@@ -69,7 +74,6 @@ jobs:
 
           echo "📨 إرسال تحديثات لـ IndexNow..."
 
-          # نأخذ كل الروابط من sitemap.xml
           URLS_JSON=$(grep -oP '(?<=<loc>)[^<]+' sitemap.xml | head -50 | jq -R . | jq -s . 2>/dev/null || echo '["https://blog.chat-alkhaleej.com/"]')
 
           curl -X POST "https://api.indexnow.org/IndexNow" \
