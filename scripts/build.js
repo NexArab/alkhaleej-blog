@@ -15,6 +15,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const yaml = require('js-yaml');
 
 // ===== الإعدادات =====
 const SITE_URL = 'https://blog.chat-alkhaleej.com';
@@ -78,94 +79,26 @@ function escapeHtml(str) {
 /**
  * تحليل Frontmatter متقدم
  */
+/**
+ * 🆕 تحليل Frontmatter باستخدام js-yaml
+ * يدعم: block scalars (|, |-, >, >-), nested structures, anchors
+ */
 function parseFrontmatter(content) {
     const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
     if (!match) return null;
 
     const yamlContent = match[1];
     const body = match[2];
-    const data = {};
-    const lines = yamlContent.split(/\r?\n/);
 
-    let i = 0;
-    while (i < lines.length) {
-        const line = lines[i];
-
-        const inlineArrayMatch = line.match(/^([a-z_]+):\s*\[(.*)\]$/);
-        if (inlineArrayMatch) {
-            const key = inlineArrayMatch[1];
-            data[key] = inlineArrayMatch[2]
-                .split(',')
-                .map(s => s.trim().replace(/^["']|["']$/g, ''))
-                .filter(s => s);
-            i++;
-            continue;
-        }
-
-        const keyValueMatch = line.match(/^([a-z_]+):\s*(.*)$/);
-        if (keyValueMatch) {
-            const key = keyValueMatch[1];
-            let value = keyValueMatch[2].trim();
-
-            if (value === '') {
-                let j = i + 1;
-
-                // قائمة بسيطة (- item)
-                if (j < lines.length && lines[j].match(/^\s+-\s+\S/) && !lines[j].match(/^\s+-\s+\w+:/)) {
-                    const nextLines = [];
-                    while (j < lines.length && lines[j].match(/^\s+-\s+/)) {
-                        nextLines.push(lines[j].replace(/^\s+-\s+/, '').replace(/^["']|["']$/g, ''));
-                        j++;
-                    }
-                    data[key] = nextLines;
-                    i = j;
-                    continue;
-                }
-
-                // قائمة كائنات (- key: value)
-                if (j < lines.length && lines[j].match(/^\s+-\s+\w+:/)) {
-                    const items = [];
-                    let currentItem = null;
-
-                    while (j < lines.length && (lines[j].match(/^\s+-\s+/) || lines[j].match(/^\s{4,}\w+:/))) {
-                        const itemStart = lines[j].match(/^\s+-\s+(\w+):\s*(.*)$/);
-                        const itemCont = lines[j].match(/^\s{4,}(\w+):\s*(.*)$/);
-
-                        if (itemStart) {
-                            if (currentItem) items.push(currentItem);
-                            currentItem = {};
-                            let val = itemStart[2].trim().replace(/^["']|["']$/g, '');
-                            if (val === 'true') val = true;
-                            else if (val === 'false') val = false;
-                            else if (/^\d+$/.test(val)) val = parseInt(val);
-                            currentItem[itemStart[1]] = val;
-                        } else if (itemCont && currentItem) {
-                            let val = itemCont[2].trim().replace(/^["']|["']$/g, '');
-                            if (val === 'true') val = true;
-                            else if (val === 'false') val = false;
-                            else if (/^\d+$/.test(val)) val = parseInt(val);
-                            currentItem[itemCont[1]] = val;
-                        }
-                        j++;
-                    }
-                    if (currentItem) items.push(currentItem);
-                    data[key] = items;
-                    i = j;
-                    continue;
-                }
-            } else {
-                value = value.replace(/^["']|["']$/g, '');
-                if (value === 'true') value = true;
-                else if (value === 'false') value = false;
-                else if (/^\d+$/.test(value)) value = parseInt(value);
-                data[key] = value;
-            }
-        }
-        i++;
+    try {
+        const data = yaml.load(yamlContent) || {};
+        return { data, body: body.trim() };
+    } catch (err) {
+        console.error(`❌ خطأ في قراءة YAML: ${err.message}`);
+        return null;
     }
-
-    return { data, body: body.trim() };
 }
+
 
 // ============================================================
 // 📝 معالجة المقالات
@@ -184,6 +117,9 @@ function buildPostHtmlFromMarkdown(mdData, slug) {
     const { data, body } = mdData;
     if (!data.title || !data.description) return null;
 
+    // 🆕 المحتوى ممكن يكون في data.body (من Sveltia) أو في body (بعد ---)
+    const postContent = data.body || body || '';
+
     let tagsHtml = '';
     if (Array.isArray(data.tags) && data.tags.length > 0) {
         tagsHtml = data.tags.map(tag => `<span class="tag">${tag}</span>`).join('\n        ');
@@ -192,7 +128,15 @@ function buildPostHtmlFromMarkdown(mdData, slug) {
     let imageUrl = data.image || 'https://tools.chat-alkhaleej.com/logo.webp';
     if (imageUrl.startsWith('/')) imageUrl = SITE_URL + imageUrl;
 
-    const dateIso = data.date || new Date().toISOString();
+    // تحويل آمن للتواريخ
+    const toIsoString = (d) => {
+        if (!d) return new Date().toISOString();
+        if (typeof d === 'string') return d;
+        if (d instanceof Date) return d.toISOString();
+        return String(d);
+    };
+    const dateIso = toIsoString(data.date);
+    const modifiedIso = toIsoString(data.modified || data.date);
     const replacements = {
         'POST_TITLE': data.title,
         'POST_DESCRIPTION': data.description,
@@ -201,11 +145,11 @@ function buildPostHtmlFromMarkdown(mdData, slug) {
         'POST_SLUG': slug,
         'POST_IMAGE': imageUrl,
         'POST_DATE': dateIso,
-        'POST_MODIFIED': data.modified || dateIso,
+        'POST_MODIFIED': modifiedIso,
         'POST_DATE_DISPLAY': formatArabicDate(dateIso),
         'POST_READ_TIME': data.read_time || 5,
         'POST_CATEGORY': data.category || 'عام',
-        'POST_CONTENT': body,
+        'POST_CONTENT': postContent,
         'POST_TAGS_HTML': tagsHtml
     };
 
@@ -267,12 +211,23 @@ function processMarkdownPost(filename) {
     let imageUrl = data.image || `${SITE_URL}/images/default.jpg`;
     if (imageUrl.startsWith('/')) imageUrl = SITE_URL + imageUrl;
 
+    // 🆕 تعريف التواريخ داخل الدالة (Bug fix)
+    const toIsoString = (d) => {
+        if (!d) return new Date().toISOString();
+        if (typeof d === 'string') return d;
+        if (d instanceof Date) return d.toISOString();
+        return String(d);
+    };
+    const dateIso = toIsoString(data.date);
+    const modifiedIso = toIsoString(data.modified || data.date);
+
     return {
         filename: htmlFilename, slug: finalSlug,
         url: `${SITE_URL}/${POSTS_DIR}/${htmlFilename}`,
         title: data.title, description: data.description, image: imageUrl,
-        publishedTime: data.date, modifiedTime: data.modified || data.date,
-        dateDisplay: formatArabicDate(data.date),
+        publishedTime: dateIso,
+        modifiedTime: modifiedIso,
+        dateDisplay: formatArabicDate(dateIso),
         category: data.category || 'عام'
     };
 }
@@ -448,9 +403,15 @@ function processLandingPage(filename) {
     let imageUrl = data.image || 'https://tools.chat-alkhaleej.com/logo.webp';
     if (imageUrl.startsWith('/')) imageUrl = SITE_URL + imageUrl;
 
-    // التواريخ
-    const pageDate = data.date || new Date().toISOString();
-    const lastUpdated = data.last_updated || data.date || new Date().toISOString();
+    // التواريخ (تحويل آمن من js-yaml للـ ISO string)
+    const toIsoString = (d) => {
+        if (!d) return new Date().toISOString();
+        if (typeof d === 'string') return d;
+        if (d instanceof Date) return d.toISOString();
+        return String(d);
+    };
+    const pageDate = toIsoString(data.date);
+    const lastUpdated = toIsoString(data.last_updated || data.date);
 
     // الأقسام الديناميكية
     const statsHtml = buildStatsHtml(data.stats);
@@ -619,9 +580,11 @@ function buildSitemap(posts, landingPages) {
     ];
 
     posts.forEach(p => {
+        const dateValue = p.modifiedTime || p.publishedTime || today;
+        const lastmod = typeof dateValue === 'string' ? dateValue.split('T')[0] : new Date(dateValue).toISOString().split('T')[0];
         urls.push({
             loc: p.url,
-            lastmod: (p.modifiedTime || p.publishedTime || today).split('T')[0],
+            lastmod: lastmod,
             changefreq: 'weekly', priority: '0.7'
         });
     });
@@ -633,9 +596,11 @@ function buildSitemap(posts, landingPages) {
             excludedCount++;
             return;
         }
+        const dateValue = p.modifiedTime || p.date || today;
+        const lastmod = typeof dateValue === 'string' ? dateValue.split('T')[0] : new Date(dateValue).toISOString().split('T')[0];
         urls.push({
             loc: p.url,
-            lastmod: (p.modifiedTime || p.date || today).split('T')[0],
+            lastmod: lastmod,
             changefreq: 'weekly', priority: '0.9'
         });
     });
