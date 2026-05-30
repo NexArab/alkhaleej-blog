@@ -1,12 +1,10 @@
-# 🤖 بناء المدونة تلقائياً
+# 🤖 بناء المدونة + Landing Pages تلقائياً
 #
-# هذا الـ workflow يشتغل تلقائياً كل ما تعمل push للريبو
-# يقرأ المقالات في /posts/ ويحدّث:
-# - index.html (الصفحة الرئيسية مع أحدث المقالات)
-# - archive.html (صفحة كل المقالات)
-# - sitemap.xml
-# - rss.xml
-# - robots.txt
+# يشتغل عند:
+# - أي تغيير في المقالات (posts/)
+# - أي تغيير في Landing Pages (_landing-data/)
+# - أي تغيير في القوالب (_templates/)
+# - أي تعديل على السكربت أو الـ workflow
 
 name: 🚀 بناء المدونة
 
@@ -14,12 +12,13 @@ on:
   push:
     branches: [main]
     paths:
-      - 'posts/**'           # عند تغيير أي مقال
-      - 'scripts/build.js'   # عند تعديل السكربت
-      - '.github/workflows/build.yml'  # عند تعديل الـ workflow
+      - 'posts/**'                       # المقالات
+      - '_landing-data/**'               # 🆕 بيانات Landing Pages
+      - '_templates/**'                  # 🆕 القوالب
+      - 'scripts/build.js'               # السكربت
+      - '.github/workflows/build.yml'    # الـ workflow
   workflow_dispatch:  # السماح بالتشغيل اليدوي
 
-# الصلاحيات المطلوبة
 permissions:
   contents: write
 
@@ -39,7 +38,7 @@ jobs:
         with:
           node-version: '20'
 
-      - name: 🏗️ بناء المدونة
+      - name: 🏗️ بناء المدونة وLanding Pages
         run: node scripts/build.js
 
       - name: 💾 حفظ التحديثات
@@ -47,26 +46,31 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # إضافة الملفات المحدّثة
-          git add posts/* index.html archive.html sitemap.xml rss.xml robots.txt
-          
-          # تحقق إذا فيه تغييرات قبل الـ commit
+          # 🆕 إضافة كل الملفات الجديدة والمعدّلة (بما فيها مجلدات Landing Pages)
+          git add -A
+
+          # تحقق من وجود تغييرات
           if git diff --staged --quiet; then
             echo "✅ لا توجد تغييرات للحفظ"
           else
-            git commit -m "🤖 تحديث تلقائي للمدونة [skip ci]"
+            # عرض الملفات المتغيرة (للتشخيص)
+            echo "📋 الملفات المتغيرة:"
+            git diff --staged --name-only
+
+            git commit -m "🤖 تحديث تلقائي: بناء المدونة وصفحات الهبوط [skip ci]"
             git push
-            echo "✅ تم حفظ التحديثات"
+            echo "✅ تم حفظ التحديثات بنجاح"
           fi
 
-      - name: 📡 إخبار IndexNow بالمقالات الجديدة (Bing)
+      - name: 📡 إخبار IndexNow بالتحديثات
         continue-on-error: true
         run: |
-          # IndexNow key (نفس اسم الملف اللي ننشئه)
           INDEXNOW_KEY="alkhaleej-blog-key-2026"
 
-          # إرسال sitemap.xml كاملاً لـ IndexNow
-          echo "📨 إرسال sitemap لـ IndexNow..."
+          echo "📨 إرسال تحديثات لـ IndexNow..."
+
+          # نأخذ كل الروابط من sitemap.xml
+          URLS_JSON=$(grep -oP '(?<=<loc>)[^<]+' sitemap.xml | head -50 | jq -R . | jq -s . 2>/dev/null || echo '["https://blog.chat-alkhaleej.com/"]')
 
           curl -X POST "https://api.indexnow.org/IndexNow" \
             -H "Content-Type: application/json; charset=utf-8" \
@@ -74,9 +78,8 @@ jobs:
               \"host\": \"blog.chat-alkhaleej.com\",
               \"key\": \"$INDEXNOW_KEY\",
               \"keyLocation\": \"https://blog.chat-alkhaleej.com/$INDEXNOW_KEY.txt\",
-              \"urlList\": [
-                \"https://blog.chat-alkhaleej.com/\",
-                \"https://blog.chat-alkhaleej.com/archive.html\",
-                \"https://blog.chat-alkhaleej.com/sitemap.xml\"
-              ]
-            }" || echo "⚠️ فشل إخبار IndexNow (لا يهم)"
+              \"urlList\": $URLS_JSON
+            }" || echo "⚠️ فشل إخبار IndexNow (غير مهم)"
+
+          echo ""
+          echo "✅ اكتمل الإشعار"
