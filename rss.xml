@@ -5,8 +5,16 @@
         <link>https://blog.chat-alkhaleej.com/</link>
         <description>مدونة شات الخليج: مقالات عربية متنوعة عن الترندات والألعاب والتقنية والسوشال ميديا والحياة الخليجية والمحتوى الترفيهي.</description>
         <language>ar</language>
-        <lastBuildDate>Tue, 30 Jun 2026 20:35:34 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 06 Jul 2026 18:08:36 GMT</lastBuildDate>
         <atom:link href="https://blog.chat-alkhaleej.com/rss.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title><![CDATA[كيفية طلب حذف حسابك في شات الخليج]]></title>
+            <link>https://blog.chat-alkhaleej.com/posts/delete-account.html</link>
+            <guid isPermaLink="true">https://blog.chat-alkhaleej.com/posts/delete-account.html</guid>
+            <description><![CDATA[تعرّف على كيفية طلب حذف حسابك في شات الخليج، والبيانات التي يتم حذفها، والمدة اللازمة لمعالجة طلب حذف الحساب وفقًا لسياسة التطبيق]]></description>
+            <pubDate>Mon, 06 Jul 2026 18:05:00 GMT</pubDate>
+            <category>معلومات عامة</category>
+        </item>
         <item>
             <title><![CDATA[شات الحجاز | أفضل دردشة الحجاز الصوتية والكتابية بدون تسجيل]]></title>
             <link>https://blog.chat-alkhaleej.com/posts/2026-06-30-shat-alhjaz-afdl-drdsha-alhjaz-alswtya-walktabya-bdwn-tsjyl.html</link>
@@ -157,14 +165,6 @@
             <guid isPermaLink="true">https://blog.chat-alkhaleej.com/posts/2026-06-15-shat-khlyjy-ktaby-drdsha-ktabya-khlyjya-lltwasl-waltaarf-abr-alintrnt.html</guid>
             <description><![CDATA[استمتع بتجربة شات خليجي كتابي وشارك في المحادثات النصية مع المستخدمين من مختلف دول الخليج العربي. دردشة كتابية سهلة وسريعة للتعارف وتبادل النقاشات اليومية]]></description>
             <pubDate>Mon, 15 Jun 2026 16:17:00 GMT</pubDate>
-            <category>دردشة وتعارف</category>
-        </item>
-        <item>
-            <title><![CDATA[شات خليجي سعودي – دردشة سعودية وخليجية للتعارف وتبادل النقاشات]]></title>
-            <link>https://blog.chat-alkhaleej.com/posts/2026-06-15-shat-khlyjy-sawdy-drdsha-sawdya-wkhlyjya-lltaarf-wtbadl-alnqashat.html</link>
-            <guid isPermaLink="true">https://blog.chat-alkhaleej.com/posts/2026-06-15-shat-khlyjy-sawdy-drdsha-sawdya-wkhlyjya-lltaarf-wtbadl-alnqashat.html</guid>
-            <description><![CDATA[انضم إلى شات خليجي سعودي واستمتع بالدردشة مع المستخدمين من مختلف مناطق المملكة العربية السعودية ودول الخليج. تعرف على أصدقاء جدد وشارك في حوارات متنوعة ضمن مجتمع خليجي تفاعلي]]></description>
-            <pubDate>Mon, 15 Jun 2026 16:13:00 GMT</pubDate>
             <category>دردشة وتعارف</category>
         </item>
     </channel>
