@@ -5,16 +5,8 @@
         <link>https://blog.chat-alkhaleej.com/</link>
         <description>مدونة شات الخليج: مقالات عربية متنوعة عن الترندات والألعاب والتقنية والسوشال ميديا والحياة الخليجية والمحتوى الترفيهي.</description>
         <language>ar</language>
-        <lastBuildDate>Mon, 17 Aug 2026 11:44:33 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 17 Aug 2026 11:47:50 GMT</lastBuildDate>
         <atom:link href="https://blog.chat-alkhaleej.com/rss.xml" rel="self" type="application/rss+xml"/>
-        <item>
-            <title><![CDATA[شات فلة الخليج – دردشة خليجية تجمع الأصدقاء في مكان واحد]]></title>
-            <link>https://blog.chat-alkhaleej.com/posts/2026-07-07-shat-fla-alkhlyj-drdsha-khlyjya-tjma-alasdqa-fy-mkan-wahd.html</link>
-            <guid isPermaLink="true">https://blog.chat-alkhaleej.com/posts/2026-07-07-shat-fla-alkhlyj-drdsha-khlyjya-tjma-alasdqa-fy-mkan-wahd.html</guid>
-            <description><![CDATA[تعرف على شات فلة الخليج، منصة دردشة خليجية تجمع الشباب والبنات في غرف متنوعة، مع سهولة الدخول والتواصل والتعرف على أصدقاء جدد من دول الخليج والعالم العربي]]></description>
-            <pubDate>Tue, 07 Jul 2026 02:01:00 GMT</pubDate>
-            <category>معلومات عامة</category>
-        </item>
         <item>
             <title><![CDATA[تطبيق شات الخليج أصبح متاحًا الآن على متجر Google Play]]></title>
             <link>https://blog.chat-alkhaleej.com/posts/google-play-app.html</link>
@@ -165,6 +157,14 @@
             <guid isPermaLink="true">https://blog.chat-alkhaleej.com/posts/2026-06-15-ghrf-shat-alkhlyj-ghrf-drdsha-khlyjya-lltaarf-wtbadl-alahadyth-alywmya.html</guid>
             <description><![CDATA[استكشف غرف شات الخليج واستمتع بالدخول إلى غرف دردشة خليجية متنوعة تجمع المستخدمين من مختلف دول الخليج العربي. تعرف على أصدقاء جدد وشارك في نقاشات ممتعة ضمن بيئة تفاعلية مميزة]]></description>
             <pubDate>Mon, 15 Jun 2026 16:08:00 GMT</pubDate>
+            <category>دردشة وتعارف</category>
+        </item>
+        <item>
+            <title><![CDATA[Child Safety Standards – Chat Alkhaleej]]></title>
+            <link>https://blog.chat-alkhaleej.com/posts/child-safety-standards.html</link>
+            <guid isPermaLink="true">https://blog.chat-alkhaleej.com/posts/child-safety-standards.html</guid>
+            <description><![CDATA[Chat Alkhaleej is committed to protecting children and preventing child sexual abuse and exploitation through reporting tools, moderation, and strict safety standards.]]></description>
+            <pubDate>Fri, 12 Jun 2026 20:17:00 GMT</pubDate>
             <category>دردشة وتعارف</category>
         </item>
     </channel>
