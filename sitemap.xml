@@ -1267,12 +1267,6 @@
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://blog.chat-alkhaleej.com/fulla-alkhleeg/</loc>
-        <lastmod>2026-07-07</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
         <loc>https://blog.chat-alkhaleej.com/chat-palestine/</loc>
         <lastmod>2026-05-31</lastmod>
         <changefreq>weekly</changefreq>
@@ -1371,6 +1365,12 @@
     <url>
         <loc>https://blog.chat-alkhaleej.com/is-chat-alkhaleej-free/</loc>
         <lastmod>2026-06-03</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://blog.chat-alkhaleej.com/fulla-alkhleeg/</loc>
+        <lastmod>2026-08-17</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
