@@ -5,8 +5,8 @@
     <link rel="icon" type="image/webp" href="https://tools.chat-alkhaleej.com/logo.webp">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>مدونة شات الخليج | ترندات العرب والتقنية والترفيه</title>
-    <meta name="description" content="مدونة شات الخليج تقدم محتوى عربي متجدد عن الترندات والتقنية والسوشال ميديا والألعاب والترفيه والحياة الخليجية بأسلوب عصري وممتع">
+    <title>مدونة شات الخليج | الشروحات والتحديثات والأمان</title>
+    <meta name="description" content="المدونة الرسمية لشات الخليج، وتشمل شروحات الاستخدام والأمان والخصوصية وحلول مشكلات الدخول والصوت وتحديثات الموقع والتطبيق.">
 
     <link rel="canonical" href="https://blog.chat-alkhaleej.com/" />
     <link rel="alternate" hreflang="ar" href="https://blog.chat-alkhaleej.com/" />
@@ -17,16 +17,18 @@
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://blog.chat-alkhaleej.com/" />
-    <meta property="og:title" content="مدونة شات الخليج | ترندات العرب والتقنية والترفيه" />
-    <meta property="og:description" content="مدونة شات الخليج تقدم محتوى عربي متجدد عن الترندات والتقنية والسوشال ميديا والألعاب والترفيه والحياة الخليجية بأسلوب عصري وممتع" />
+    <meta property="og:title" content="مدونة شات الخليج | الشروحات والتحديثات والأمان" />
+    <meta property="og:description" content="المدونة الرسمية لشات الخليج، وتشمل شروحات الاستخدام والأمان والخصوصية وحلول مشكلات الدخول والصوت وتحديثات الموقع والتطبيق." />
     <meta property="og:image" content="https://tools.chat-alkhaleej.com/logo.webp" />
+    <meta property="og:image:alt" content="شعار مدونة شات الخليج">
     <meta property="og:locale" content="ar_SA" />
     <meta property="og:site_name" content="مدونة شات الخليج" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="مدونة شات الخليج | ترندات العرب والتقنية والترفيه" />
-    <meta name="twitter:description" content="مدونة شات الخليج تقدم محتوى عربي متجدد عن الترندات والتقنية والسوشال ميديا والألعاب والترفيه والحياة الخليجية بأسلوب عصري وممتع" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="مدونة شات الخليج | الشروحات والتحديثات والأمان" />
+    <meta name="twitter:description" content="المدونة الرسمية لشات الخليج، وتشمل شروحات الاستخدام والأمان والخصوصية وحلول مشكلات الدخول والصوت وتحديثات الموقع والتطبيق." />
     <meta name="twitter:image" content="https://tools.chat-alkhaleej.com/logo.webp" />
+    <meta name="twitter:image:alt" content="شعار مدونة شات الخليج">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +42,7 @@
       "@type": "Blog",
       "name": "مدونة شات الخليج",
       "url": "https://blog.chat-alkhaleej.com/",
-      "description": "مدونة شات الخليج تقدم محتوى عربي متجدد عن الترندات والتقنية والسوشال ميديا والألعاب والترفيه والحياة الخليجية",
+      "description": "المدونة الرسمية لشات الخليج، وتشمل شروحات الاستخدام والأمان والخصوصية وحلول مشكلات الدخول والصوت وتحديثات الموقع والتطبيق.",
       "inLanguage": "ar",
       "publisher": {
         "@type": "Organization",
@@ -207,9 +209,19 @@
             text-shadow: 2px 3px 5px rgba(0,0,0,0.3);
         }
 
+        .header-subtitle {
+            color: var(--white);
+            font-size: 16px;
+            margin-top: 12px;
+            font-weight: 600;
+            text-shadow: 1px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.6;
+        }
+
         @media (max-width: 600px) {
             header h1 { font-size: 22px; }
             header img { max-width: 160px; }
+            .header-subtitle { font-size: 14px; }
         }
 
         /* ===== CONTAINER ===== */
@@ -251,7 +263,7 @@
         }
         .main-desc strong { color: var(--primary); }
 
-        /* ===== LATEST POSTS SECTION (NEW!) ===== */
+        /* ===== LATEST POSTS SECTION ===== */
         .section-header {
             display: flex;
             justify-content: space-between;
@@ -396,7 +408,6 @@
             transform: translateX(-5px);
         }
 
-        /* رسالة لما ما يكون فيه مقالات بعد */
         .no-posts-yet {
             background: var(--white);
             padding: 50px 30px;
@@ -422,191 +433,117 @@
             .section-header h2 { font-size: 22px; }
         }
 
-        /* ===== COUNTRIES GRID (الموجود) ===== */
-        .rooms-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 40px;
+        /* ===== COUNTRY ENTRY SECTION ===== */
+        .country-entry-section {
+            margin: 50px 0 40px;
         }
 
-        .room-card {
-            background: var(--white);
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-            transition: all 0.3s ease;
-            border-top: 6px solid var(--accent);
-            display: flex;
-            flex-direction: column;
-        }
-        .room-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 30px rgba(0,0,0,0.1);
-            border-top-color: var(--primary);
+        .country-entry-heading {
+            text-align: center;
+            margin-bottom: 35px;
         }
 
-        .room-card.expanded {
-            box-shadow: 0 18px 40px rgba(69, 12, 12, 0.15);
-        }
-
-        .blog-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .room-title {
-            font-size: 20px;
+        .country-entry-heading h2 {
+            font-size: 26px;
             font-weight: 900;
             color: var(--primary);
-            padding: 18px 20px 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .room-title i {
-            color: var(--accent);
-            font-size: 20px;
-        }
-
-        .room-desc {
-            font-size: 15px;
-            color: #475569;
-            padding: 0 20px 15px;
-            line-height: 1.8;
-            text-align: justify;
-        }
-
-        .article-full {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-        }
-        .article-full.open { padding: 0 20px 10px; }
-
-        .article-full-inner h3 {
-            color: var(--primary);
-            font-size: 19px;
-            margin: 10px 0 15px;
-            border-right: 4px solid var(--accent);
-            padding-right: 12px;
-        }
-        .article-full-inner p {
-            font-size: 15px;
-            line-height: 1.9;
-            margin-bottom: 12px;
-            color: #1e293b;
-            text-align: justify;
-        }
-
-        .article-image {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-            margin-bottom: 15px;
-        }
-
-        .btn-enter {
-            margin: 0 20px 20px;
-            background: var(--primary);
-            color: var(--accent);
-            border: none;
-            padding: 12px 20px;
-            border-radius: 12px;
-            font-weight: 800;
-            font-family: 'Cairo', sans-serif;
-            font-size: 14.5px;
-            cursor: pointer;
-            transition: 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 12px;
+            margin-bottom: 12px;
         }
 
-        .btn-enter:hover {
-            background: var(--accent);
-            color: var(--primary);
+        .country-entry-heading h2 i {
+            color: var(--accent);
+            font-size: 24px;
         }
 
-        .btn-enter.active {
-            background: var(--accent);
-            color: var(--primary);
+        .country-entry-heading p {
+            font-size: 16px;
+            color: #475569;
+            line-height: 1.7;
         }
 
-        /* ===== CAPITALS SECTION ===== */
-        .capitals-section { margin-top: 60px; }
-        .capitals-section h2 {
-            font-size: 28px;
-            color: var(--primary);
-            text-align: center;
-            margin-bottom: 30px;
-            font-weight: 900;
-            position: relative;
-            padding-bottom: 15px;
-        }
-        .capitals-section h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-
-        .capitals-grid {
+        .country-entry-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
         }
 
-        .capital-card {
+        .country-entry-link {
             background: var(--white);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.07);
+            border-radius: 14px;
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
-            border-top: 6px solid var(--accent);
+            border-top: 4px solid var(--accent);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 12px;
         }
-        .capital-card:hover {
+
+        .country-entry-link:hover {
             transform: translateY(-6px);
-            box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 12px 25px rgba(69, 12, 12, 0.12);
             border-top-color: var(--primary);
         }
 
-        .capital-img {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            display: block;
+        .country-entry-link:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
         }
 
-        .capital-body { padding: 20px; }
+        .country-entry-icon {
+            font-size: 32px;
+            line-height: 1;
+        }
 
-        .capital-title {
-            font-size: 19px;
-            font-weight: 900;
-            color: var(--primary);
-            margin-bottom: 10px;
+        .country-entry-text {
             display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .capital-title i {
-            color: var(--accent);
-            font-size: 18px;
+            flex-direction: column;
+            gap: 6px;
         }
 
-        .capital-desc {
-            font-size: 14.5px;
-            color: #475569;
-            line-height: 1.8;
-            text-align: justify;
+        .country-entry-text strong {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .country-entry-text small {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .country-entry-arrow {
+            color: var(--accent);
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .country-entry-link:hover .country-entry-arrow {
+            transform: translateX(-5px);
+        }
+
+        @media (max-width: 900px) {
+            .country-entry-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .country-entry-grid {
+                grid-template-columns: 1fr;
+            }
+            .country-entry-heading h2 {
+                font-size: 22px;
+            }
         }
 
         /* ===== SEO & FOOTER ===== */
@@ -618,8 +555,53 @@
             margin-top: 40px;
         }
         .seo-content h2 { color: var(--primary); font-size: 26px; margin-bottom: 20px; }
-        .seo-content h3 { color: var(--primary); border-right: 5px solid var(--accent); padding-right: 15px; margin-bottom: 25px; font-size: 24px; }
-        .seo-content p { margin-bottom: 20px; text-align: justify; font-size: 17px; color: #475569; line-height: 1.9; }
+        .seo-content h2:first-child { 
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 15px;
+        }
+        .seo-content p { 
+            margin-bottom: 20px; 
+            text-align: right; 
+            font-size: 17px; 
+            color: #475569; 
+            line-height: 1.9; 
+        }
+        .seo-content p a {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .seo-content p a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        .seo-content .seo-btn {
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .seo-content .seo-btn:hover {
+            text-decoration: none;
+        }
+
+        .seo-content .primary-btn {
+            color: var(--accent);
+        }
+
+        .seo-content .primary-btn:hover {
+            color: var(--primary);
+        }
+
+        .seo-content .secondary-btn {
+            color: var(--primary);
+        }
+
+        .seo-content .secondary-btn:hover {
+            color: #fff;
+        }
 
         footer {
             text-align: center;
@@ -655,11 +637,19 @@
         }
         .footer-nav a i { color: var(--accent); font-size: 16px; }
         .footer-nav a:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
-        .nav-vip { border: 1.5px solid var(--accent) !important; background: #fffdf5 !important; }
+        
+        .footer-nav a.nav-vip {
+            border: 1.5px solid var(--accent);
+            background: #fffdf5;
+        }
+
+        .footer-nav a.nav-vip:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
 
         @media (max-width: 600px) {
-            .rooms-grid { grid-template-columns: 1fr; }
-            .capitals-grid { grid-template-columns: 1fr; }
             .footer-nav { grid-template-columns: 1fr; }
             .seo-content { padding: 25px; }
         }
@@ -681,6 +671,11 @@
             font-weight: 800;
             transition: 0.3s;
             font-size: 16px;
+        }
+
+        .seo-btn:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
         }
 
         .primary-btn {
@@ -723,7 +718,7 @@
                 </a>
             </li>
             <li>
-                <a href="https://chat-alkhaleej.com/rooms/">
+                <a href="https://chat-alkhaleej.com/rooms">
                     <i class="fas fa-comments" aria-hidden="true"></i>
                     دليل الغرف
                 </a>
@@ -762,7 +757,10 @@
         height="210"
         fetchpriority="high"
     >
-    <h1>مدونة شات الخليج | ترندات العرب والتقنية والترفيه</h1>
+    <h1>مدونة شات الخليج</h1>
+    <p class="header-subtitle">
+        شروحات الاستخدام، حلول المشاكل، نصائح الأمان، وتحديثات الموقع والتطبيق
+    </p>
 </header>
 
 <div class="container">
@@ -775,11 +773,14 @@
     </nav>
 
     <div class="main-desc">
-       استكشف في <strong>مدونة شات الخليج</strong> محتوى عربي متجدد عن الترندات والتقنية والسوشال ميديا والألعاب والترفيه والحياة الخليجية بأسلوب عصري وممتع.
+        تقدّم <strong>مدونة شات الخليج</strong> شروحات رسمية لاستخدام
+        الدردشة الصوتية والكتابية، وحلول مشكلات الدخول والمايك والاتصال،
+        وإرشادات حماية الحساب والخصوصية، إلى جانب أخبار التحديثات الفعلية
+        للموقع والتطبيق.
     </div>
 
     <!-- ====================================================== -->
-    <!-- ===== 🆕 قسم أحدث المقالات (يُحدّث تلقائياً) ===== -->
+    <!-- ===== قسم أحدث المقالات ===== -->
     <!-- ====================================================== -->
     <section class="latest-posts-section">
         <div class="section-header">
@@ -800,374 +801,142 @@
     </section>
     <!-- ===== نهاية قسم أحدث المقالات ===== -->
 
-    <!-- ===== BLOG GRID (بطاقات الدول - تبقى كما هي) ===== -->
-    <main class="rooms-grid">
+    <!-- ===== COUNTRY ENTRY SECTION ===== -->
+    <section class="country-entry-section" aria-labelledby="country-entry-title">
 
-        <!-- السعودية -->
-        <article class="room-card" id="card-sa">
-            <img
-                src="https://ik.imagekit.io/c7waukvji/chat-alkhaleej-saudi-arabia.png"
-                alt="المملكة العربية السعودية"
-                class="blog-image"
-            >
-            <h2 class="room-title">
-                <i class="fas fa-kaaba"></i>
-                المملكة العربية السعودية
+        <div class="country-entry-heading">
+            <h2 id="country-entry-title">
+                <i class="fas fa-globe-asia" aria-hidden="true"></i>
+                دخول شات الخليج حسب الدولة
             </h2>
-            <p class="room-desc">
-                عاصمة السعودية هي الرياض، وتُعد من أكبر الدول الخليجية وأكثرها تأثيراً في المنطقة، وتتميز بتاريخ طويل ومدن حديثة وثقافة متنوعة تجمع بين الأصالة والتطور.
+            <p>
+                اختر الدولة للانتقال مباشرة إلى صفحة الشات المناسبة.
             </p>
+        </div>
 
-            <div class="article-full" id="article-sa" aria-hidden="true">
-                <div class="article-full-inner">
-                    <h3>المملكة العربية السعودية: أرض التاريخ والطموح</h3>
-                    <img
-                        src="https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?q=80&w=900&auto=format&fit=crop"
-                        alt="الرياض عاصمة المملكة العربية السعودية"
-                        class="article-image"
-                    >
-                    <p>
-                        تقع المملكة العربية السعودية في قلب شبه الجزيرة العربية، وتُعدّ الأكبر مساحةً بين دول الخليج العربي، إذ تمتد على رقعة تتجاوز مليوني كيلومتر مربع. عاصمتها الرياض مدينة حديثة وفتيّة في آنٍ واحد، تجمع بين ناطحات السحاب العملاقة والأحياء التراثية العريقة التي تحكي تاريخ الدولة السعودية منذ نشأتها.
-                    </p>
-                    <p>
-                        تتمتع المملكة بموقع استراتيجي مميز، وتحتضن أقدس البقاع الإسلامية وأشرفها، مكة المكرمة والمدينة المنورة، اللتين تستقطبان ملايين الحجاج والمعتمرين من شتى أرجاء العالم كل عام. ولا يقتصر ثقل المملكة على الجانب الديني، بل تمتلك احتياطياتٍ نفطية ضخمة جعلتها ركيزةً أساسية في الاقتصاد العالمي لعقود طويلة.
-                    </p>
-                    <p>
-                        في إطار رؤية 2030 التي أطلقها ولي العهد الأمير محمد بن سلمان، تشهد المملكة تحولاً هائلاً في بنيتها الاقتصادية والاجتماعية؛ من تطوير قطاع السياحة وافتتاح المواقع الأثرية العالمية كالعُلا وهجرة حَرَّاء، إلى إطلاق مشاريع عملاقة كنيوم ومشروع البحر الأحمر. ويعكس ذلك إصراراً واضحاً على تنويع مصادر الدخل وتحقيق التنمية المستدامة.
-                    </p>
-                    <p>
-                        الثقافة السعودية غنية ومتجذّرة؛ يشتهر أهلها بالكرم والضيافة الأصيلة، وتتنوع أطباقهم التقليدية من الكبسة والجريش والمطازيز لتعكس تنوعاً جغرافياً بين المناطق. كما تمتلك المملكة تراثاً شعبياً ثرياً يتجلى في فن العرضة الوطنية والموسيقى النجدية والحجازية. وقد باتت المملكة اليوم وجهةً سياحية صاعدة تستهوي الزوار من كل أنحاء العالم.
-                    </p>
-                </div>
-            </div>
+        <div class="country-entry-grid">
 
-            <button class="btn-enter" onclick="toggleArticle('sa')" aria-expanded="false" aria-controls="article-sa">
-                <span class="btn-icon"><i class="fas fa-chevron-down"></i></span>
-                اقرأ المزيد
-            </button>
-        </article>
+            <a class="country-entry-link"
+               href="https://chat-alkhaleej.com/sa"
+               aria-label="دخول شات السعودية">
+                <span class="country-entry-icon" aria-hidden="true">🇸🇦</span>
+                <span class="country-entry-text">
+                    <strong>شات السعودية</strong>
+                    <small>دخول مباشر إلى صفحة شات السعودية</small>
+                </span>
+                <i class="fas fa-arrow-left country-entry-arrow" aria-hidden="true"></i>
+            </a>
 
-        <!-- الإمارات -->
-        <article class="room-card" id="card-uae">
-            <img
-                src="https://ik.imagekit.io/c7waukvji/chat-alkhaleej-uae.jpg"
-                alt="الإمارات العربية المتحدة"
-                class="blog-image"
-            >
-            <h2 class="room-title">
-                <i class="fas fa-city"></i>
-                الإمارات العربية المتحدة
-            </h2>
-            <p class="room-desc">
-                عاصمة الإمارات هي أبوظبي، وتشتهر الدولة بالمدن الحديثة مثل دبي، إضافة إلى التطور العمراني الكبير والاقتصاد القوي والمناطق السياحية العالمية.
-            </p>
+            <a class="country-entry-link"
+               href="https://chat-alkhaleej.com/kw"
+               aria-label="دخول شات الكويت">
+                <span class="country-entry-icon" aria-hidden="true">🇰🇼</span>
+                <span class="country-entry-text">
+                    <strong>شات الكويت</strong>
+                    <small>دخول مباشر إلى صفحة شات الكويت</small>
+                </span>
+                <i class="fas fa-arrow-left country-entry-arrow" aria-hidden="true"></i>
+            </a>
 
-            <div class="article-full" id="article-uae" aria-hidden="true">
-                <div class="article-full-inner">
-                    <h3>الإمارات العربية المتحدة: معجزة الصحراء الحديثة</h3>
-                    <img
-                        src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=900&auto=format&fit=crop"
-                        alt="دبي مدينة الأحلام في الإمارات"
-                        class="article-image"
-                    >
-                    <p>
-                        تأسّست دولة الإمارات العربية المتحدة عام 1971 حين اتحدت سبع إمارات تحت راية واحدة، وقد تحوّلت في خمسة عقود من صحراء شبه خالية إلى واحدة من أكثر دول العالم تطوراً وانفتاحاً. عاصمتها أبوظبي هي المركز السياسي والثقافي للدولة، فيما تحتلّ دبي مكانة مرموقة كعاصمة اقتصادية وسياحية عالمية.
-                    </p>
-                    <p>
-                        دبي تحديداً باتت رمزاً للتحدي والإبداع المعماري؛ يعلو فيها برج خليفة الذي يُعدّ الأطول في العالم، وتضم جزيرة النخلة الاصطناعية الشهيرة التي تستقطب الزوار من كل مكان. كما تُنظَّم فيها أبرز الفعاليات الدولية والمعارض التجارية، وعلى رأسها إكسبو الذي جسّد للعالم قدرة الإمارات على الإبداع واستضافة الحدث العالمي الأبرز.
-                    </p>
-                    <p>
-                        تنتهج الإمارات سياسة انفتاح اقتصادي واجتماعي لافتة؛ إذ تستقطب كفاءات ومستثمرين من أكثر من مئتي جنسية، وتوفر لهم بيئة آمنة ومنظومة قانونية واضحة. وقد ساعد ذلك في تنويع اقتصادها بعيداً عن الاعتماد الكلّي على النفط، ليشمل السياحة والتجارة والتكنولوجيا والخدمات المالية.
-                    </p>
-                    <p>
-                        على الصعيد الثقافي، تحتضن الإمارات تراثاً إماراتياً أصيلاً يتجلى في رياضة صيد الصقور وسباقات الهجن والموروث الشعبي في الغناء والرقص. وتعمل الدولة بجدية على الموازنة بين التحديث والحفاظ على الهوية الوطنية من خلال متاحف كاللوفر أبوظبي وجامعة نيويورك في أبوظبي.
-                    </p>
-                </div>
-            </div>
+            <a class="country-entry-link"
+               href="https://chat-alkhaleej.com/uae"
+               aria-label="دخول شات الإمارات">
+                <span class="country-entry-icon" aria-hidden="true">🇦🇪</span>
+                <span class="country-entry-text">
+                    <strong>شات الإمارات</strong>
+                    <small>دخول مباشر إلى صفحة شات الإمارات</small>
+                </span>
+                <i class="fas fa-arrow-left country-entry-arrow" aria-hidden="true"></i>
+            </a>
 
-            <button class="btn-enter" onclick="toggleArticle('uae')" aria-expanded="false" aria-controls="article-uae">
-                <span class="btn-icon"><i class="fas fa-chevron-down"></i></span>
-                اقرأ المزيد
-            </button>
-        </article>
+            <a class="country-entry-link"
+               href="https://chat-alkhaleej.com/qa"
+               aria-label="دخول شات قطر">
+                <span class="country-entry-icon" aria-hidden="true">🇶🇦</span>
+                <span class="country-entry-text">
+                    <strong>شات قطر</strong>
+                    <small>دخول مباشر إلى صفحة شات قطر</small>
+                </span>
+                <i class="fas fa-arrow-left country-entry-arrow" aria-hidden="true"></i>
+            </a>
 
-        <!-- الكويت -->
-        <article class="room-card" id="card-kw">
-            <img
-                src="https://ik.imagekit.io/c7waukvji/chat-alkhaleej-kuwait.webp"
-                alt="دولة الكويت"
-                class="blog-image"
-            >
-            <h2 class="room-title">
-                <i class="fas fa-anchor"></i>
-                دولة الكويت
-            </h2>
-            <p class="room-desc">
-                عاصمة الكويت هي مدينة الكويت، وتتميز الدولة بتاريخ بحري قديم وثقافة خليجية معروفة، إضافة إلى التطور الحديث والأسواق والمطاعم الشهيرة.
-            </p>
+            <a class="country-entry-link"
+               href="https://chat-alkhaleej.com/bh"
+               aria-label="دخول شات البحرين">
+                <span class="country-entry-icon" aria-hidden="true">🇧🇭</span>
+                <span class="country-entry-text">
+                    <strong>شات البحرين</strong>
+                    <small>دخول مباشر إلى صفحة شات البحرين</small>
+                </span>
+                <i class="fas fa-arrow-left country-entry-arrow" aria-hidden="true"></i>
+            </a>
 
-            <div class="article-full" id="article-kw" aria-hidden="true">
-                <div class="article-full-inner">
-                    <h3>دولة الكويت: لؤلؤة الخليج وعبق التاريخ البحري</h3>
-                    <img
-                        src="https://images.unsplash.com/photo-1578922746465-3a80a228f223?q=80&w=900&auto=format&fit=crop"
-                        alt="أبراج الكويت وناطحات السحاب"
-                        class="article-image"
-                    >
-                    <p>
-                        تتربّع دولة الكويت على الطرف الشمالي للخليج العربي، وعلى الرغم من مساحتها المتواضعة نسبياً، إلا أنها تمتلك حضوراً اقتصادياً وسياسياً بارزاً في المنطقة. عاصمتها مدينة الكويت مزيج ساحر من الحداثة والتراث، حيث تتجاور الأبراج الزجاجية اللامعة مع الأسواق الشعبية العريقة كسوق المباركية.
-                    </p>
-                    <p>
-                        تشتهر الكويت بتاريخها البحري الممتد؛ كانت مركزاً رئيسياً لصيد اللؤلؤ والتجارة البحرية قبل اكتشاف النفط، وكانت السفن الكويتية تجوب المحيط الهندي وتصل إلى موانئ الهند وأفريقيا الشرقية. وتُجسّد قصة تحوّل الكويت من مجتمع بحري متواضع إلى دولة رفاه حديثة أحد أبرز النماذج في التاريخ المعاصر.
-                    </p>
-                    <p>
-                        يعرف الكويتيون بكرمهم الفطري وتمسّكهم بالقيم الأصيلة، وتتميز مطبخهم بأطباق شهية كالمطبق والمراقيق والهريس التي تعكس تأثيرات بلاد الرافدين والخليج معاً. كما تشتهر الكويت بأسواقها التجارية الكبرى وجاليريهاتها الحديثة التي تجذب الزوار من الدول المجاورة.
-                    </p>
-                    <p>
-                        تمتلك الكويت منظومة رفاه اجتماعي متقدمة توفر لمواطنيها تعليماً وصحةً مجانيّين ودعماً حكومياً واسع النطاق. وتتبنى سياسة خارجية معتدلة تعتمد الحوار والدبلوماسية، وقد لعبت دوراً وسيطاً في عدة أزمات إقليمية. وتبقى الكويت نموذجاً فريداً يجمع ديمقراطية خليجية نسبية مع المحافظة على الهوية العربية الأصيلة.
-                    </p>
-                </div>
-            </div>
-
-            <button class="btn-enter" onclick="toggleArticle('kw')" aria-expanded="false" aria-controls="article-kw">
-                <span class="btn-icon"><i class="fas fa-chevron-down"></i></span>
-                اقرأ المزيد
-            </button>
-        </article>
-
-        <!-- قطر -->
-        <article class="room-card" id="card-qa">
-            <img
-                src="https://ik.imagekit.io/c7waukvji/chat-alkhaleej-qatar-doha.jpg"
-                alt="دولة قطر"
-                class="blog-image"
-            >
-            <h2 class="room-title">
-                <i class="fas fa-trophy"></i>
-                دولة قطر
-            </h2>
-            <p class="room-desc">
-                عاصمة قطر هي الدوحة، وتعتبر من أسرع الدول الخليجية نمواً، وتشتهر بالبنية التحتية الحديثة والاستثمارات الرياضية والإعلامية.
-            </p>
-
-            <div class="article-full" id="article-qa" aria-hidden="true">
-                <div class="article-full-inner">
-                    <h3>دولة قطر: الدوحة تتحدى المستحيل</h3>
-                    <img
-                        src="https://images.unsplash.com/photo-1578894381163-e72c17f2d45f?q=80&w=900&auto=format&fit=crop"
-                        alt="أفق مدينة الدوحة عاصمة قطر"
-                        class="article-image"
-                    >
-                    <p>
-                        شهدت دولة قطر في العقود الأخيرة نهضةً شاملة غير مسبوقة، جعلتها واحدة من أعلى دول العالم في مستوى دخل الفرد. تقع شبه جزيرة قطر في قلب الخليج العربي، وعاصمتها الدوحة مدينة تخطف الأبصار بأفقها العمراني المتنوع الذي يمزج بين التصاميم المعمارية الجريئة والحي الثقافي التراثي المعروف بـ"مشيرب".
-                    </p>
-                    <p>
-                        استثمرت قطر ثرواتها النفطية والغازية استثماراً استراتيجياً محكماً؛ فأطلقت قناة الجزيرة لتصبح أكبر شبكة إخبارية عربية وصوتاً إعلامياً عالمياً مؤثراً، واستضافت كأس العالم لكرة القدم 2022 بتنظيم استثنائي أبهر الزوار ومنحها حضوراً دولياً لا مثيل له. كما تملك صندوق الثروة السيادي "جهاز قطر للاستثمار" الذي يستثمر في الشركات الكبرى والأصول العقارية حول العالم.
-                    </p>
-                    <p>
-                        على صعيد الثقافة، تُبرز قطر هويتها القطرية الأصيلة من خلال متحف الفن الإسلامي الشهير الذي صمّمه المعماري العالمي آي إم باي، ومتحف قطر الوطني الذي يروي تاريخ البلاد منذ الأزل. كما تتبنى الدوحة فعاليات ثقافية سنوية كمعرض الكتاب الدولي ومهرجانات الفنون.
-                    </p>
-                    <p>
-                        تتميز قطر كذلك بمناخ اجتماعي يشجع على التعليم والابتكار؛ "المدينة التعليمية" في الدوحة تضم أفرعاً لكبرى الجامعات الأمريكية والأوروبية. وتحرص الدولة على بناء مجتمع متوازن يُحافظ على موروثه البدوي والبحري في ظل عالم سريع التحول.
-                    </p>
-                </div>
-            </div>
-
-            <button class="btn-enter" onclick="toggleArticle('qa')" aria-expanded="false" aria-controls="article-qa">
-                <span class="btn-icon"><i class="fas fa-chevron-down"></i></span>
-                اقرأ المزيد
-            </button>
-        </article>
-
-        <!-- البحرين -->
-        <article class="room-card" id="card-bh">
-            <img
-                src="https://ik.imagekit.io/c7waukvji/chat-alkhaleej-bahrain-manama.jpg"
-                alt="مملكة البحرين"
-                class="blog-image"
-            >
-            <h2 class="room-title">
-                <i class="fas fa-gem"></i>
-                مملكة البحرين
-            </h2>
-            <p class="room-desc">
-                عاصمة البحرين هي المنامة، وتتميز المملكة بأجوائها البحرية والأسواق القديمة والحياة الاجتماعية الهادئة والثقافة الخليجية المعروفة.
-            </p>
-
-            <div class="article-full" id="article-bh" aria-hidden="true">
-                <div class="article-full-inner">
-                    <h3>مملكة البحرين: جزيرة اللؤلؤ وعمق التاريخ</h3>
-                    <img
-                        src="https://images.unsplash.com/photo-1541417904950-b855846fe074?q=80&w=900&auto=format&fit=crop"
-                        alt="المنامة عاصمة البحرين الجزيرة الخليجية"
-                        class="article-image"
-                    >
-                    <p>
-                        مملكة البحرين أرخبيل يتكوّن من أكثر من ثلاثة وثلاثين جزيرة، تتوسط مياه الخليج العربي بين المملكة العربية السعودية وقطر. وعلى الرغم من مساحتها المحدودة التي تجعلها الأصغر بين دول الخليج، إلا أنها تختزل تاريخاً حضارياً بالغ العراقة يمتد لأكثر من خمسة آلاف عام، إذ كانت موطناً لحضارة دلمون الأسطورية.
-                    </p>
-                    <p>
-                        اشتُهرت البحرين تاريخياً بالغوص على اللؤلؤ الطبيعي الذي كانت تجارته ركيزة الاقتصاد قبل ظهور النفط. وقد أدرجت اليونسكو "ثقافة صيد اللؤلؤ" في البحرين ضمن قائمة التراث الثقافي غير المادي للإنسانية، وهو اعتراف دولي يُكرّس مكانة هذه الحرفة في الذاكرة الخليجية.
-                    </p>
-                    <p>
-                        تتميز المنامة عاصمة البحرين بطابعها الكوزموبوليتاني المميز؛ فهي تجمع بين الأسواق التقليدية العتيقة كسوق المنامة المسقوف والمجمعات التجارية الحديثة. وتحرص البحرين على تطوير قطاع السياحة والترفيه بافتتاح المواقع الأثرية ومتحف البحرين الوطني وحلبة الفورمولا 1 الشهيرة.
-                    </p>
-                    <p>
-                        تنتهج البحرين سياسة اقتصادية منفتحة جعلتها مركزاً مالياً رائداً في المنطقة، وتستضيف عدداً كبيراً من البنوك والمؤسسات المالية الدولية. كما تتبنى مساراً تحديثياً اجتماعياً تدريجياً مع الحفاظ على الهوية العربية الإسلامية الأصيلة، مما يجعلها نموذجاً مثيراً للاهتمام في المنطقة.
-                    </p>
-                </div>
-            </div>
-
-            <button class="btn-enter" onclick="toggleArticle('bh')" aria-expanded="false" aria-controls="article-bh">
-                <span class="btn-icon"><i class="fas fa-chevron-down"></i></span>
-                اقرأ المزيد
-            </button>
-        </article>
-
-        <!-- عمان -->
-        <article class="room-card" id="card-om">
-            <img
-                src="https://ik.imagekit.io/c7waukvji/chat-alkhaleej-oman-muscat.jpg"
-                alt="سلطنة عمان"
-                class="blog-image"
-            >
-            <h2 class="room-title">
-                <i class="fas fa-mountain"></i>
-                سلطنة عمان
-            </h2>
-            <p class="room-desc">
-                عاصمة سلطنة عمان هي مسقط، وتشتهر بالطبيعة الجبلية والأسواق التقليدية والهدوء والثقافة العريقة الممتدة عبر التاريخ الخليجي.
-            </p>
-
-            <div class="article-full" id="article-om" aria-hidden="true">
-                <div class="article-full-inner">
-                    <h3>سلطنة عمان: روح الخليج الأصيل وجمال الطبيعة الفريد</h3>
-                    <img
-                        src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=900&auto=format&fit=crop"
-                        alt="مسقط عاصمة سلطنة عمان بين الجبال والبحر"
-                        class="article-image"
-                    >
-                    <p>
-                        تتربّع سلطنة عُمان على الطرف الجنوبي الشرقي من شبه الجزيرة العربية، وتمتلك تنوعاً جغرافياً نادراً يجمع بين الجبال الشاهقة في الحجر الغربي والشرقي والصحاري الخلابة في الربع الخالي وشواطئ خليج عُمان وبحر العرب الممتدة على مسافة تزيد على ثلاثة آلاف كيلومتر. هذا التنوع جعلها وجهةً سياحية طبيعية متفردة بلا منازع في المنطقة.
-                    </p>
-                    <p>
-                        عاصمتها مسقط تمتاز بطرازها المعماري المنسجم ونظافتها اللافتة؛ تسودها أبنية بيضاء ذات طابع عُماني أصيل، وتنتشر فيها الأسواق التقليدية العتيقة، وأبرزها سوق مطرح الذي يُعدّ واحداً من أجمل الأسواق الشعبية في الجزيرة العربية، ويعبق بأريج البخور واللبان والتوابل.
-                    </p>
-                    <p>
-                        تنتهج سلطنة عُمان سياسة خارجية حيادية حكيمة جعلتها وسيطاً موثوقاً في كثير من النزاعات الإقليمية والدولية. وقد شكّلت حقبة السلطان الراحل قابوس بن سعيد حقبة نهضوية شاملة أعادت رسم ملامح الدولة العُمانية الحديثة مع الحفاظ على الجذور والهوية التاريخية.
-                    </p>
-                    <p>
-                        تزخر عُمان بكنوز تراثية وطبيعية تستهوي المستكشفين والباحثين؛ من قلعة نزوى ومدينة بهلاء التاريخية المدرجة على قائمة التراث العالمي، إلى وادي شاب ووادي بني خالد، ومحمية رأس الحد لتعشيش السلاحف. وتظل عُمان الملاذ الأهدأ والأعمق في روح الخليج العربي.
-                    </p>
-                </div>
-            </div>
-
-            <button class="btn-enter" onclick="toggleArticle('om')" aria-expanded="false" aria-controls="article-om">
-                <span class="btn-icon"><i class="fas fa-chevron-down"></i></span>
-                اقرأ المزيد
-            </button>
-        </article>
-
-    </main>
-
-    <!-- ===== CAPITALS SECTION ===== -->
-    <section class="capitals-section">
-        <h2>عواصم دول الخليج العربي</h2>
-
-        <div class="capitals-grid">
-
-            <div class="capital-card">
-                <img src="https://ik.imagekit.io/c7waukvji/chat-alkhaleej-riyadh.webp" alt="الرياض عاصمة المملكة العربية السعودية" class="capital-img">
-                <div class="capital-body">
-                    <h3 class="capital-title"><i class="fas fa-landmark"></i> الرياض</h3>
-                    <p class="capital-desc">
-                        عاصمة المملكة العربية السعودية وأكبر مدنها، تتربع في قلب نجد وتضم برج المملكة وبرج الفيصلية اللذين يُشكّلان معلم الأفق الشهير. تجمع الرياض بين الحداثة الطاغية والتراث العريق، وهي مركز القرار السياسي والاقتصادي للمملكة وأحد أسرع المدن الكبرى نمواً في العالم العربي.
-                    </p>
-                </div>
-            </div>
-
-            <div class="capital-card">
-                <img src="https://ik.imagekit.io/c7waukvji/chat-alkhaleej-state-of-kuwait.jpg" alt="مدينة الكويت العاصمة" class="capital-img">
-                <div class="capital-body">
-                    <h3 class="capital-title"><i class="fas fa-flag"></i> مدينة الكويت</h3>
-                    <p class="capital-desc">
-                        عاصمة دولة الكويت وقلبها النابض، تطل على الخليج العربي وتتميز بأبراجها الثلاثة الشهيرة رمز المدينة. تضم أرقى الأحياء التجارية والحكومية، وتمزج بين التراث البحري القديم والحداثة المعمارية، وسوق المباركية فيها مقصد للباحثين عن الأصالة الكويتية والتجارة التقليدية.
-                    </p>
-                </div>
-            </div>
-
-            <div class="capital-card">
-                <img src="https://ik.imagekit.io/c7waukvji/chat-alkhaleej-uae-abu-dhabi.webp" alt="أبوظبي عاصمة الإمارات العربية المتحدة" class="capital-img">
-                <div class="capital-body">
-                    <h3 class="capital-title"><i class="fas fa-city"></i> أبوظبي</h3>
-                    <p class="capital-desc">
-                        عاصمة دولة الإمارات العربية المتحدة ومقرّ الحكومة الاتحادية، تقع على جزيرة في الخليج العربي وتعكس رؤية طموحة في التخطيط العمراني. تضم مسجد الشيخ زايد الكبير الذي يُعدّ من روائع العمارة الإسلامية في العصر الحديث، وتتطور بخطى متسارعة نحو أن تكون مدينة الفن والثقافة والاستدامة.
-                    </p>
-                </div>
-            </div>
-
-            <div class="capital-card">
-                <img src="https://ik.imagekit.io/c7waukvji/chat-alkhaleej-doha.webp" alt="الدوحة عاصمة قطر" class="capital-img">
-                <div class="capital-body">
-                    <h3 class="capital-title"><i class="fas fa-building"></i> الدوحة</h3>
-                    <p class="capital-desc">
-                        عاصمة دولة قطر ومركزها الحضاري والاقتصادي، تتألق بكورنيشها الساحلي البانورامي وأفقها المعماري الجريء المليء بالأبراج الزجاجية. احتضنت كأس العالم 2022 وكانت في مستوى التوقعات وأعلى، وتضم حياً تراثياً "سوق واقف" يروي فصولاً من تاريخ قطر قبل عصر النفط.
-                    </p>
-                </div>
-            </div>
-
-            <div class="capital-card">
-                <img src="https://ik.imagekit.io/c7waukvji/chat-alkhaleej-manama.webp" alt="المنامة عاصمة البحرين" class="capital-img">
-                <div class="capital-body">
-                    <h3 class="capital-title"><i class="fas fa-water"></i> المنامة</h3>
-                    <p class="capital-desc">
-                        عاصمة مملكة البحرين وأكبر مدنها، تعلو فيها ناطحات السحاب الحديثة جنباً إلى جنب مع الحارات التقليدية والأسواق الشعبية القديمة. تُعدّ مركزاً مالياً إقليمياً مرموقاً، وتشتهر بمهرجاناتها الثقافية وتنوعها الاجتماعي الذي جعلها ملتقى حضارات الخليج والعالم.
-                    </p>
-                </div>
-            </div>
-
-            <div class="capital-card">
-                <img src="https://ik.imagekit.io/c7waukvji/chat-alkhaleej-muscat.jpg" alt="مسقط عاصمة سلطنة عمان" class="capital-img">
-                <div class="capital-body">
-                    <h3 class="capital-title"><i class="fas fa-mountain"></i> مسقط</h3>
-                    <p class="capital-desc">
-                        عاصمة سلطنة عُمان الحالمة المحاطة بالجبال والبحر، تتميز بطرازها المعماري الأبيض المتناسق ونظافتها الاستثنائية المضرب بها المثل. تتناثر فيها القلاع العثمانية التاريخية وأبرزها قلعة مطرح، وتعبق أسواقها بعطر البخور العُماني الفريد الذي يجعل الزيارة تجربة حسية لا تُنسى.
-                    </p>
-                </div>
-            </div>
+            <a class="country-entry-link"
+               href="https://chat-alkhaleej.com/om"
+               aria-label="دخول شات عُمان">
+                <span class="country-entry-icon" aria-hidden="true">🇴🇲</span>
+                <span class="country-entry-text">
+                    <strong>شات عُمان</strong>
+                    <small>دخول مباشر إلى صفحة شات عُمان</small>
+                </span>
+                <i class="fas fa-arrow-left country-entry-arrow" aria-hidden="true"></i>
+            </a>
 
         </div>
+
     </section>
+    <!-- ===== نهاية قسم دخول الدول ===== -->
 
     <!-- ===== SEO CONTENT ===== -->
-    <section class="seo-content">
+    <section class="seo-content" aria-labelledby="about-chat-alkhaleej">
 
-        <h2>شات الخليج | دردشة خليجية صوتية وكتابية بدون تسجيل</h2>
+        <h2 id="about-chat-alkhaleej">
+            عن شات الخليج ومدونته
+        </h2>
 
         <p>
-            يُعتبر <strong>شات الخليج</strong> من أفضل مواقع الدردشة الخليجية التي تجمع بين السرعة والبساطة والتفاعل الحقيقي بين المستخدمين من مختلف دول الخليج العربي. يوفّر الموقع غرف <a href="https://chat-alkhaleej.com/voice/">دردشة صوتية خليجية</a> و<a href="https://chat-alkhaleej.com/text/">شات كتابي</a> يعمل مباشرة من الجوال أو الكمبيوتر بدون الحاجة إلى تحميل تطبيقات أو إنشاء حسابات معقدة.
+            <strong>شات الخليج</strong> منصة دردشة عربية تعمل عبر متصفح
+            الجوال والكمبيوتر، وتوفّر المحادثات الصوتية والكتابية في مكان
+            واحد. يمكن للزائر الدخول باسم مستعار، كما تتيح العضوية المسجلة
+            خيارات إضافية لإدارة الحساب والتفاعل داخل الغرف.
         </p>
 
         <p>
-            يضم الموقع أقساماً متنوعة تشمل <a href="https://chat-alkhaleej.com/sa/">شات السعودية</a> و<a href="https://chat-alkhaleej.com/kw/">شات الكويت</a> و<a href="https://chat-alkhaleej.com/uae/">شات الإمارات</a> إضافة إلى غرف قطر والبحرين وسلطنة عمان، مما يمنح المستخدم فرصة التعارف والدردشة مع أبناء الخليج العربي في بيئة تفاعلية سريعة وآمنة.
+            تختص <strong>مدونة شات الخليج</strong> بالشروحات المرتبطة
+            بالخدمة نفسها، ومنها طريقة الدخول واستخدام المايك، وحل مشكلات
+            الصوت والاتصال، وحماية الحساب والخصوصية، والتعامل مع الإساءات،
+            إضافة إلى أخبار التحديثات الفعلية للموقع والتطبيق.
         </p>
 
         <p>
-            تم تصميم <strong>شات الخليج للجوال</strong> ليكون خفيفاً وسلساً على جميع الأجهزة، سواء كنت تستخدم آيفون أو أندرويد. كما يتميز الموقع بسرعة التصفح وسهولة الدخول إلى الغرف العامة والخاصة، مع دعم كامل للدردشة الصوتية والكتابية الحديثة.
-        </p>
-
-        <p>
-            إذا كنت تبحث عن <strong>دردشة خليجية بدون تسجيل</strong> أو موقع تعارف عربي سريع وآمن يجمع بين الوناسة والتفاعل الحقيقي، فإن <strong>شات الخليج</strong> يوفر لك تجربة متكاملة تجمع المستخدمين من مختلف أنحاء الوطن العربي داخل منصة واحدة.
+            يمكن الانتقال إلى صفحات الدول من الأزرار الموجودة أعلاه،
+            أو استعراض الغرف المتاحة من خلال
+            <a href="https://chat-alkhaleej.com/rooms">دليل غرف شات الخليج</a>.
+            كما يمكن مراجعة
+            <a href="https://chat-alkhaleej.com/chat-faq-gulf.html">
+                دليل الاستخدام والأسئلة الشائعة
+            </a>
+            و
+            <a href="https://chat-alkhaleej.com/chat-rules-gulf.html">
+                قوانين شات الخليج
+            </a>
+            قبل المشاركة.
         </p>
 
         <div class="seo-buttons">
-            <a href="https://chat-alkhaleej.com/" class="seo-btn primary-btn">
-                <i class="fas fa-comments"></i>
+
+            <a href="https://chat-alkhaleej.com/"
+               class="seo-btn primary-btn">
+                <i class="fas fa-comments" aria-hidden="true"></i>
                 دخول شات الخليج
             </a>
-            <a href="https://chat-alkhaleej.com/rooms/" class="seo-btn secondary-btn">
-                <i class="fas fa-list"></i>
+
+            <a href="https://chat-alkhaleej.com/rooms"
+               class="seo-btn secondary-btn">
+                <i class="fas fa-list" aria-hidden="true"></i>
                 استعراض غرف الدردشة
             </a>
+
         </div>
 
     </section>
@@ -1176,12 +945,17 @@
 
 <footer>
     <div class="footer-nav">
-        <a href="https://chat-alkhaleej.com/chat-support-gulf.html"><i class="fas fa-headset" aria-hidden="true"></i> الدعم الفني</a>
+        <a href="https://chat-alkhaleej.com/chat-support-gulf.html"><i class="fas fa-headset" aria-hidden="true"></i> عن شات الخليج</a>
         <a href="https://chat-alkhaleej.com/chat-faq-gulf.html"><i class="fas fa-question-circle" aria-hidden="true"></i> الأسئلة الشائعة</a>
         <a href="https://chat-alkhaleej.com/chat-rules-gulf.html"><i class="fas fa-gavel" aria-hidden="true"></i> القوانين</a>
         <a href="https://chat-alkhaleej.com/chat-vip-gulf.html" class="nav-vip"><i class="fas fa-gem" aria-hidden="true"></i> اشتراكات VIP</a>
     </div>
-    <p>حقوق النشر &copy; <time datetime="2026">2026</time> موقع شات الخليج | دردشة الخليج | نجمع العرب تحت سقف واحد بصداقة وأمان.</p>
+    <p>
+        جميع الحقوق محفوظة
+        &copy;
+        <time datetime="2026">2026</time>
+        شات الخليج.
+    </p>
 </footer>
 
 <script>
@@ -1203,36 +977,6 @@
             nav.classList.remove("active");
         }
     });
-
-    /* ===== READ MORE TOGGLE ===== */
-    function toggleArticle(id) {
-        const article = document.getElementById('article-' + id);
-        const card    = document.getElementById('card-' + id);
-        const btn     = card.querySelector('.btn-enter');
-        const isOpen  = article.classList.contains('open');
-
-        if (isOpen) {
-            article.style.maxHeight = null;
-            article.classList.remove('open');
-            article.setAttribute('aria-hidden', 'true');
-            btn.classList.remove('active');
-            btn.setAttribute('aria-expanded', 'false');
-            btn.innerHTML = '<span class="btn-icon"><i class="fas fa-chevron-down"></i></span> اقرأ المزيد';
-            card.classList.remove('expanded');
-        } else {
-            article.classList.add('open');
-            article.style.maxHeight = article.scrollHeight + "px";
-            article.setAttribute('aria-hidden', 'false');
-            btn.classList.add('active');
-            btn.setAttribute('aria-expanded', 'true');
-            btn.innerHTML = '<span class="btn-icon"><i class="fas fa-chevron-up"></i></span> إغلاق المقال';
-            card.classList.add('expanded');
-
-            setTimeout(() => {
-                card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
-        }
-    }
 </script>
 
 </body>
