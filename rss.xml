@@ -5,8 +5,15 @@
         <link>https://blog.chat-alkhaleej.com/</link>
         <description>مدونة شات الخليج: مقالات عربية متنوعة عن الترندات والألعاب والتقنية والسوشال ميديا والحياة الخليجية والمحتوى الترفيهي.</description>
         <language>ar</language>
-        <lastBuildDate>Wed, 19 Aug 2026 16:17:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 20 Aug 2026 04:27:23 GMT</lastBuildDate>
         <atom:link href="https://blog.chat-alkhaleej.com/rss.xml" rel="self" type="application/rss+xml"/>
-
+        <item>
+            <title><![CDATA[دليل استخدام شات الخليج: الدخول وتشغيل المايك وحل مشاكل الصوت]]></title>
+            <link>https://blog.chat-alkhaleej.com/posts/how-to-use-chat-alkhaleej.html</link>
+            <guid isPermaLink="true">https://blog.chat-alkhaleej.com/posts/how-to-use-chat-alkhaleej.html</guid>
+            <description><![CDATA[دليل عملي يشرح طريقة الدخول إلى شات الخليج كزائر أو عضو، واختيار الغرفة، وتشغيل المايك، وحل مشاكل الصوت والاتصال عبر الجوال والكمبيوتر]]></description>
+            <pubDate>Thu, 20 Aug 2026 04:23:00 GMT</pubDate>
+            <category>دردشة وتعارف</category>
+        </item>
     </channel>
 </rss>
